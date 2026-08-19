@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Tutor — EDA Insights & Executive Presentation Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="brand-logo">
+        <i data-lucide="bot"></i>
+      </div>
+      <div>
+        <div class="brand-title">AI Tutor Insights</div>
+      </div>
+      <span class="brand-badge">EDA & Improvement Lab</span>
+    </div>
+
+    <!-- Mode Switcher -->
+    <div class="mode-switcher">
+      <button id="btnModeDashboard" class="mode-btn active">
+        <i data-lucide="layout-dashboard"></i>
+        <span>Dashboard</span>
+      </button>
+      <button id="btnModeSlides" class="mode-btn">
+        <i data-lucide="presentation"></i>
+        <span>Slide Presentation</span>
+      </button>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <button id="themeToggleBtn" class="icon-btn" title="Đổi giao diện Sáng / Tối">
+        <i data-lucide="sun"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- ============================================================== -->
+    <!-- VIEW 1: EXECUTIVE DASHBOARD VIEW                               -->
+    <!-- ============================================================== -->
+    <section id="dashboardView" class="view-panel active">
+      
+      <!-- Hero Banner -->
+      <div class="hero-banner">
+        <h1 class="hero-title">AI Tutor — EDA Insights & <span class="gradient-text">Improvement Backlog</span></h1>
+        <p class="hero-subtitle">Báo cáo phân tích toàn diện 1.000 lượt tương tác học viên trên khóa học, phát hiện các điểm mù kiến trúc và thiết lập lộ trình tối ưu hóa trải nghiệm trợ giảng AI.</p>
+        
+        <div class="hero-meta-row">
+          <div class="hero-meta-item"><i data-lucide="database"></i> Nguồn: <code>labeled_semantic.csv</code></div>
+          <div class="hero-meta-item"><i data-lucide="calendar"></i> Thời gian: 2026-08-10 → 2026-08-15 (6 ngày)</div>
+          <div class="hero-meta-item"><i data-lucide="users"></i> Quy mô: 258 học viên · 360 cuộc hội thoại · 18 Day Codes</div>
+        </div>
+      </div>
+
+      <!-- KPI Ribbon -->
+      <div id="kpiGrid" class="kpi-grid">
+        <!-- Injected by js/dashboard.js -->
+      </div>
+
+      <!-- Charts Section (2 Columns) -->
+      <div class="dashboard-grid">
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Tầng Thu Thập Ngữ Cảnh (Context Capture)</h3>
+            <span class="chart-badge">48,1% Echo Lỗi (P0)</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chartContextCapture"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Tỉ Lệ Thất Bại & Retry Theo Ý Định</h3>
+            <span class="chart-badge" style="color: var(--accent-rose);">Simplify Fail 20%</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chartRetryIntent"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Độ Hiệu Quả Rule Engine & Tỉ Lệ Thắng (Win Rate)</h3>
+            <span class="chart-badge">Rule 7 Win 0,5%</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chartRuleWinRate"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Lưu Lượng Câu Hỏi Theo Ngày</h3>
+            <span class="chart-badge">Peak 14/08 (46,6%)</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="chartDailyVolume"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Simulators Section -->
+      <div class="section-title-box">
+        <h2 class="section-title">⚡ Công Cụ Giả Lập Tương Tác (Interactive Simulators)</h2>
+      </div>
+
+      <div class="simulator-card">
+        <div class="sim-grid">
+          <div>
+            <h3 class="sim-title">1. Giả Lập Ngân Sách Độ Dài Câu Trả Lời (P0)</h3>
+            <p class="sim-desc">Thiết lập ngân sách từ tối đa theo từng ý định học tập để tránh lạm phát độ dài 37x gây quá tải nhận thức cho học viên trong lớp.</p>
+            
+            <div class="form-group mt-3">
+              <label class="form-label">Chọn Ý Định Học Viên (Pedagogical Intent):</label>
+              <select id="simIntentSelect" class="form-select">
+                <option value="define">Định nghĩa khái niệm (define / là gì)</option>
+                <option value="locate">Tìm vị trí slide (locate / ở đâu)</option>
+                <option value="simplify">Đơn giản hóa (simplify / dễ hiểu hơn)</option>
+                <option value="deepen">Đào sâu chuyên môn (deepen / chi tiết)</option>
+                <option value="summarize">Tóm tắt bài học (summarize / tóm tắt)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sim-result-box">
+            <div class="text-sm text-secondary">Ngân Sách Độ Dài Khuyến Nghị:</div>
+            <div id="simResultWords" class="sim-result-number">≤ 80 từ</div>
+            <div id="simResultTime" style="font-size: 0.9rem; color: var(--text-primary);">~15 giây đọc trong lớp</div>
+            <div id="simResultStatus" class="mt-2"><span class="badge badge-emerald">Tối ưu trong giờ học</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="simulator-card">
+        <div class="sim-grid">
+          <div>
+            <h3 class="sim-title">2. Bộ Thử Nghiệm Luật Phân Loại (Rule Engine Tester)</h3>
+            <p class="sim-desc">Nhập câu hỏi mẫu để kiểm tra xem câu hỏi sẽ kích hoạt rule nào và xem xung đột giải quyết (Resolve) với fallback 30%.</p>
+            
+            <div class="form-group mt-3">
+              <label class="form-label">Nhập Câu Hỏi Học Viên:</label>
+              <input id="simRuleInput" type="text" class="form-input" placeholder="Ví dụ: Giải thích rõ đoạn này giúp mình, slide 27 nó nói gì...">
+            </div>
+          </div>
+
+          <div class="sim-result-box">
+            <div class="text-sm text-secondary">Kết Quả Phân Tách Rule Engine:</div>
+            <div id="simRuleResult" style="margin-top: 0.5rem;">
+              <span style="color: var(--text-muted);">Hãy nhập câu hỏi mẫu để test...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11 Detailed Chapters Deep-Dive Section -->
+      <div class="section-title-box">
+        <h2 class="section-title">📖 11 Chuyên Đề Phân Tích Chuyên Sâu (EDA Chapters)</h2>
+        <span class="text-sm text-muted">Nhấn vào từng chương để xem chi tiết bằng chứng & đề xuất</span>
+      </div>
+
+      <div id="chaptersAccordion" class="chapter-accordion">
+        <!-- Injected by js/dashboard.js -->
+      </div>
+
+      <!-- P0/P1/P2 Improvement Backlog Table -->
+      <div class="section-title-box">
+        <h2 class="section-title">📋 Lộ Trình Cải Tiến Hệ Thống (Priority Backlog)</h2>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="mode-btn active filter-btn" onclick="filterBacklog('ALL')">Tất cả (19)</button>
+          <button class="mode-btn filter-btn" onclick="filterBacklog('P0')">P0 - Làm ngay (5)</button>
+          <button class="mode-btn filter-btn" onclick="filterBacklog('P1')">P1 - Sprint tới (10)</button>
+          <button class="mode-btn filter-btn" onclick="filterBacklog('P2')">P2 - Sau (4)</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Ưu tiên</th>
+              <th>Đầu việc cải tiến</th>
+              <th>Lý do & Tác động</th>
+              <th>Chương</th>
+              <th>Mức độ</th>
+              <th>Công sức</th>
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody id="backlogTableBody">
+            <!-- Injected by js/dashboard.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Live Q&A Sample Table -->
+      <div class="section-title-box">
+        <h2 class="section-title">🔍 Mẫu Dữ Liệu Tương Tác Thực Tế (Live Q&A Inspector)</h2>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nhãn</th>
+              <th>Ý định (Intent)</th>
+              <th>Trang</th>
+              <th>Câu hỏi</th>
+              <th>Độ dài đáp</th>
+              <th>Citation</th>
+              <th>Tín hiệu</th>
+            </tr>
+          </thead>
+          <tbody id="sampleTableBody">
+            <!-- Injected by js/dashboard.js -->
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- VIEW 2: SLIDE PRESENTATION VIEW                                -->
+    <!-- ============================================================== -->
+    <section id="slidesView" class="view-panel">
+      <div class="presentation-container">
+        
+        <!-- Slide Deck Frame -->
+        <div id="slideDeckWrapper" class="slide-deck-wrapper">
+          <div id="slideStage" class="slide-stage">
+            <!-- Slide Content Injected by js/slides.js -->
+          </div>
+        </div>
+
+        <!-- Controls Bar -->
+        <div class="slide-controls-bar">
+          <div class="nav-buttons">
+            <button id="btnPrevSlide" class="slide-nav-btn" onclick="prevSlide()">
+              <i data-lucide="chevron-left"></i> Trước
+            </button>
+            <button id="btnNextSlide" class="slide-nav-btn" onclick="nextSlide()">
+              Tiếp <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+
+          <div class="slide-progress-container">
+            <div id="slideProgressBar" class="slide-progress-bar"></div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div id="slideCounter" class="slide-counter">1 / 12</div>
+            <button class="icon-btn" onclick="toggleSpeakerNotes()" title="Ghi chú trình chiếu">
+              <i data-lucide="file-text"></i>
+            </button>
+            <button class="icon-btn" onclick="toggleFullscreen()" title="Toàn màn hình (F)">
+              <i data-lucide="maximize"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Speaker Notes Drawer -->
+        <div id="speakerNotesDrawer" class="speaker-notes-drawer">
+          <div class="notes-header">
+            <i data-lucide="message-circle" style="width: 16px;"></i>
+            <span>Ghi chú cho Diễn giả / Tech Lead:</span>
+          </div>
+          <div id="speakerNotesText">
+            Khái quát quy mô 1.000 log và nhấn mạnh 3 vấn đề kiến trúc cần khắc phục ngay.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/slides.js"></script>
+</body>
+</html>
