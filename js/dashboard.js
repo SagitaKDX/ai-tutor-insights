@@ -1,8 +1,10 @@
 // AI Tutor Dashboard - Interactive Controller
-document.addEventListener("DOMContentLoaded", () => {
-  const data = window.AI_TUTOR_DATA;
-  if (!data) return;
 
+function getAppData() {
+  return window.AI_TUTOR_DATA || { overview: { metrics: [] }, chapters: [], backlog: [], sampleQuestions: [] };
+}
+
+document.addEventListener("DOMContentLoaded", () => {
   initDashboardKPIs();
   initDashboardCharts();
   renderChaptersAccordion();
@@ -11,12 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
   renderSampleTable();
   initThemeToggle();
   initModeSwitcher();
+  if (window.lucide) lucide.createIcons();
 });
 
 // 1. Render Dashboard KPIs
 function initDashboardKPIs() {
+  const data = getAppData();
   const grid = document.getElementById("kpiGrid");
-  if (!grid) return;
+  if (!grid || !data.overview || !data.overview.metrics) return;
 
   grid.innerHTML = data.overview.metrics.map(m => `
     <div class="kpi-card">
@@ -36,6 +40,8 @@ function initDashboardKPIs() {
 
 // 2. Initialize Chart.js Dashboard Visualizations
 function initDashboardCharts() {
+  if (typeof Chart === "undefined") return;
+
   // Chart 1: Context Capture Breakdown
   const ctxContext = document.getElementById("chartContextCapture");
   if (ctxContext) {
@@ -172,8 +178,9 @@ function initDashboardCharts() {
 
 // 3. Render 11 Chapters Accordion
 function renderChaptersAccordion() {
+  const data = getAppData();
   const container = document.getElementById("chaptersAccordion");
-  if (!container) return;
+  if (!container || !data.chapters) return;
 
   container.innerHTML = data.chapters.map((ch, idx) => `
     <div class="chapter-item ${idx === 1 ? 'active' : ''}" id="chapter-${ch.id}">
@@ -223,8 +230,9 @@ window.toggleChapter = function(id) {
 
 // 4. Render Backlog Table with Priority Filter
 function renderBacklogTable(filter = "ALL") {
+  const data = getAppData();
   const tbody = document.getElementById("backlogTableBody");
-  if (!tbody) return;
+  if (!tbody || !data.backlog) return;
 
   const filtered = filter === "ALL" 
     ? data.backlog 
@@ -245,7 +253,9 @@ function renderBacklogTable(filter = "ALL") {
 
 window.filterBacklog = function(priority) {
   document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
-  event.target.classList.add("active");
+  if (window.event && window.event.target) {
+    window.event.target.classList.add("active");
+  }
   renderBacklogTable(priority);
 };
 
@@ -256,7 +266,7 @@ function initSimulators() {
   const resultTime = document.getElementById("simResultTime");
   const resultStatus = document.getElementById("simResultStatus");
 
-  if (intentSelect) {
+  if (intentSelect && resultWords && resultTime && resultStatus) {
     intentSelect.addEventListener("change", (e) => {
       const val = e.target.value;
       if (val === "define" || val === "locate") {
@@ -321,8 +331,9 @@ function initSimulators() {
 
 // 6. Live Q&A Sample Table
 function renderSampleTable() {
+  const data = getAppData();
   const tbody = document.getElementById("sampleTableBody");
-  if (!tbody) return;
+  if (!tbody || !data.sampleQuestions) return;
 
   tbody.innerHTML = data.sampleQuestions.map(q => `
     <tr>
