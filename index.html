@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Tutor — EDA Insights & Executive Presentation Dashboard</title>
+  <title>AI Tutor — Báo Cáo Phân Tích & Lộ Trình Cải Tiến Trợ Giảng AI</title>
   <link rel="stylesheet" href="css/styles.css">
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -21,25 +21,28 @@
       <div>
         <div class="brand-title">AI Tutor Insights</div>
       </div>
-      <span class="brand-badge">EDA & Improvement Lab</span>
+      <span class="brand-badge">Báo Cáo Phân Tích & Cải Tiến</span>
     </div>
 
     <!-- Mode Switcher -->
     <div class="mode-switcher">
       <button id="btnModeDashboard" class="mode-btn active">
         <i data-lucide="layout-dashboard"></i>
-        <span>Dashboard</span>
+        <span>Bảng Điều Khiển (Dashboard)</span>
       </button>
       <button id="btnModeSlides" class="mode-btn">
         <i data-lucide="presentation"></i>
-        <span>Slide Presentation</span>
+        <span>Trình Chiếu Slide (16:9)</span>
       </button>
     </div>
 
-    <!-- Header Actions -->
+    <!-- Header Actions (Fixed GitHub Button with explicit SVG) -->
     <div class="header-actions">
-      <a href="https://github.com/SagitaKDX/ai-tutor-insights" target="_blank" class="icon-btn" title="GitHub Repository">
-        <i data-lucide="github"></i>
+      <a href="https://github.com/SagitaKDX/ai-tutor-insights" target="_blank" class="github-btn" title="Mở GitHub Repository">
+        <svg height="18" width="18" viewBox="0 0 16 16" fill="currentColor" style="display: inline-block; vertical-align: middle;">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+        <span>GitHub Repo</span>
       </a>
     </div>
   </header>
@@ -54,22 +57,22 @@
       
       <!-- Hero Banner -->
       <div class="hero-banner">
-        <h1 class="hero-title">AI Tutor — EDA Insights & <span class="text-gradient-red">Improvement Backlog</span></h1>
-        <p class="hero-subtitle">Báo cáo phân tích toàn diện 1.000 lượt tương tác học viên trên khóa học, phát hiện các điểm mù kiến trúc (P0) và thiết lập lộ trình tối ưu hóa trải nghiệm trợ giảng AI với giao diện sắc nét.</p>
+        <h1 class="hero-title">AI Tutor — Báo Cáo Phân Tích Dữ Liệu & <span class="text-gradient-red">Lộ Trình Cải Tiến Hệ Thống</span></h1>
+        <p class="hero-subtitle">Phân tích thực chứng trên 1.000 lượt hỏi/đáp của 258 học viên, phát hiện 3 điểm mù kiến trúc (P0) và thiết lập giải pháp tối ưu hóa trải nghiệm trợ giảng AI trong lớp học.</p>
         
         <div class="hero-meta-row">
-          <div class="hero-meta-item"><i data-lucide="database" class="text-blue"></i> Nguồn: <code>labeled_semantic.csv</code></div>
-          <div class="hero-meta-item"><i data-lucide="calendar" class="text-blue"></i> Thời gian: <strong>2026-08-10 → 2026-08-15 (6 ngày)</strong></div>
-          <div class="hero-meta-item"><i data-lucide="users" class="text-blue"></i> Quy mô: <strong>258 học viên · 360 cuộc hội thoại · 18 Day Codes</strong></div>
+          <div class="hero-meta-item"><i data-lucide="database" class="text-blue"></i> Nguồn dữ liệu: <code>labeled_semantic.csv</code></div>
+          <div class="hero-meta-item"><i data-lucide="calendar" class="text-blue"></i> Thời gian thu thập: <strong>10/08/2026 → 15/08/2026 (6 ngày liên tục)</strong></div>
+          <div class="hero-meta-item"><i data-lucide="users" class="text-blue"></i> Quy mô khảo sát: <strong>258 học viên · 360 phiên hội thoại · 18 buổi học</strong></div>
         </div>
       </div>
 
-      <!-- KPI Ribbon -->
+      <!-- 6 Thẻ KPI Cốt Lõi -->
       <div id="kpiGrid" class="kpi-grid">
         <!-- Injected by js/dashboard.js -->
       </div>
 
-      <!-- Health Index & Radar Comparison Section -->
+      <!-- Chỉ Số Sức Khỏe Kiến Trúc & Radar Comparison -->
       <div class="health-radar-box">
         <div>
           <div class="chart-wrapper" style="min-height: 320px;">
@@ -77,28 +80,28 @@
           </div>
         </div>
         <div class="health-info">
-          <span class="chart-badge danger">Chỉ số Sức khỏe Kiến trúc</span>
-          <h3 class="mt-2">So Sánh: Hiện Tại vs Sau Tối Ưu (P0)</h3>
-          <p>Đánh giá toàn diện hệ sinh thái AI Tutor trên 6 trục: Độ trung thực ngữ cảnh, Độ tinh gọn câu trả lời, Độ tin cậy Retry, Độ chuẩn xác Ý định, Hiệu năng Rule Engine và Tỷ lệ giữ chân học viên.</p>
+          <span class="chart-badge danger">Chỉ Số Sức Khỏe Kiến Trúc</span>
+          <h3 class="mt-2">So Sánh: Hiện Tại vs Sau Khi Tối Ưu (P0)</h3>
+          <p>Đánh giá hệ sinh thái AI Tutor trên 6 trục: Độ sạch của ngữ cảnh bôi đen, Độ tinh gọn câu trả lời, Tỷ lệ thành công khi giải thích đơn giản, Khả năng nhận diện đúng ý định, Hiệu quả bộ quy tắc và Tỷ lệ giữ chân học viên.</p>
           <div class="comparison-pills">
             <div class="comp-pill bad">
-              <span><strong>Baseline Hiện Tại:</strong> Context Echo 48,1% · Retry Simplify 20%</span>
-              <span class="text-rose font-bold">35 / 100</span>
+              <span><strong>Hệ thống hiện tại:</strong> Lỗi lặp ngữ cảnh 48,1% · Thất bại khi xin làm đơn giản 20%</span>
+              <span class="text-red font-bold">35 / 100 Điểm</span>
             </div>
             <div class="comp-pill good">
-              <span><strong>Mục tiêu Sau Tối Ưu P0:</strong> Context 0% lỗi · Retry <8% · Trả lời ≤120 từ</span>
-              <span class="text-emerald font-bold">92 / 100</span>
+              <span><strong>Mục tiêu sau tối ưu (P0):</strong> Ngữ cảnh sạch 100% · Retry &lt; 8% · Trả lời ≤ 120 từ</span>
+              <span class="text-emerald font-bold">92 / 100 Điểm</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Visual Charts Section (4 Primary Charts) -->
+      <!-- 4 Biểu Đồ Phân Tích Trọng Điểm -->
       <div class="dashboard-grid">
         <div class="chart-card">
           <div class="chart-header">
             <h3 class="chart-title">Tầng Thu Thập Ngữ Cảnh (Context Capture)</h3>
-            <span class="chart-badge danger">48,1% Echo Lỗi (P0)</span>
+            <span class="chart-badge danger">48,1% Bị Lỗi Lặp (P0)</span>
           </div>
           <div class="chart-wrapper">
             <canvas id="chartContextCapture"></canvas>
@@ -107,8 +110,8 @@
 
         <div class="chart-card">
           <div class="chart-header">
-            <h3 class="chart-title">Tỉ Lệ Thất Bại & Retry Theo Ý Định</h3>
-            <span class="chart-badge danger">Simplify Fail 20%</span>
+            <h3 class="chart-title">Tỷ Lệ Thất Bại & Hỏi Lại Theo Từng Ý Định</h3>
+            <span class="chart-badge danger">Làm Dễ Hiểu Fail 20%</span>
           </div>
           <div class="chart-wrapper">
             <canvas id="chartRetryIntent"></canvas>
@@ -117,8 +120,8 @@
 
         <div class="chart-card">
           <div class="chart-header">
-            <h3 class="chart-title">Độ Hiệu Quả Rule Engine & Tỉ Lệ Thắng</h3>
-            <span class="chart-badge danger">Rule 7 Win 0,5%</span>
+            <h3 class="chart-title">Hiệu Quả Bộ Quy Tắc & Tỷ Lệ Thắng</h3>
+            <span class="chart-badge danger">Rule 7 Thắng 0,5%</span>
           </div>
           <div class="chart-wrapper">
             <canvas id="chartRuleWinRate"></canvas>
@@ -127,8 +130,8 @@
 
         <div class="chart-card">
           <div class="chart-header">
-            <h3 class="chart-title">Lưu Lượng Tương Tác Theo Giờ Lên Lớp</h3>
-            <span class="chart-badge">79,1% Giờ Học (8-11h & 14-16h)</span>
+            <h3 class="chart-title">Lưu Lượng Câu Hỏi Theo Giờ Lên Lớp</h3>
+            <span class="chart-badge">79,1% Dồn Giờ Học (8-11h & 14-16h)</span>
           </div>
           <div class="chart-wrapper">
             <canvas id="chartHourlyTraffic"></canvas>
@@ -136,21 +139,21 @@
         </div>
       </div>
 
-      <!-- Keyword Heatmap & Terminology Explorer -->
+      <!-- Bản Đồ Thuật Ngữ Tiếng Anh (Vocabulary Heatmap) -->
       <div class="vocab-card">
         <div class="chart-header" style="border-bottom: none; margin-bottom: 0;">
           <div>
-            <h3 class="chart-title">🔤 Bản Đồ Thuật Ngữ Tiếng Anh (Top Highlighted Terms)</h3>
-            <p class="text-sm text-secondary mt-2">76,8% lượt bôi đen thật của học viên tập trung vào thuật ngữ tiếng Anh chuyên ngành AI/LLM. Bấm vào từng từ để xem tần suất và ứng dụng Tooltip.</p>
+            <h3 class="chart-title">🔤 Bản Đồ Thuật Ngữ Tiếng Anh Được Bôi Đen Nhiều Nhất</h3>
+            <p class="text-sm text-secondary mt-2">76,8% lượt bôi đen thật của học viên tập trung vào các thuật ngữ tiếng Anh chuyên ngành AI/LLM. Bấm vào từng từ để xem tần suất và ứng dụng Tooltip giải nghĩa tức thì (Chi phí 0$).</p>
           </div>
-          <span class="chart-badge">76,8% English Tokens</span>
+          <span class="chart-badge">76,8% Từ Tiếng Anh</span>
         </div>
         <div id="vocabGrid" class="vocab-grid">
           <!-- Injected by js/dashboard.js -->
         </div>
       </div>
 
-      <!-- Interactive Simulators Section -->
+      <!-- 2 Trình Giả Lập Tương Tác (Simulators) -->
       <div class="section-title-box">
         <h2 class="section-title"><i data-lucide="zap" class="text-blue"></i> Công Cụ Giả Lập Tương Tác (Interactive Simulators)</h2>
       </div>
@@ -159,16 +162,16 @@
         <div class="simulator-card red-accent">
           <div>
             <h3 class="sim-title">1. Giả Lập Ngân Sách Độ Dài Câu Trả Lời (P0)</h3>
-            <p class="sim-desc">Thiết lập ngân sách từ tối đa theo từng ý định học tập để tránh lạm phát độ dài 37x gây quá tải nhận thức cho học viên trong giờ nghe giảng.</p>
+            <p class="sim-desc">Tính toán độ dài từ tối đa theo từng ý định học tập để tránh lạm phát độ dài gấp 37 lần, giúp học viên không bị quá tải khi vừa nghe giảng vừa đọc trợ giảng.</p>
             
             <div class="form-group">
-              <label class="form-label">Chọn Ý Định Học Viên (Pedagogical Intent):</label>
+              <label class="form-label">Chọn Ý Định Của Học Viên (Pedagogical Intent):</label>
               <select id="simIntentSelect" class="form-select">
                 <option value="define">Định nghĩa khái niệm (define / là gì)</option>
-                <option value="locate">Tìm vị trí slide (locate / ở đâu)</option>
-                <option value="simplify">Đơn giản hóa (simplify / dễ hiểu hơn)</option>
-                <option value="deepen">Đào sâu chuyên môn (deepen / chi tiết)</option>
-                <option value="summarize">Tóm tắt bài học (summarize / tóm tắt)</option>
+                <option value="locate">Tìm vị trí slide bài học (locate / ở đâu)</option>
+                <option value="simplify">Làm đơn giản hóa (simplify / dễ hiểu hơn)</option>
+                <option value="deepen">Đào sâu chuyên môn (deepen / chi tiết kỹ thuật)</option>
+                <option value="summarize">Tóm tắt nội dung bài học (summarize / tóm tắt)</option>
               </select>
             </div>
           </div>
@@ -176,45 +179,45 @@
           <div class="sim-result-box">
             <div class="text-sm text-muted">Ngân Sách Độ Dài Khuyến Nghị:</div>
             <div id="simResultWords" class="sim-result-number">≤ 80 từ</div>
-            <div id="simResultTime" style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary);">~15 giây đọc trong lớp</div>
-            <div id="simResultStatus" class="mt-2"><span class="chapter-badge badge-emerald">Tối ưu trong giờ học</span></div>
+            <div id="simResultTime" style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary);">~15 giây đọc nhanh trong lớp</div>
+            <div id="simResultStatus" class="mt-2"><span class="chapter-badge badge-emerald">Tối ưu cho giờ nghe giảng</span></div>
           </div>
         </div>
 
         <div class="simulator-card">
           <div>
-            <h3 class="sim-title">2. Bộ Thử Nghiệm Luật Phân Loại (Rule Engine Tester)</h3>
-            <p class="sim-desc">Nhập câu hỏi mẫu để kiểm tra xem câu hỏi sẽ kích hoạt rule nào và xem xung đột giải quyết (Resolve) với nhánh fallback 30,2%.</p>
+            <h3 class="sim-title">2. Bộ Thử Nghiệm Quy Tắc Phân Loại (Rule Engine Tester)</h3>
+            <p class="sim-desc">Nhập câu hỏi mẫu bất kỳ để kiểm tra luồng kích hoạt rule, xung đột phân giải và nhánh Fallback 30,2%.</p>
             
             <div class="form-group">
-              <label class="form-label">Nhập Câu Hỏi Học Viên:</label>
+              <label class="form-label">Nhập Câu Hỏi Mẫu Của Học Viên:</label>
               <input id="simRuleInput" type="text" class="form-input" placeholder="Ví dụ: Giải thích rõ đoạn này giúp mình, slide 27 nó nói gì...">
             </div>
           </div>
 
           <div class="sim-result-box">
-            <div class="text-sm text-muted">Kết Quả Phân Tách Rule Engine:</div>
+            <div class="text-sm text-muted">Kết Quả Phân Tách Quy Tắc:</div>
             <div id="simRuleResult" style="margin-top: 0.5rem;">
-              <span style="color: var(--text-muted); font-size: 0.9rem;">Hãy nhập câu hỏi mẫu để test...</span>
+              <span style="color: var(--text-muted); font-size: 0.9rem;">Hãy nhập câu hỏi mẫu phía trên để chạy thử...</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 11 Detailed Chapters Deep-Dive Section -->
+      <!-- 11 Chuyên Đề Phân Tích Chi Tiết (Accordion) -->
       <div class="section-title-box">
         <h2 class="section-title"><i data-lucide="book-open" class="text-blue"></i> 11 Chuyên Đề Phân Tích Chuyên Sâu (EDA Chapters)</h2>
-        <span class="text-sm text-muted">Nhấn vào từng chương để xem chi tiết bằng chứng định lượng & đề xuất</span>
+        <span class="text-sm text-muted">Nhấn vào từng chương để xem chi tiết bằng chứng định lượng & đề xuất hành động</span>
       </div>
 
       <div id="chaptersAccordion" class="chapter-accordion">
         <!-- Injected by js/dashboard.js -->
       </div>
 
-      <!-- P0/P1/P2 Improvement Backlog Table -->
+      <!-- Bảng Lộ Trình Backlog P0 / P1 / P2 -->
       <div class="section-title-box">
         <h2 class="section-title"><i data-lucide="check-square" class="text-blue"></i> Lộ Trình Cải Tiến Hệ Thống (Priority Backlog)</h2>
-        <div style="display: flex; gap: 0.5rem;">
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
           <button class="mode-btn active filter-btn" onclick="filterBacklog('ALL')">Tất cả (19)</button>
           <button class="mode-btn filter-btn" onclick="filterBacklog('P0')">P0 - Làm ngay (5)</button>
           <button class="mode-btn filter-btn" onclick="filterBacklog('P1')">P1 - Sprint tới (10)</button>
@@ -226,13 +229,13 @@
         <table class="data-table">
           <thead>
             <tr>
-              <th>Ưu tiên</th>
-              <th>Đầu việc cải tiến</th>
-              <th>Lý do & Tác động</th>
-              <th>Chương</th>
-              <th>Mức độ</th>
-              <th>Công sức</th>
-              <th>Trạng thái</th>
+              <th>Mức Ưu Tiên</th>
+              <th>Đầu Việc Cải Tiến</th>
+              <th>Lý Do & Tác Động</th>
+              <th>Chương Phân Tích</th>
+              <th>Mức Độ Tác Động</th>
+              <th>Công Sức</th>
+              <th>Trạng Thái</th>
             </tr>
           </thead>
           <tbody id="backlogTableBody">
@@ -241,7 +244,7 @@
         </table>
       </div>
 
-      <!-- Live Q&A Sample Table -->
+      <!-- Bảng Kiểm Tra Mẫu Câu Hỏi Thực Tế -->
       <div class="section-title-box">
         <h2 class="section-title"><i data-lucide="search" class="text-blue"></i> Mẫu Dữ Liệu Tương Tác Thực Tế (Live Q&A Inspector)</h2>
       </div>
@@ -250,14 +253,14 @@
         <table class="data-table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Nhãn</th>
-              <th>Ý định (Intent)</th>
-              <th>Trang</th>
-              <th>Câu hỏi</th>
-              <th>Độ dài đáp</th>
-              <th>Citation</th>
-              <th>Tín hiệu</th>
+              <th>Mã ID</th>
+              <th>Nhãn Phân Loại</th>
+              <th>Ý Định (Intent)</th>
+              <th>Trang Slide</th>
+              <th>Câu Hỏi Học Viên</th>
+              <th>Độ Dài Trả Lời</th>
+              <th>Số Trích Dẫn</th>
+              <th>Tín Hiệu Đánh Giá</th>
             </tr>
           </thead>
           <tbody id="sampleTableBody">
@@ -269,26 +272,26 @@
     </section>
 
     <!-- ============================================================== -->
-    <!-- VIEW 2: SLIDE PRESENTATION VIEW                                -->
+    <!-- VIEW 2: SLIDE PRESENTATION VIEW (16:9)                         -->
     <!-- ============================================================== -->
     <section id="slidesView" class="view-panel">
       <div class="presentation-container">
         
-        <!-- Slide Deck Frame -->
+        <!-- Khung Slide Trình Chiếu -->
         <div id="slideDeckWrapper" class="slide-deck-wrapper">
           <div id="slideStage" class="slide-stage">
             <!-- Slide Content Injected by js/slides.js -->
           </div>
         </div>
 
-        <!-- Controls Bar -->
+        <!-- Thanh Điều Khiển Slide -->
         <div class="slide-controls-bar">
           <div class="nav-buttons">
             <button id="btnPrevSlide" class="slide-nav-btn" onclick="prevSlide()">
-              <i data-lucide="chevron-left"></i> Trước
+              <i data-lucide="chevron-left"></i> Trang trước
             </button>
             <button id="btnNextSlide" class="slide-nav-btn" onclick="nextSlide()">
-              Tiếp <i data-lucide="chevron-right"></i>
+              Trang tiếp <i data-lucide="chevron-right"></i>
             </button>
           </div>
 
@@ -298,20 +301,20 @@
 
           <div style="display: flex; align-items: center; gap: 1.25rem;">
             <div id="slideCounter" class="slide-counter">1 / 12</div>
-            <button class="icon-btn" onclick="toggleSpeakerNotes()" title="Ghi chú trình chiếu">
+            <button class="icon-btn" onclick="toggleSpeakerNotes()" title="Bật/Tắt Ghi chú diễn giả">
               <i data-lucide="file-text"></i>
             </button>
-            <button class="icon-btn" onclick="toggleFullscreen()" title="Toàn màn hình (F)">
+            <button class="icon-btn" onclick="toggleFullscreen()" title="Toàn màn hình (Phím F)">
               <i data-lucide="maximize"></i>
             </button>
           </div>
         </div>
 
-        <!-- Speaker Notes Drawer -->
+        <!-- Hộp Ghi Chú Diễn Giả (Speaker Notes Drawer) -->
         <div id="speakerNotesDrawer" class="speaker-notes-drawer">
           <div class="notes-header">
             <i data-lucide="message-circle" style="width: 18px;"></i>
-            <span>Ghi chú cho Diễn giả / Tech Lead:</span>
+            <span>Ghi chú dành cho Diễn giả / Tech Lead:</span>
           </div>
           <div id="speakerNotesText">
             Khái quát quy mô 1.000 log và nhấn mạnh 3 vấn đề kiến trúc cần khắc phục ngay.

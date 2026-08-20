@@ -55,12 +55,12 @@ function initDashboardCharts() {
       type: "radar",
       data: {
         labels: [
-          "Độ sạch Context",
-          "Độ tinh gọn (Length)",
-          "Độ tin cậy Retry",
-          "Chuẩn hóa Intent",
-          "Độ chính xác Rule",
-          "Tỷ lệ giữ chân User"
+          "Độ sạch Ngữ cảnh (Context)",
+          "Độ tinh gọn (Độ dài câu)",
+          "Độ tin cậy (Hạ tỷ lệ Retry)",
+          "Chuẩn hóa Ý định (Intent)",
+          "Độ chính xác Quy tắc (Rule)",
+          "Tỷ lệ giữ chân Học viên"
         ],
         datasets: [
           {
@@ -247,20 +247,20 @@ function renderVocabGrid() {
   if (!container) return;
 
   const terms = [
-    { word: "agent", count: 44, desc: "Kiến trúc Multi-Agent, Tool use, Reasoning" },
-    { word: "model", count: 31, desc: "Lựa chọn LLM, Tokenizer, Weight" },
-    { word: "gpu", count: 31, desc: "VRAM, CUDA Cores, Parallelization" },
-    { word: "llm", count: 23, desc: "Large Language Models & Prompting" },
-    { word: "context", count: 22, desc: "Context Window, Memory, Retrieval" },
-    { word: "latency", count: 17, desc: "TTFT, Inference Time, Optimization" },
-    { word: "cost", count: 17, desc: "Token Cost, API Pricing, Caching" },
-    { word: "serving", count: 16, desc: "Deployment, vLLM, Triton Server" },
-    { word: "reflexion", count: 15, desc: "Self-Reflection, Feedback Loops" },
-    { word: "vllm", count: 14, desc: "PagedAttention, High Throughput" }
+    { word: "agent", count: 44, desc: "Kiến trúc Multi-Agent, Tool Use, khả năng suy luận Reasoning" },
+    { word: "model", count: 31, desc: "Lựa chọn mô hình LLM, Tokenizer, kích thước tham số" },
+    { word: "gpu", count: 31, desc: "Dung lượng VRAM, CUDA Cores, tối ưu tính toán song song" },
+    { word: "llm", count: 23, desc: "Mô hình ngôn ngữ lớn & Kỹ thuật Prompt Engineering" },
+    { word: "context", count: 22, desc: "Cửa sổ ngữ cảnh Context Window, bộ nhớ hội thoại" },
+    { word: "latency", count: 17, desc: "Thời gian phản hồi TTFT, độ trễ suy luận mô hình" },
+    { word: "cost", count: 17, desc: "Chi phí token API, tối ưu hóa bộ nhớ đệm Caching" },
+    { word: "serving", count: 16, desc: "Triển khai hạ tầng phục vụ suy luận (vLLM, Triton Server)" },
+    { word: "reflexion", count: 15, desc: "Cơ chế tự phản tư và vòng lặp tự sửa lỗi Self-Reflection" },
+    { word: "vllm", count: 14, desc: "Thư viện tối ưu thông lượng bộ nhớ PagedAttention" }
   ];
 
   container.innerHTML = terms.map(t => `
-    <div class="vocab-chip" onclick="alert('Thuật ngữ: ${t.word}\\nTần suất bôi đen: ${t.count} lần\\nỨng dụng: ${t.desc}\\n→ Đề xuất: Tích hợp Tooltip inline ngay trên slide PDF.')">
+    <div class="vocab-chip" onclick="alert('Thuật ngữ: ${t.word}\\nTần suất học viên bôi đen: ${t.count} lần\\nÝ nghĩa chuyên ngành: ${t.desc}\\n\\n👉 Đề xuất cải tiến: Tích hợp Tooltip giải nghĩa tức thì ngay trên slide PDF (Không tốn chi phí gọi LLM).')">
       <div class="vocab-term">${t.word}</div>
       <div class="vocab-count">${t.count} lần</div>
     </div>

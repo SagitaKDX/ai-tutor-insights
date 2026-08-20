@@ -200,6 +200,30 @@ body {
   transform: translateY(-1px);
 }
 
+.github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid #1e293b;
+  box-shadow: var(--shadow-xs);
+  transition: var(--transition-fast);
+}
+
+.github-btn:hover {
+  background: var(--royal-blue);
+  border-color: var(--royal-blue);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
 /* ========================================= */
 /* MAIN LAYOUT                               */
 /* ========================================= */
