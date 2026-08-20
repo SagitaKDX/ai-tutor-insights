@@ -1,4 +1,4 @@
-// AI Tutor Slide Presentation Controller
+// AI Tutor Slide Presentation Controller (Theme: Crisp White, Royal Blue, Crimson Red)
 let currentSlideIndex = 0;
 let slideCharts = {};
 
@@ -130,17 +130,19 @@ window.initSlideContextChart = function() {
   slideCharts.context = new Chart(ctx, {
     type: "pie",
     data: {
-      labels: ["Echo (48,1%)", "Bôi đen thật (40,5%)", "Không ngữ cảnh (10,9%)"],
+      labels: ["Echo lỗi (48,1%)", "Bôi đen thật (40,5%)", "Không ngữ cảnh (10,9%)"],
       datasets: [{
         data: [481, 405, 109],
-        backgroundColor: ["#f43f5e", "#10b981", "#64748b"]
+        backgroundColor: ["#dc2626", "#059669", "#64748b"],
+        borderColor: "#ffffff",
+        borderWidth: 2
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { position: "bottom", labels: { color: "#9ca3af", font: { size: 10 } } }
+        legend: { position: "bottom", labels: { color: "#334155", font: { size: 11, weight: "bold" } } }
       }
     }
   });
@@ -158,15 +160,16 @@ window.initSlideRuleChart = function() {
       datasets: [{
         label: "Win Rate (%)",
         data: [97.0, 94.0, 94.0, 60.0, 0.5],
-        backgroundColor: ["#10b981", "#10b981", "#10b981", "#3b82f6", "#f43f5e"]
+        backgroundColor: ["#059669", "#059669", "#059669", "#1e40af", "#dc2626"],
+        borderRadius: 4
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-        y: { ticks: { color: "#9ca3af", callback: v => v + "%" }, max: 100 },
-        x: { ticks: { color: "#9ca3af" } }
+        y: { ticks: { color: "#64748b", callback: v => v + "%", font: { weight: "600" } }, max: 100, grid: { color: "#f1f5f9" } },
+        x: { ticks: { color: "#1e293b", font: { weight: "700" } }, grid: { display: false } }
       },
       plugins: { legend: { display: false } }
     }
@@ -185,7 +188,7 @@ window.initSlideRetryChart = function() {
       datasets: [{
         label: "Retry Rate (%)",
         data: [20.0, 13.8, 6.2, 5.5, 3.6],
-        backgroundColor: ["#f43f5e", "#f59e0b", "#3b82f6", "#3b82f6", "#10b981"],
+        backgroundColor: ["#dc2626", "#ea580c", "#2563eb", "#2563eb", "#059669"],
         borderRadius: 4
       }]
     },
@@ -194,8 +197,8 @@ window.initSlideRetryChart = function() {
       maintainAspectRatio: false,
       indexAxis: "y",
       scales: {
-        x: { ticks: { color: "#9ca3af", callback: v => v + "%" }, max: 25 },
-        y: { ticks: { color: "#9ca3af" } }
+        x: { ticks: { color: "#64748b", callback: v => v + "%", font: { weight: "600" } }, max: 25, grid: { color: "#f1f5f9" } },
+        y: { ticks: { color: "#1e293b", font: { weight: "700" } }, grid: { display: false } }
       },
       plugins: { legend: { display: false } }
     }
