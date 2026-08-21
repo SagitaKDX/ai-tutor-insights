@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Từ Bình Luận đến Điểm Giao Thoa — Hướng Dẫn Từng Bước (Step-by-Step Guide)</title>
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<!-- KaTeX CSS & JS for Math Rendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+        ],
+        throwOnError: false
+    });"></script>
+
+<style>
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --surface-alt:#F8F9FA; --ink:#111111; --muted:#444444; --line:#D0D0D0;
+  /* Distinct Semantic Chart & Badge Colors */
+  --r:#C0392B; --r-soft:#FDEDEC; --r-ink:#922B21;
+  --s:#1E7F70; --s-soft:#E8F8F5; --s-ink:#117A65;
+  --c:#D4AC0D; --c-soft:#FEF9E7; --c-ink:#B7950B;
+  --c-dark:#B8860B;
+  --code-bg:#F4F4F4; --warn:#FCF3CF; --warn-ink:#7D6608;
+  --accent:#111111; --accent-soft:#EAECEE;
+}
+
+@media print{
+  :root{--bg:#fff;--surface:#fff;--ink:#000;--muted:#333;--line:#bbb;--code-bg:#f2f2f2;}
+  body{font-size:10pt;line-height:1.5}
+  .wrap{max-width:none;padding:0}
+  .step{break-inside:avoid}
+  a{color:inherit;text-decoration:none}
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:15.5px;
+  line-height:1.65;
+}
+.wrap{max-width:78ch;margin:0 auto;padding:2.5rem 1.25rem 5rem}
+
+h1,h2,h3{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif;line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:2.1rem;font-weight:800;letter-spacing:-.01em;padding-bottom:.6rem;border-bottom:2.5px solid var(--ink)}
+h2{font-size:1.35rem;font-weight:700;margin-top:2.6rem;text-transform:uppercase;letter-spacing:.03em}
+h3{font-size:1.05rem;font-weight:700;margin-top:1.2rem}
+p{margin:.85rem 0}
+
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;font-weight:600}
+.lede{font-size:1.05rem;color:var(--muted);margin-top:.85rem;line-height:1.6}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--muted);margin:1.2rem 0;background:var(--surface-alt);padding:.7rem 1rem;border:1px solid var(--line);border-left:3px solid var(--ink)}
+
+code,pre{font-family:"IBM Plex Mono",monospace;font-size:.88em}
+code{background:var(--code-bg);padding:.15em .4em;border-radius:3px;border:1px solid #E2E2E2}
+pre{background:var(--code-bg);padding:1rem 1.15rem;border-radius:4px;border:1px solid var(--line);border-left:3px solid var(--ink);overflow-x:auto;line-height:1.55;margin:1rem 0;white-space:pre-wrap}
+pre code{background:none;padding:0;border:none}
+
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:1.2rem 0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.tbl{overflow-x:auto}
+th,td{text-align:left;padding:.6rem .75rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:700;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);background:var(--surface-alt);border-bottom:1.5px solid var(--ink)}
+
+.step{background:var(--surface);border:1.5px solid var(--line);border-radius:6px;padding:1.3rem 1.5rem;margin:1.6rem 0}
+.step .n{font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;font-weight:700}
+.step h2{margin-top:.2rem;border:0;padding:0;font-size:1.3rem;text-transform:none}
+
+.block{margin:.9rem 0}
+.block b{display:block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem;font-weight:700}
+.why{border-left:3.5px solid var(--c-dark);padding-left:.95rem}
+.how{border-left:3.5px solid var(--ink);padding-left:.95rem}
+.get{border-left:3.5px solid var(--s);padding-left:.95rem}
+.ex{background:var(--surface-alt);border:1px solid var(--line);border-radius:4px;padding:.8rem 1rem;font-size:.92rem;margin:.5rem 0}
+.vi{font-style:italic;font-weight:600}
+
+/* Colored Pills */
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.74rem;padding:.15em .55em;border-radius:3px;font-weight:600;white-space:nowrap}
+.pill.r{background:var(--r-soft);color:var(--r-ink);border:1px solid var(--r)}
+.pill.s{background:var(--s-soft);color:var(--s-ink);border:1px solid var(--s)}
+.pill.c{background:var(--c-soft);color:var(--c-ink);border:1px solid var(--c)}
+.pill.n{background:var(--code-bg);color:var(--muted);border:1px solid var(--line)}
+
+.callout{background:var(--surface-alt);color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--ink);padding:.9rem 1.1rem;border-radius:3px;margin:1.2rem 0}
+.callout.warn{border-left-color:var(--c-dark);background:var(--warn);color:var(--warn-ink)}
+.callout p{margin:.3rem 0}
+
+ul,ol{padding-left:1.3rem}li{margin:.35rem 0}
+.fig{background:var(--surface);border:1.5px solid var(--ink);border-radius:4px;padding:1.25rem;margin:1.5rem 0}
+.fig figcaption{font-size:.86rem;color:var(--muted);margin-top:.75rem;line-height:1.5;border-top:1px solid var(--line);padding-top:.5rem}
+.fig svg{width:100%;height:auto;display:block}
+
+.small{font-size:.88rem;color:var(--muted)}
+dl{margin:0}
+dt{font-weight:700;margin-top:.8rem;color:var(--ink)}
+dd{margin:0 0 .3rem 0;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="eyebrow">FCBEM Study 1 · Hướng Dẫn Diễn Giải Dễ Hiểu</div>
+<h1>Từ Bình Luận đến Điểm Giao Thoa — Hướng Dẫn Từng Bước (Step-by-Step Guide)</h1>
+<p class="lede">Làm thế nào để biến hàng nghìn bình luận Facebook tiếng Việt về một Người ảnh hưởng ảo (Virtual Influencer) thành một câu trả lời khoa học và trung thực: <em>Khi nào thì khán giả thôi coi cô ấy là một "thứ đồ giả" và bắt đầu đối xử như một con người thực thụ — và các thảo luận mua sắm có diễn ra sau đó hay không?</em> Văn bản này được viết để bất kỳ ai dù không chuyên về thống kê cũng có thể nắm bắt rõ ràng từng bước và hiểu được lý do tại sao phải làm như vậy.</p>
+
+<div class="meta">
+  <strong>Tài liệu bổ trợ cho:</strong> <code>VI_Acceptance_Playbook_FCBEM_vi.html</code> (nơi chứa đầy đủ chi tiết học thuật, mã nguồn và trích dẫn). Cập nhật: 21/08/2026.
+</div>
+
+<!-- ============================================================ -->
+<h2>Ý tưởng cốt lõi qua một bức tranh</h2>
+<p>Hãy tưởng tượng một học sinh mới chuyển vào lớp bạn nhưng có vẻ ngoài hơi "lạ lùng" — giống như một robot cực kỳ giống người. Ở tuần thứ nhất, cả lớp xì xào: <i>"Trông ghê quá, nhìn đôi mắt kìa"</i>. Đến tuần thứ 10, mọi người bắt đầu bảo: <i>"Bạn này nói chuyện hài ghê"</i> và <i>"Mai có đi chơi cùng nhóm không?"</i>. Đến tuần thứ 20, có người hỏi: <i>"Đôi giày bạn mua ở đâu đẹp thế?"</i>.</p>
+<p>Nghiên cứu của chúng ta đo lường chính xác <strong>hành trình tâm lý đó</strong> đối với một KOL ảo (Virtual Influencer - VI), thông qua những gì công chúng bình luận trên mạng xã hội.</p>
+
+<figure class="fig">
+<svg viewBox="0 0 650 260" role="img" aria-label="Ba đường cong theo thời gian: chê bai giảm, kết bạn tăng, hỏi mua sắm tăng sau đó; điểm giao nhau được đánh dấu">
+  <defs>
+    <style>
+      .ax { stroke: #111; stroke-width: 1.5; }
+      .grid { stroke: #EEE; stroke-width: 1; stroke-dasharray: 2 2; }
+      .lbl { font: 12px "IBM Plex Mono", monospace; fill: #444; font-weight: 500; }
+      .t { font: 13px "IBM Plex Sans", sans-serif; font-weight: 700; }
+    </style>
+  </defs>
+  
+  <!-- Grid -->
+  <line x1="50" y1="160" x2="620" y2="160" class="grid"/>
+  <line x1="50" y1="110" x2="620" y2="110" class="grid"/>
+  <line x1="50" y1="60" x2="620" y2="60" class="grid"/>
+
+  <!-- Axes -->
+  <line x1="50" y1="210" x2="620" y2="210" class="ax"/>
+  <line x1="50" y1="20" x2="50" y2="210" class="ax"/>
+  <text x="335" y="246" class="lbl" text-anchor="middle">Số tuần kể từ bài đăng đầu tiên của KOL ảo</text>
+  <text x="18" y="115" class="lbl" transform="rotate(-90 18 115)" text-anchor="middle">Tỷ lệ bình luận (%)</text>
+
+  <!-- Shaded Crossover Region (Soft Mint) -->
+  <rect x="320" y="20" width="70" height="190" fill="#E8F8F5" opacity="0.9"/>
+  <line x1="355" y1="20" x2="355" y2="210" stroke="#117A65" stroke-dasharray="4 4" stroke-width="1.8"/>
+
+  <!-- Curve 1: Creepy/Fake (Red) -->
+  <path d="M60 40 C 140 60, 200 130, 300 165 S 520 190, 610 192" fill="none" stroke="#C0392B" stroke-width="3.2"/>
+  
+  <!-- Curve 2: Relational/Friend (Emerald Teal) -->
+  <path d="M60 180 C 160 178, 240 168, 320 150 S 480 95, 610 80" fill="none" stroke="#1E7F70" stroke-width="3.2"/>
+  
+  <!-- Curve 3: Commercial/Buy (Amber Gold) -->
+  <path d="M60 200 C 200 200, 330 196, 420 175 S 560 140, 610 132" fill="none" stroke="#D4AC0D" stroke-width="2.5" stroke-dasharray="6 4"/>
+
+  <!-- Colored Labels -->
+  <text x="65" y="34" class="t" fill="#C0392B">── Thảo luận chê bai / kỳ dị R(t)</text>
+  <text x="390" y="75" class="t" fill="#1E7F70">── Thảo luận coi như bạn bè S(t)</text>
+  <text x="400" y="128" class="t" fill="#B7950B">- - Thảo luận hỏi mua sắm C(t)</text>
+  
+  <text x="355" y="14" class="lbl" text-anchor="middle" fill="#117A65" font-weight="bold">Điểm giao thoa τ*</text>
+  <text x="355" y="226" class="lbl" text-anchor="middle" fill="#117A65" font-weight="bold">τ*</text>
+</svg>
+<figcaption>Toàn bộ dự án nghiên cứu này tồn tại để vẽ nên bức tranh này một cách trung thực, có dải sai số khoa học, từ các bình luận thực tế của người dùng.</figcaption>
+</figure>
+
+<!-- ============================================================ -->
+<h2>Những gì bạn cần chuẩn bị trước khi bắt đầu</h2>
+<ul>
+  <li><strong>Dữ liệu bình luận:</strong> Đã cào vào SQLite <code>data/db/scraper.sqlite</code> (khoảng 5.900 bình luận cho <span class="vi">Tiểu Mỹ</span>; đang cào thêm các KOL khác).</li>
+  <li><strong>Môi trường lập trình:</strong> <strong>Python</strong> (pandas) để làm sạch dữ liệu và gọi AI; <strong>R</strong> (các gói <code>mgcv</code>, <code>gratia</code>, <code>segmented</code>) để ước lượng các đường cong.</li>
+  <li><strong>Tài khoản API DeepSeek:</strong> Dùng mô hình DeepSeek V4 Flash; chi phí gán nhãn toàn bộ dữ liệu chỉ vài USD.</li>
+  <li><strong>Hai người Việt Nam gán nhãn bằng tay:</strong> Sẵn sàng gán nhãn 600–800 bình luận độc lập. <em>Đây là thành phần quan trọng nhất quyết định độ tin cậy của bài báo.</em></li>
+</ul>
+
+<!-- ============================================================ -->
+<!-- BƯỚC 1 -->
+<div class="step">
+  <div class="n">Bước 01</div>
+  <h2>Làm sạch dữ liệu bình luận</h2>
+  <div class="block why">
+    <b>Tại sao phải làm?</b> Dữ liệu đầu vào bừa bãi sẽ cho kết quả sai lệch. Công cụ cào đôi khi quét trùng bình luận, cào nhầm đoạn văn bản mô tả ảnh của Facebook (alt-text) và có cả những bình luận do chính tài khoản của KOL tự trả lời fan.
+  </div>
+  <div class="block how">
+    <b>Cách thực hiện:</b>
+    <ul>
+      <li>Xóa các bình luận trùng lặp chính xác 100% (cùng bài viết + cùng người đăng + cùng nội dung).</li>
+      <li>Xóa các dòng rác do Facebook tự sinh (bắt đầu bằng <span class="vi">“May be an image of…”</span> hoặc <span class="vi">“Avatar is pointing…”</span>).</li>
+      <li>Xóa bình luận do chính tài khoản của KOL ảo tự đăng.</li>
+      <li><em>Đánh dấu cờ (không xóa):</em> Các bình luận chỉ có icon, spam rõ ràng (“Follow”, copy-paste hàng loạt) và văn bản không phải tiếng Việt. Ta giữ lại để đếm tổng tương tác nhưng không đưa vào gán nhãn nội dung.</li>
+      <li>Thay thế tên/ID người dùng bằng mã băm ngẫu nhiên (hash) để bảo mật danh tính.</li>
+    </ul>
+  </div>
+  <div class="block get">
+    <b>Kết quả thu được:</b> Một bảng dữ liệu sạch hoàn chỉnh, mỗi dòng là một bình luận, gồm các cột: mã bình luận, mã bài viết, tên nhân vật, nội dung, mã người đăng, thời gian, có phải reply không, nội dung bình luận cha, caption bài viết.
+  </div>
+</div>
+
+<!-- BƯỚC 2 -->
+<div class="step">
+  <div class="n">Bước 02</div>
+  <h2>Gán số thứ tự tuần cho từng bình luận</h2>
+  <div class="block why">
+    <b>Tại sao phải làm?</b> Toàn bộ bài báo nghiên cứu về sự thay đổi theo thời gian, do đó mỗi bình luận cần được định vị trên một trục thời gian đồng nhất cho mọi KOL ảo: <strong>số tuần tính từ bài đăng đầu tiên của KOL đó</strong> (tuần 0 = ngày ra mắt).
+  </div>
+  <div class="block how">
+    <b>Cách thực hiện:</b>
+    <ul>
+      <li>Facebook hiển thị thời gian có lúc chính xác (<code>2026-05-12 16:21</code>), có lúc tương đối (<span class="vi">“13 tuần trước”</span>). Với mốc tương đối, lấy ngày chạy cào trừ đi 13 tuần. Sai số khoảng $\pm 1$ tuần — hoàn toàn chấp nhận được cho phân tích theo tuần, và sau này sẽ kiểm tra lại bằng bước gom 2 tuần.</li>
+      <li>Xác định ngày đăng bài đầu tiên của từng KOL ảo và lưu vào file <code>data/personas.csv</code>.</li>
+      <li>Tính: <code>week_since_launch = (ngày bình luận − ngày ra mắt) / 7</code> (làm tròn xuống).</li>
+    </ul>
+  </div>
+  <div class="block get">
+    <b>Kết quả thu được:</b> Các cột <code>comment_time</code>, <code>time_precision</code> và <code>week_since_launch</code> (với Tiểu Mỹ là tuần 0 đến 23).
+  </div>
+  <div class="callout warn">
+    <p><strong>Lưu ý:</strong> Một bài viết viral có thể chiếm tới 23% tổng bình luận, và có tuần chỉ có 3 bình luận trong khi tuần cao điểm có tới 2.278 bình luận. Vì vậy sau này ta không thể tính tỷ lệ phần trăm tuần một cách thô sơ mà phải dùng mô hình thống kê kiểm soát theo bài viết.</p>
+  </div>
+</div>
+
+<!-- BƯỚC 3 -->
+<div class="step">
+  <div class="n">Bước 03</div>
+  <h2>Xác định chính xác những gì cần đo lường</h2>
+  <div class="block why">
+    <b>Tại sao phải làm?</b> Câu hỏi <i>"Bình luận này tích cực hay tiêu cực?"</i> là không đủ. Câu hỏi đúng là <em>người bình luận đang thiết lập mối quan hệ như thế nào với KOL ảo</em>. Một câu chê nhẹ (<span class="vi">“Con nhỏ này hôm nay lại đi quảng cáo nữa à =)))”</span>) thực chất chứng minh người đó đã coi cô ấy như một KOL bình thường. Vì vậy ta đo 4 phản ứng độc lập:
+  </div>
+  <div class="block how">
+    <b>Bốn nhãn phản ứng (mỗi nhãn là Có/Không - 1/0):</b>
+    <div class="tbl"><table>
+      <thead>
+        <tr><th>Tên nhãn</th><th>Ý nghĩa</th><th>Ví dụ thực tế</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="pill r">uncanny resistance</span></td><td>Chê ngoại hình/giọng nói giả, dị hợm; từ chối xem <em>vì</em> là ảo</td><td><span class="vi">“Al hát ghép nên nghe k thật”</span> · <span class="vi">“mỗi lúc 1 khác chả đồng nhất”</span></td></tr>
+        <tr><td><span class="pill n">AI skepticism</span></td><td>Chống đối công nghệ AI nói chung, chê nhãn hàng lừa đảo — không nói về ngoại hình</td><td><span class="vi">“sống chung với rác AI”</span> · <span class="vi">“lừa đảo người dùng”</span></td></tr>
+        <tr><td><span class="pill s">parasocial / relational</span></td><td>Trò chuyện như với bạn bè: gọi chị/em/bé/bà, khen duyên, giục ra video, bênh vực, trêu đùa</td><td><span class="vi">“Sắp thuộc rồi chú Khoa ơi”</span> · <span class="vi">“nói AI bé nó buồn đấy”</span></td></tr>
+        <tr><td><span class="pill c">commercial receptivity</span></td><td>Hỏi sản phẩm, hỏi giá, xin link, hỏi tên hãng; muốn mua/dùng thử; khen bài hợp tác</td><td><span class="vi">“Quạt, quạt gì cơ xin link”</span> · <span class="vi">“áo đẹp quá cho xin info”</span></td></tr>
+      </tbody>
+    </table></div>
+    <p>Cộng thêm 2 thông tin phụ: <strong>sentiment</strong> (tiêu cực/trung tính/tích cực) và <strong>khía cạnh (aspects)</strong> — người ta đang đánh giá phần nào (ngoại hình, giọng nói, tính cách, sản phẩm...).</p>
+  </div>
+  <div class="block get">
+    <b>Kết quả thu được:</b> Bộ khung định nghĩa nhãn rõ ràng, chuẩn chỉnh về mặt lý thuyết.
+  </div>
+</div>
+
+<!-- BƯỚC 4 -->
+<div class="step">
+  <div class="n">Bước 04</div>
+  <h2>Xây dựng Sổ tay mã hóa (Codebook) qua mẫu thử Pilot</h2>
+  <div class="block why">
+    <b>Tại sao phải làm?</b> Nếu không có quy tắc rõ ràng, hai người cùng đọc một bình luận sẽ chấm khác nhau, nhất là với tiếng lóng, teencode Việt Nam. Sổ tay mã hóa với ví dụ thực tế chính là thứ biến việc gán nhãn thành một phương pháp khoa học thay vì cảm tính cá nhân.
+  </div>
+  <div class="block how">
+    <b>Cách thực hiện:</b>
+    <ul>
+      <li>Chọn <strong>200 bình luận</strong> — nhưng không lấy ngẫu nhiên hoàn toàn. Nếu lấy ngẫu nhiên sẽ toàn gặp <span class="vi">“xinh quá”</span> và icon (vì câu chê chỉ chiếm ~2%, câu hỏi mua chỉ chiếm ~3%). Hãy cố tình chọn đủ các tháng, các nhân vật và lọc cả các từ khóa như <span class="vi">giả, ghê, AI, đơ, link, mua, giá, quạt</span>.</li>
+      <li>Trúc và Minh cùng nhau chấm 200 câu này, tranh luận về các câu khó và ghi lại quy tắc: câu hỏi <span class="vi">“AI hả?”</span> <em>không</em> tính là chê bai; câu <span class="vi">“lại quảng cáo nữa à”</span> tính là gắn kết thân mật, không tính là đón nhận thương mại.</li>
+    </ul>
+  </div>
+  <div class="block get">
+    <b>Kết quả thu được:</b> Sổ tay mã hóa <strong>Codebook v1</strong> gồm định nghĩa, tiêu chí gán, tiêu chí loại trừ và 3–5 ví dụ tiếng Việt cho từng nhãn.
+  </div>
+</div>
+
+<!-- BƯỚC 5 -->
+<div class="step">
+  <div class="n">Bước 05</div>
+  <h2>Tạo Tập Chuẩn Vàng (Gold Set) với 2 Chuyên viên Chấm độc lập</h2>
+  <div class="block why">
+    <b>Tại sao phải làm?</b> Sau này AI sẽ gán nhãn hàng chục nghìn bình luận, nhưng ta chỉ có thể tin tưởng AI nếu có một "đề thi và đáp án chuẩn" do chính con người chấm để đối chiếu.
+  </div>
+  <div class="block how">
+    <b>Cách thực hiện:</b>
+    <ul>
+      <li>Chọn 600–800 bình luận mới theo phương pháp lấy mẫu cân bằng như trên.</li>
+      <li>Hai người Việt Nam gán nhãn <strong>hoàn toàn độc lập</strong> (không thảo luận với nhau), đọc văn bản tiếng Việt gốc.</li>
+      <li>Đo mức độ đồng thuận bằng hệ số <strong>Krippendorff's $\alpha$</strong> (chỉ số đo độ trùng khớp vượt lên trên yếu tố may rủi, từ 0 đến 1). Ta cần $\alpha \ge 0.67$, lý tưởng là $\ge 0.80$. Nếu nhãn nào có $\alpha$ thấp, nghĩa là quy tắc trong Codebook chưa rõ $\rightarrow$ sửa lại quy tắc và chấm lại nhãn đó.</li>
+      <li>Những câu hai người chấm lệch nhau sẽ ngồi lại thảo luận để chốt đáp án cuối cùng.</li>
+      <li>Chia tập chuẩn thành 2 phần: khoảng 40% làm <strong>Tập luyện (Practice set)</strong> để chỉnh prompt cho AI, và 60% làm <strong>Tập thi (Exam/Test set)</strong> — tập này chỉ dùng để chấm điểm AI đúng một lần duy nhất.</li>
+    </ul>
+  </div>
+  <div class="block get">
+    <b>Kết quả thu được:</b> Một file dữ liệu ~700 bình luận có đáp án chuẩn của con người, chỉ số $\alpha$, và phân chia rõ tập Practice / Test.
+  </div>
+</div>
+
+<!-- BƯỚC 6 -->
+<div class="step">
+  <div class="n">Bước 06</div>
+  <h2>Huấn luyện Prompt cho AI và Chấm điểm "Bài thi" của AI</h2>
+  <div class="block why">
+    <b>Tại sao phải làm?</b> Con người chỉ có thể chấm vài trăm câu, không thể chấm 30.000 câu. AI DeepSeek có thể làm điều đó trong vài phút với chi phí cực rẻ — nhưng ta phải chứng minh được AI hiểu đúng như con người.
+  </div>
+  <div class="block how">
+    <b>Cách thực hiện:</b>
+    <ul>
+      <li>Viết prompt hướng dẫn: nêu rõ vai trò, đưa nguyên văn Codebook và 8–12 ví dụ mẫu đã giải sẵn lấy từ tập Practice. Yêu cầu trả về định dạng JSON thuần túy, đặt `temperature = 0`.</li>
+      <li>Chạy thử trên tập Practice, xem AI chấm sai ở đâu, tinh chỉnh lại câu chữ trong prompt.</li>
+      <li>Chạy AI trên tập Test <strong>đúng 1 lần</strong> và chấm điểm bằng:
+        <ul>
+          <li><strong>Precision (Độ chuẩn xác):</strong> Trong những câu AI bảo là "chê bai", có bao nhiêu câu thực sự là chê? (Có bị báo động giả không?)</li>
+          <li><strong>Recall (Độ bao phủ):</strong> Trong những câu chê bai thật sự, AI tìm ra được bao nhiêu câu? (Có bị bỏ sót không?)</li>
+          <li><strong>$F_1$ và Macro-$F_1$:</strong> Điểm cân bằng trung bình giữa Precision và Recall trên tất cả các nhãn.</li>
+        </ul>
+        <em>Không bao giờ chỉ báo cáo Accuracy:</em> vì 97% bình luận không hỏi mua hàng, nếu AI luôn đoán "không" thì Accuracy vẫn là 97% nhưng vô giá trị.
+      </li>
+      <li>Chạy lại 5% dữ liệu lần thứ 2 để kiểm tra AI có tự nhất quán với chính nó không (mục tiêu $\ge 90\%$).</li>
+    </ul>
+  </div>
+  <div class="block get">
+    <b>Kết quả thu được:</b> Bảng kiểm định độ tin cậy hoàn chỉnh để đưa vào bài báo (Bảng 2).
+  </div>
+</div>
+
+<!-- BƯỚC 7 -->
+<div class="step">
+  <div class="n">Bước 07</div>
+  <h2>Gán nhãn toàn bộ dữ liệu bằng AI</h2>
+  <div class="block how">
+    <b>Cách thực hiện:</b> Đóng băng prompt. Gửi toàn bộ bình luận đã làm sạch vào DeepSeek V4 Flash kèm caption bài viết; lưu kết quả JSON vào bảng dữ liệu. Lưu lại toàn bộ prompt, tên model và ngày chạy vào Phụ lục bài báo để đảm bảo khả năng tái lập.
+  </div>
+  <div class="block get">
+    <b>Kết quả thu được:</b> Bảng dữ liệu phân tích hoàn chỉnh: mỗi dòng là một bình luận có đủ thông tin tuần, bài viết, nhân vật, 4 nhãn phản ứng, sentiment và khía cạnh.
+  </div>
+</div>
+
+<!-- BƯỚC 8 -->
+<div class="step">
+  <div class="n">Bước 08</div>
+  <h2>Vẽ các đường cong theo tuần một cách khoa học</h2>
+  <div class="block why">
+    <b>Tại sao phải làm?</b> Cách làm đơn giản nhất là tính "% bình luận chê theo tuần" rồi nối các điểm lại. Nhưng cách này sai vì 2 lý do: (1) một bài viral đột biến sẽ làm méo mó cả tuần đó; (2) nếu đồ họa của KOL đẹp hơn theo thời gian, lời chê giảm có thể là do đồ họa xịn hơn chứ không phải khán giả đã quen. Ta cần một phương pháp giải quyết được cả hai vấn đề này.
+  </div>
+  <div class="block how">
+    <b>Cách thực hiện (Ý tưởng cốt lõi, không cần giỏi toán):</b>
+    <ul>
+      <li>Dùng <strong>Mô hình đường cong mượt mà (GAM trong gói `mgcv` của R)</strong>. Hãy hình dung nó như việc vẽ một đường cong mềm mại vừa vặn nhất với dữ liệu, kèm theo một dải bóng mờ thể hiện mức độ không chắc chắn (khoảng tin cậy). Nó không ép đường cong phải là đường thẳng.</li>
+      <li>Khai báo cho mô hình biết bình luận nào thuộc <strong>bài viết</strong> nào và thuộc <strong>KOL</strong> nào — để một bài viết viral cực lớn chỉ được tính như một sự kiện đơn lẻ, không thao túng toàn bộ dữ liệu của tuần.</li>
+      <li>Đưa vào các <strong>biến kiểm soát</strong>: bài có quảng cáo không, loại ảnh hay video, độ thật của đồ họa, có thừa nhận AI không. Điều này giúp ta tự tin khẳng định: <em>"Khán giả thay đổi tâm lý, chứ không phải do video đẹp hơn"</em>.</li>
+      <li>Vẽ 3 đường cong: Phản kháng $R(t)$, Gắn kết $S(t)$, Đón nhận thương mại $C(t)$. Đạo hàm của đường cong cho ta biết tốc độ suy giảm phản kháng và tốc độ tăng trưởng gắn kết.</li>
+    </ul>
+  </div>
+  <div class="block get">
+    <b>Kết quả thu được:</b> Hình 1 của bài báo — 3 đường cong kèm dải băng tin cậy; và kết quả kiểm định cho Giả thuyết H1 và H2.
+  </div>
+</div>
+
+<!-- BƯỚC 9 -->
+<div class="step">
+  <div class="n">Bước 09</div>
+  <h2>Xác định Điểm Giao Thoa $\tau^*$ và Đo lường Độ Tin Cậy</h2>
+  <div class="block why">
+    <b>Tại sao phải làm?</b> Tiêu đề cốt lõi của bài báo là <em>"tuần mà thảo luận gắn kết vượt qua thảo luận chê bai một cách bền vững"</em>. Một tuần ngẫu nhiên mà 2 đường chạm nhau chỉ là nhiễu. Và con số chính xác tuyệt đối như "ngày thứ 76" nghe thì hay nhưng thiếu cơ sở khoa học nếu không có khoảng tin cậy.
+  </div>
+  <div class="block how">
+    <b>Cách thực hiện:</b>
+    <ul>
+      <li>Tính đường chênh lệch <strong>$D(t) = S(t) - R(t)$</strong>. Nếu $D(t) < 0$: chê bai vẫn chiếm ưu thế. Nếu $D(t) > 0$: gắn kết chiếm ưu thế.</li>
+      <li><strong>Quy tắc chốt trước:</strong> Điểm giao thoa $\tau^*$ là <em>tuần đầu tiên mà biên dưới của khoảng tin cậy 95% của $D(t)$ lớn hơn 0 liên tục trong 3 tuần</em>. Ghi rõ quy tắc này vào bài báo trước khi chạy số.</li>
+      <li><strong>Đo độ tin cậy bằng Bootstrap:</strong> Giống như bỏ tất cả bài viết vào một chiếc hộp, bốc ngẫu nhiên có hoàn lại để tạo ra bộ dữ liệu mới cùng kích thước, rồi chạy lại mô hình. Lặp lại 1.000 lần. 95% giá trị $\tau^*$ ở giữa chính là Khoảng tin cậy 95% (ví dụ: $\tau^* \approx$ Tuần 14, KTC 95% [12, 18]).</li>
+      <li>Nếu 2 đường không cắt nhau, hãy báo cáo trung thực: <i>"Phản kháng giảm từ 18% xuống 5% nhưng gắn kết chưa vượt qua trong 23 tuần"</i>. Đây vẫn là một kết quả nghiên cứu có giá trị xuất bản cao, tuyệt đối không "ép" số liệu phải cắt nhau.</li>
+    </ul>
+  </div>
+  <div class="block get">
+    <b>Kết quả thu được:</b> Hình 2 (đường chênh lệch cắt qua số 0), con số $\tau^*$ kèm khoảng tin cậy cho từng KOL (Hình 3).
+  </div>
+</div>
+
+<!-- BƯỚC 10 -->
+<div class="step">
+  <div class="n">Bước 10</div>
+  <h2>Thảo luận mua sắm có diễn ra sau điểm giao thoa không?</h2>
+  <div class="block why">
+    <b>Tại sao phải làm?</b> Giả thuyết H3/H4 cho rằng: khi cán cân nghiêng về phía yêu mến/gắn kết, các thảo luận quan tâm đến sản phẩm sẽ tăng lên <em>ở các tuần sau đó</em>.
+  </div>
+  <div class="block how">
+    <b>Cách thực hiện:</b> Lập bảng dữ liệu theo tuần: tỷ lệ bình luận thương mại tuần này ($C_t$), độ chênh lệch gắn kết tuần trước ($D_{t-1}$), số lượng bài quảng cáo tuần này, tổng lượng bình luận. Chạy mô hình hồi quy để xem $D_{t-1}$ có tác động dương có ý nghĩa thống kê đến $C_t$ hay không.
+  </div>
+  <div class="block get">
+    <b>Kết quả thu được:</b> Hình 7 và hệ số tác động trễ chứng minh vai trò của $\tau^*$ như một chỉ số dẫn dắt thương mại.
+  </div>
+</div>
+
+<!-- BƯỚC 11 -->
+<div class="step">
+  <div class="n">Bước 11</div>
+  <h2>Kiểm tra độ vững (Robustness Checks)</h2>
+  <div class="block why">
+    <b>Tại sao phải làm?</b> Người phản biện sẽ hỏi: <i>"Nếu bạn đổi cách gom nhóm hay bỏ bài viral đi thì kết quả có còn đúng không?"</i>. Hãy trả lời họ trước khi họ kịp hỏi.
+  </div>
+  <div class="block how">
+    <b>Chạy lại các bước 8–10 với các kịch bản:</b>
+    <ul>
+      <li>Gom nhóm 2 tuần thay vì 1 tuần;</li>
+      <li>Chỉ chạy trên tập dữ liệu do con người chấm (để chứng minh AI không làm sai lệch kết quả);</li>
+      <li>Loại bỏ bài đăng viral ở Tuần 33 (1.357 bình luận);</li>
+      <li>Chạy riêng biệt cho từng KOL ảo;</li>
+      <li>Thử nghiệm với quy tắc 2 tuần hoặc 4 tuần liên tiếp thay vì 3 tuần.</li>
+    </ul>
+  </div>
+  <div class="block get">
+    <b>Kết quả thu được:</b> Bảng kiểm tra độ vững chứng minh kết quả nghiên cứu là đáng tin cậy và bền vững.
+  </div>
+</div>
+
+<!-- BƯỚC 12 -->
+<div class="step">
+  <div class="n">Bước 12</div>
+  <h2>Trình bày câu chuyện qua biểu đồ và Viết bài báo</h2>
+  <div class="block how">
+    <b>Hệ thống hình ảnh theo đúng thứ tự logic:</b>
+    <ol>
+      <li><strong>Hình 1:</strong> 3 đường cong $R(t)$, $S(t)$, $C(t)$ — "Chê bai giảm, gắn kết tăng, cán cân đảo chiều tại đây".</li>
+      <li><strong>Hình 2:</strong> Đường chênh lệch $D(t)$ cắt trục 0 — "Sự đảo chiều là vững chắc và kéo dài".</li>
+      <li><strong>Hình 3:</strong> Biểu đồ từng KOL — "Mỗi nhân vật có tốc độ bình thường hóa khác nhau".</li>
+      <li><strong>Hình 4:</strong> Biểu đồ nhiệt khía cạnh — "Khán giả hết chê ngoại hình trước, khen tính cách sau, rồi mới hỏi mua đồ".</li>
+      <li><strong>Hình 5:</strong> Gắn kết vs Sentiment tích cực — "Bình thường hóa không đồng nghĩa với việc chỉ toàn lời khen".</li>
+      <li><strong>Hình 6:</strong> Biểu đồ Sankey của người bình luận lặp lại — "Tâm lý từng cá nhân cũng dịch chuyển theo hướng của thị trường".</li>
+      <li><strong>Hình 7:</strong> Thảo luận thương mại nối tiếp sau điểm giao thoa.</li>
+    </ol>
+  </div>
+  <div class="block get">
+    <b>Ranh giới kết luận:</b>
+    <ul>
+      <li>✅ <em>Được tuyên bố:</em> Sự bình thường hóa diễn ra ở cấp độ thảo luận cộng đồng trên Facebook Việt Nam; điểm $\tau^*$ là chỉ số dẫn dắt thực tiễn cho nhãn hàng.</li>
+      <li>❌ <em>Không được tuyên bố:</em> Không nói mọi cá nhân đều đổi ý, không khẳng định quan hệ nhân quả trực tiếp làm tăng doanh số (muốn đo doanh số hay ý định mua hàng phải có survey/sales data).</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>Thuật ngữ quan trọng (Giải thích ngắn gọn)</h2>
+<dl>
+<dt>Virtual Influencer (VI - KOL ảo)</dt>
+<dd>Nhân vật do máy tính/AI tạo ra, hoạt động và đăng bài trên mạng xã hội như một người có ảnh hưởng thật.</dd>
+
+<dt>Uncanny Valley (Thung lũng kỳ lạ)</dt>
+<dd>Cảm giác rợn người, khó chịu khi nhìn thấy một thực thể nhân tạo nhìn gần giống người nhưng có nét gì đó không tự nhiên (mắt đơ, cử động sượng).</dd>
+
+<dt>Parasocial Interaction (Tương tác cận xã hội)</dt>
+<dd>Mối quan hệ tâm lý một chiều khi khán giả cảm thấy thân thiết, gắn bó với một nhân vật truyền thông như bạn bè ngoài đời.</dd>
+
+<dt>Codebook (Sổ tay mã hóa)</dt>
+<dd>Quy tắc hướng dẫn chi tiết cách chấm điểm từng loại bình luận kèm ví dụ minh họa cụ thể.</dd>
+
+<dt>Gold Set (Tập Chuẩn Vàng)</dt>
+<dd>Tập bình luận do con người chấm độc lập; đóng vai trò làm đáp án chuẩn để chấm điểm AI.</dd>
+
+<dt>Krippendorff's $\alpha$</dt>
+<dd>Chỉ số thống kê đo mức độ trùng khớp giữa 2 người chấm độc lập ($\ge 0.67$ là đạt, $\ge 0.80$ là tốt).</dd>
+
+<dt>Precision / Recall / $F_1$</dt>
+<dd>Độ chính xác (có báo động giả không) / Độ bao phủ (có bỏ sót không) / Điểm số cân bằng tổng thể của mô hình AI.</dd>
+
+<dt>GAM (Generalized Additive Model)</dt>
+<dd>Mô hình thống kê cho phép vẽ đường cong phi tuyến mượt mà kèm dải sai số tin cậy.</dd>
+
+<dt>Bootstrap</dt>
+<dd>Phương pháp rút mẫu lặp lại hàng nghìn lần để tính khoảng tin cậy khoa học cho một chỉ số.</dd>
+
+<dt>Điểm Giao Thoa $\tau^*$ (Normalization Crossover Point)</dt>
+<dd>Tuần đầu tiên mà thảo luận gắn kết xã hội chính thức vượt qua thảo luận chê bai một cách bền vững.</dd>
+</dl>
+
+<!-- ============================================================ -->
+<h2>Bảng kiểm 12 Bước hoàn thành bài báo (Checklist)</h2>
+<div class="tbl"><table>
+<thead>
+<tr><th>Bước</th><th>Hạng mục công việc</th><th>File kết quả đầu ra</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Bảng dữ liệu bình luận đã làm sạch</td><td><code>data/analysis/comments.parquet</code></td></tr>
+<tr><td>2</td><td>Ngày ra mắt KOL + số tuần</td><td><code>data/personas.csv</code>; cột <code>week_since_launch</code></td></tr>
+<tr><td>3–4</td><td>Sổ tay mã hóa Codebook v1 sau mẫu Pilot 200 câu</td><td><code>docs/codebook_v1.md</code></td></tr>
+<tr><td>5</td><td>Tập chuẩn 600–800 câu, tính $\alpha$, chia Practice/Test</td><td><code>data/coding/gold.csv</code></td></tr>
+<tr><td>6</td><td>Chỉnh prompt trên Practice; Chấm điểm trên Test (P/R/F1)</td><td><code>docs/validation_table.csv</code></td></tr>
+<tr><td>7</td><td>Gán nhãn toàn bộ dữ liệu bằng DeepSeek AI</td><td><code>data/analysis/labels.parquet</code></td></tr>
+<tr><td>8</td><td>Vẽ 3 đường cong $R(t)$, $S(t)$, $C(t)$ + tính tốc độ dốc</td><td><code>fig1.pdf</code></td></tr>
+<tr><td>9</td><td>Đường $D(t)$, điểm $\tau^*$ + Bootstrap CI từng KOL</td><td><code>fig2.pdf</code>, <code>fig3.pdf</code></td></tr>
+<tr><td>10</td><td>Mô hình hồi quy tác động thương mại trễ</td><td><code>fig7.pdf</code></td></tr>
+<tr><td>11</td><td>Bảng kết quả kiểm tra độ vững (Robustness table)</td><td><code>robustness.csv</code></td></tr>
+<tr><td>12</td><td>Hoàn thiện toàn bộ hình ảnh, bảng biểu và nội dung bài báo</td><td>Bản thảo nộp bài 28/08</td></tr>
+</tbody>
+</table></div>
+
+</div>
+</body>
+</html>

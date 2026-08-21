@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From Comments to Crossover — Step-by-Step Guide</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F4F6F7;--surface:#FFFFFF;--ink:#18222B;--muted:#5C6B75;--line:#D6DDE1;--accent:#1E7F70;--accent-soft:#E1F0EC;--r:#B5482A;--r-soft:#F6E4DD;--s:#1E7F70;--s-soft:#DDEFEA;--c:#B8860B;--c-soft:#F7EDD1;--code-bg:#EDF1F3;--warn:#FBF1E6;--warn-ink:#7A4A12}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111A20;--surface:#18232A;--ink:#E6ECEF;--muted:#9FB0B9;--line:#2B3A43;--accent:#4FB8A6;--accent-soft:#173A34;--r:#E07A5A;--r-soft:#3C241C;--s:#4FB8A6;--s-soft:#173A34;--c:#E0B04A;--c-soft:#3B3115;--code-bg:#0E161B;--warn:#3A2C18;--warn-ink:#F1C98A}}
+@media print{:root{--bg:#fff;--surface:#fff;--ink:#000;--muted:#444;--line:#bbb;--code-bg:#f2f2f2;--accent-soft:#E8F2EF;--warn:#FFF6E8}body{font-size:10.5pt}.wrap{max-width:none;padding:0}.step{break-inside:avoid}a{color:inherit;text-decoration:none}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16.5px;line-height:1.65}
+.wrap{max-width:74ch;margin:0 auto;padding:2.5rem 1.25rem 5rem}
+h1,h2,h3{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:700}
+h2{font-size:1.4rem;font-weight:700;margin-top:2.6rem}
+h3{font-size:1.05rem;font-weight:600;margin-top:1.2rem}
+p{margin:.8rem 0}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem}
+.lede{font-size:1.08rem;color:var(--muted);margin-top:.75rem}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--muted);margin-top:1rem}
+code,pre{font-family:"IBM Plex Mono",monospace;font-size:.86em}
+code{background:var(--code-bg);padding:.1em .35em;border-radius:3px}
+pre{background:var(--code-bg);padding:1rem 1.1rem;border-radius:6px;overflow-x:auto;line-height:1.5;margin:1rem 0;white-space:pre-wrap}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0}
+.tbl{overflow-x:auto}
+th,td{text-align:left;padding:.5rem .65rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1.2rem 1.4rem;margin:1.5rem 0}
+.step .n{font-family:"IBM Plex Mono",monospace;font-size:.75rem;letter-spacing:.1em;color:var(--accent);text-transform:uppercase}
+.step h2{margin-top:.2rem;border:0;padding:0;font-size:1.35rem}
+.block{margin:.9rem 0}
+.block b{display:block;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+.why{border-left:3px solid var(--c);padding-left:.9rem}
+.how{border-left:3px solid var(--accent);padding-left:.9rem}
+.get{border-left:3px solid var(--s);padding-left:.9rem}
+.ex{background:var(--code-bg);border-radius:6px;padding:.7rem .9rem;font-size:.93rem}
+.vi{font-style:italic}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.72rem;padding:.1em .5em;border-radius:999px;font-weight:500;white-space:nowrap}
+.pill.r{background:var(--r-soft);color:var(--r)} .pill.s{background:var(--s-soft);color:var(--s)} .pill.c{background:var(--c-soft);color:var(--c)} .pill.n{background:var(--code-bg);color:var(--muted)}
+.callout{background:var(--warn);color:var(--warn-ink);border-left:4px solid var(--c);padding:.8rem 1rem;border-radius:4px;margin:1rem 0}
+.callout p{margin:.3rem 0}
+ul,ol{padding-left:1.3rem}li{margin:.3rem 0}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:1rem;margin:1.2rem 0}
+.fig svg{width:100%;height:auto;display:block}
+.fig figcaption{font-size:.85rem;color:var(--muted);margin-top:.5rem}
+.small{font-size:.88rem;color:var(--muted)}
+dl{margin:0}dt{font-weight:600;margin-top:.6rem}dd{margin:0 0 .2rem 0;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="eyebrow">FCBEM Study 1 · plain-language guide</div>
+<h1>From Comments to Crossover — a Step-by-Step Guide</h1>
+<p class="lede">How to take thousands of Vietnamese Facebook comments about a virtual influencer and turn them into one honest answer: <em>when did the audience stop treating her as a “fake thing” and start treating her as a person — and did shopping talk follow?</em> Written so that someone with no statistics background can follow every step and understand why it is done.</p>
+<p class="meta">Companion to <code>VI_Acceptance_Playbook_FCBEM.html</code> (which has the formal details, code and references). Prepared 2026-08-21.</p>
+
+<h2>The idea in one picture</h2>
+<p>Imagine a new student who joins your class but looks slightly “off” — maybe a very realistic robot. In week 1 everyone whispers “that's creepy, look at the eyes”. By week 10 people say “she's actually funny” and “hey, are you coming tomorrow?”. By week 20 someone asks “where did you get those shoes?”. We want to measure exactly that journey for a virtual influencer (VI), using what people write in public comments.</p>
+<figure class="fig">
+<svg viewBox="0 0 640 250" role="img" aria-label="Three curves over weeks: creepy talk falling, friend talk rising, shopping talk rising later; the crossing point is marked">
+<defs><style>.ax{stroke:var(--line)}.lbl{font:12px "IBM Plex Mono",monospace;fill:var(--muted)}.t{font:13px "IBM Plex Sans",sans-serif}</style></defs>
+<line x1="50" y1="205" x2="610" y2="205" class="ax"/><line x1="50" y1="20" x2="50" y2="205" class="ax"/>
+<text x="330" y="238" class="lbl" text-anchor="middle">weeks since the VI's first post</text>
+<text x="18" y="112" class="lbl" transform="rotate(-90 18 112)" text-anchor="middle">share of comments</text>
+<rect x="318" y="20" width="70" height="185" fill="var(--accent-soft)" opacity=".7"/>
+<line x1="352" y1="20" x2="352" y2="205" stroke="var(--ink)" stroke-dasharray="4 4"/>
+<path d="M60 40 C 140 60, 200 130, 300 160 S 520 185, 600 187" fill="none" stroke="var(--r)" stroke-width="3"/>
+<path d="M60 178 C 160 176, 240 166, 320 148 S 480 95, 600 80" fill="none" stroke="var(--s)" stroke-width="3"/>
+<path d="M60 196 C 200 196, 330 192, 420 172 S 560 140, 600 132" fill="none" stroke="var(--c)" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="70" y="34" class="t" fill="var(--r)">“creepy / fake” talk</text>
+<text x="440" y="75" class="t" fill="var(--s)">“she's my friend” talk</text>
+<text x="445" y="128" class="t" fill="var(--c)">“where to buy?” talk</text>
+<text x="352" y="14" class="lbl" text-anchor="middle">crossover point τ*</text>
+</svg>
+<figcaption>The whole project exists to draw this picture truthfully, with error bars, from real comments.</figcaption>
+</figure>
+
+<h2>What you need before starting</h2>
+<ul>
+  <li><strong>The comments</strong> — already crawled into <code>data/db/scraper.sqlite</code> (≈ 5,900 comments for <span class="vi">Tiểu Mỹ</span>; more personas coming).</li>
+  <li><strong>Python</strong> (pandas) for cleaning and for talking to the AI; <strong>R</strong> (packages <code>mgcv</code>, <code>gratia</code>, <code>segmented</code>) for the curves.</li>
+  <li><strong>A DeepSeek API key</strong> (the model is DeepSeek V4 Flash; the whole project costs a few dollars).</li>
+  <li><strong>Two Vietnamese-speaking people</strong> willing to label 600–800 comments by hand. This is the most important ingredient.</li>
+</ul>
+
+<!-- STEP 1 -->
+<div class="step"><div class="n">Step 1</div><h2>Clean the comments</h2>
+<div class="block why"><b>Why</b>Messy input gives wrong answers. The crawler sometimes captured the same comment twice, picked up Facebook's image descriptions as if they were comments, and the VI's own account replies to fans.</div>
+<div class="block how"><b>How</b>
+<ul>
+<li>Remove exact duplicates (same post + same author + same text).</li>
+<li>Remove rows that are really image alt-text (they start with <span class="vi">“May be an image of…”</span> or <span class="vi">“Avatar is pointing…”</span>).</li>
+<li>Remove comments written by the VI's own account.</li>
+<li><em>Mark</em> (don't delete) emoji-only comments, obvious spam (“Follow”, repeated copy-paste, links) and non-Vietnamese comments. We keep them for counting but not for labelling.</li>
+<li>Replace each author's name/id with a random code (hash). We never need real identities.</li>
+</ul></div>
+<div class="block get"><b>What you get</b>One clean table, one row per comment, with columns: comment id, post id, persona, text, author code, time, is-reply, parent comment text, post caption.</div>
+</div>
+
+<!-- STEP 2 -->
+<div class="step"><div class="n">Step 2</div><h2>Give every comment a week number</h2>
+<div class="block why"><b>Why</b>The whole study is about change over time, so every comment needs a position on a timeline that is the same for every persona: <strong>weeks since that persona's first post</strong> (week 0 = launch).</div>
+<div class="block how"><b>How</b>
+<ul>
+<li>Facebook shows some times exactly (<code>2026-05-12 16:21</code>) and many only roughly (<span class="vi">“13 weeks ago”</span>). For rough ones, subtract from the moment the crawler ran: crawl date − 13 weeks. That is accurate to about ± 1 week — fine for weekly analysis, and we will double-check later with 2-week bins.</li>
+<li>Decide the launch date for each persona (first public post) and write it down in a small file <code>personas.csv</code>.</li>
+<li><code>week_since_launch = (comment date − launch date) ÷ 7</code>, rounded down.</li>
+</ul></div>
+<div class="block get"><b>What you get</b>Columns <code>comment_time</code>, <code>time_precision</code> (exact / day / week) and <code>week_since_launch</code>. For <span class="vi">Tiểu Mỹ</span> that is weeks 0–23.</div>
+<div class="callout"><p><strong>Watch out:</strong> one viral post holds 23% of all comments, and some weeks have only 3 comments while one week has 2,278. That is why, later, we will not just compute “% per week” — we will use a model that knows which post each comment belongs to.</p></div>
+</div>
+
+<!-- STEP 3 -->
+<div class="step"><div class="n">Step 3</div><h2>Decide exactly what you are measuring</h2>
+<div class="block why"><b>Why</b>“Is the comment positive or negative?” is not the question. The question is <em>how does the commenter relate to the VI</em>. A comment can be negative and still treat her like a normal influencer (<span class="vi">“Con nhỏ này hôm nay lại đi quảng cáo nữa à =)))”</span>). So we measure four things, and a comment can be several at once.</div>
+<div class="block how"><b>The four labels (each is yes/no)</b>
+<div class="tbl"><table>
+<tr><th>Label</th><th>Means the comment…</th><th>Real examples</th></tr>
+<tr><td><span class="pill r">uncanny resistance</span></td><td>focuses on her looking/sounding fake, strange, creepy; rejects her <em>because</em> she's artificial</td><td><span class="vi">“Al hát ghép nên nghe k thật”</span> · <span class="vi">“mỗi lúc 1 khác chả thấy đồng nhất”</span></td></tr>
+<tr><td><span class="pill n">AI skepticism</span></td><td>is against AI in general or distrusts brands using AI — not about how she looks</td><td><span class="vi">“sống chung với rác AI”</span></td></tr>
+<tr><td><span class="pill s">parasocial / relational</span></td><td>talks <em>to</em> her or <em>about</em> her like a person: calls her chị/em/bé, likes her humour, asks her to post more, defends her, jokes with her — even if teasing</td><td><span class="vi">“Sắp thuộc rồi chú Khoa ơi”</span> · <span class="vi">“nói AI bé nó buồn đấy”</span></td></tr>
+<tr><td><span class="pill c">commercial receptivity</span></td><td>asks about a product, price, link, brand; wants to try/buy; likes a collab</td><td><span class="vi">“Quạt, quạt gì cơ”</span> · <span class="vi">“xin link”</span></td></tr>
+</table></div>
+<p>Plus two helpers: <strong>sentiment</strong> (negative / neutral / positive) and <strong>aspects</strong> — <em>which part</em> of her is being judged (appearance, voice/motion, being-AI, personality, the content, the product) and whether it is praised or criticised. The aspects are what let a manager read “appearance complaints faded but voice complaints stayed”.</p></div>
+<div class="block get"><b>What you get</b>A clear list of label definitions. Nothing coded yet.</div>
+</div>
+
+<!-- STEP 4 -->
+<div class="step"><div class="n">Step 4</div><h2>Write the rulebook (the codebook) with a small pilot</h2>
+<div class="block why"><b>Why</b>Two people reading “parasocial” will disagree unless the rule says exactly what counts. Vietnamese slang makes this harder. A written rulebook with real examples is what makes the labels scientific instead of opinions.</div>
+<div class="block how"><b>How</b>
+<ul>
+<li>Pick <strong>200 comments</strong> — but not randomly. Randomly you would get mostly <span class="vi">“xinh quá”</span> and emojis; creepy-talk is only ~2% and shopping-talk ~3%. So pick a mix: every persona, every month, every content type, and deliberately include comments containing words like <span class="vi">giả, ghê, AI, đơ, link, mua, giá</span>.</li>
+<li>Trúc and Minh label them together, argue about the hard ones, and write down the decisions: <span class="vi">“AI hả?”</span> (just a question) is <em>not</em> resistance; <span class="vi">“lại quảng cáo nữa”</span> is relational, not commercial; teasing counts as relational.</li>
+<li>Note any new pattern that keeps appearing (e.g. joking as if she were a real girlfriend) — these become “emergent themes” in the paper.</li>
+</ul></div>
+<div class="block get"><b>What you get</b>Codebook v1: for every label a definition, what to include, what to exclude, and 3–5 Vietnamese examples.</div>
+</div>
+
+<!-- STEP 5 -->
+<div class="step"><div class="n">Step 5</div><h2>Build the answer key (gold set) with two human coders</h2>
+<div class="block why"><b>Why</b>The AI will label everything later, but we can only trust it if we can <em>check</em> it against humans. The gold set is the answer key for that exam.</div>
+<div class="block how"><b>How</b>
+<ul>
+<li>Pick 600–800 new comments the same balanced way as the pilot.</li>
+<li>Two Vietnamese coders label them <strong>independently</strong> (no talking), using the codebook, reading the raw Vietnamese (never a translation).</li>
+<li>Measure how much they agree with <strong>Krippendorff's α</strong>: it is “agreement beyond what luck would give”, from 0 (pure luck) to 1 (perfect). We want ≥ 0.67 per label, ideally ≥ 0.80. If a label is low, the codebook rule for it is unclear — fix the rule, re-label that part.</li>
+<li>Where they disagree, they discuss and pick the final answer.</li>
+<li>Split the gold set: about 40% becomes the <strong>practice set</strong> (for tuning the AI) and 60% the <strong>exam set</strong> (touched once, at the end).</li>
+</ul></div>
+<div class="block get"><b>What you get</b>A file with ~700 comments, final human labels, the α numbers, and a column saying practice/exam.</div>
+</div>
+
+<!-- STEP 6 -->
+<div class="step"><div class="n">Step 6</div><h2>Teach the AI and give it the exam</h2>
+<div class="block why"><b>Why</b>Humans can label 700 comments; they cannot label 30,000. DeepSeek can — cheaply — but only if we prove it agrees with humans.</div>
+<div class="block how"><b>How</b>
+<ul>
+<li>Write the instructions (the “prompt”): the role, the codebook word-for-word, and 8–12 solved examples taken from the <em>practice</em> set. Ask for a strict JSON answer per comment, e.g. <code>{"uv_resistance":1,"parasocial_orientation":1,"commercial_acceptance":1,"sentiment":"pos", ...}</code>. Use temperature 0 (no randomness). Record the model name and date.</li>
+<li>Run it on the practice set, look at the mistakes, improve the wording. Repeat a few times — on the practice set only.</li>
+<li>Run it <strong>once</strong> on the exam set and score it with:
+  <ul>
+  <li><strong>Precision</strong> — of the comments the AI called “resistance”, how many really were? (Did it cry wolf?)</li>
+  <li><strong>Recall</strong> — of the real “resistance” comments, how many did the AI find? (Did it miss some?)</li>
+  <li><strong>F1</strong> — the balance of the two. <strong>Macro-F1</strong> — the average over all labels so rare labels count as much as common ones.</li>
+  </ul>
+  Never report only “accuracy”: 97% of comments are not commercial, so an AI that says “never commercial” is 97% accurate and useless.</li>
+<li>Re-run 5% of comments a second time to show the AI gives the same answer twice (aim ≥ 90%).</li>
+</ul></div>
+<div class="block get"><b>What you get</b>A validation table for the paper: α per label, precision/recall/F1 per label, macro-F1, and the confusion matrix in the appendix.</div>
+</div>
+
+<!-- STEP 7 -->
+<div class="step"><div class="n">Step 7</div><h2>Label everything</h2>
+<div class="block how"><b>How</b>Freeze the prompt. Send every cleaned comment (with its post caption and parent comment for context) to DeepSeek; save the JSON answers into the table. Keep the prompt, model name, date and settings in the paper's appendix so anyone can repeat it.</div>
+<div class="block get"><b>What you get</b>The full analysis table: one row per comment with week, post, persona, the four labels, sentiment, aspects.</div>
+</div>
+
+<!-- STEP 8 -->
+<div class="step"><div class="n">Step 8</div><h2>Draw the weekly curves — properly</h2>
+<div class="block why"><b>Why</b>The tempting thing is “% of comments with resistance, per week” and connect the dots. Two problems: (1) one viral post would dominate its week; (2) if the VI's graphics improved over time, negative comments could fall for that reason, not because people got used to her. We need a method that handles both.</div>
+<div class="block how"><b>How (the idea, no maths)</b>
+<ul>
+<li>Use a <strong>smooth-curve model</strong> (a GAM, in R's <code>mgcv</code>). Think of it as drawing the best-fitting smooth line through the weekly data, with a shaded band showing how unsure we are. It does not force a straight line — it can fall fast, flatten, then fall again.</li>
+<li>Tell the model which <strong>post</strong> each comment belongs to and which <strong>persona</strong> — so a giant viral post counts as one noisy event, not as the whole truth of that week.</li>
+<li>Add <strong>controls</strong> per post: sponsored or not, content type, how realistic the video looks, whether AI was disclosed. This is what lets us say “the audience changed” rather than “the videos got better”.</li>
+<li>Do it three times: for resistance R(t), relational S(t), commercial C(t). Also compute the <strong>slope</strong> of each curve (how fast it falls/rises) — that is the “resistance decay rate” and “socialization growth rate” in the paper.</li>
+</ul></div>
+<div class="block get"><b>What you get</b>Figure 1 — three curves with bands; and the answers to H1 (resistance falls) and H2 (relational rises), with confidence intervals.</div>
+</div>
+
+<!-- STEP 9 -->
+<div class="step"><div class="n">Step 9</div><h2>Find the crossover point — and how sure you are</h2>
+<div class="block why"><b>Why</b>The paper's headline is “the week relational talk durably overtook creepy talk”. A single week where the lines happen to touch is noise. And “exactly day 76” sounds precise but isn't.</div>
+<div class="block how"><b>How</b>
+<ul>
+<li>Compute the gap <strong>D(t) = S(t) − R(t)</strong>. Below zero: resistance still dominates. Above zero: relational talk dominates.</li>
+<li><strong>Rule, decided in advance:</strong> the crossover week τ* is the first week where D(t) is above zero <em>and stays above zero for 3 weeks in a row</em>, using the lower edge of the confidence band (so it is really above, not maybe). Write this rule in the paper before you see the result.</li>
+<li><strong>How sure?</strong> Use a <em>bootstrap</em>: put all the posts in a hat, draw posts at random with replacement to make a new dataset of the same size, redo steps 8–9, note τ*. Do this 1,000 times. The middle 95% of those τ* values is your confidence interval. Report “τ* ≈ week 14, 95% CI [12, 18]”.</li>
+<li>If the lines never cross in the window, say so: “resistance fell from .18 to .05 but relational talk did not overtake it within 23 weeks.” That is a real, publishable result — never force a crossover.</li>
+<li>Optional check: a <strong>breakpoint test</strong> (R <code>segmented</code>) asks the data how many “phases” it actually supports — one bend, two bends, none.</li>
+</ul></div>
+<div class="block get"><b>What you get</b>Figure 2 (the gap curve crossing zero), τ* with its interval, one per persona (Figure 3), and the phase count.</div>
+</div>
+
+<!-- STEP 10 -->
+<div class="step"><div class="n">Step 10</div><h2>Does shopping talk follow?</h2>
+<div class="block why"><b>Why</b>H3/H4 say: when the balance tips toward relational talk, commercial talk rises <em>afterwards</em>.</div>
+<div class="block how"><b>How</b>Make a weekly table (one row per week per persona): share of commercial comments this week, the gap D last week, commercial share last week, how many sponsored/product posts the VI made this week, how many comments there were. Fit a simple regression: <em>this week's commercial share explained by last week's gap, controlling for the rest.</em> A positive, significant coefficient on “last week's gap” supports H4. Also compare average commercial share before vs after τ* — but call it a description, not a cause (τ* came from the same data).</div>
+<div class="block get"><b>What you get</b>Figure 7 and one coefficient with its interval.</div>
+</div>
+
+<!-- STEP 11 -->
+<div class="step"><div class="n">Step 11</div><h2>Stress-test the result</h2>
+<div class="block why"><b>Why</b>A reviewer will ask “would you get the same answer if you had chosen differently?”. Answer before they ask.</div>
+<div class="block how"><b>Re-run steps 8–10 with</b>
+<ul>
+<li>2-week bins instead of weekly (because of the ±1-week timestamps);</li>
+<li>only the human-labelled comments (does the AI change the story?);</li>
+<li>spam and non-Vietnamese removed;</li>
+<li>the viral post (1,357 comments) removed;</li>
+<li>each persona alone; sponsored posts vs organic posts separately;</li>
+<li>a strict vs broad definition of “resistance”;</li>
+<li>the crossover rule with 2 or 4 weeks instead of 3;</li>
+<li>only posts where we collected ≥ 50% of the comments Facebook shows.</li>
+</ul>If τ* moves a little, fine. If it appears only under one choice, say the evidence is weak.</div>
+</div>
+
+<!-- STEP 12 -->
+<div class="step"><div class="n">Step 12</div><h2>Tell the story with figures, then say what you can and cannot claim</h2>
+<div class="block how"><b>The figures, in order</b>
+<ol>
+<li>Three curves with bands and τ* shaded — “resistance fades, relationship grows, the balance tips here”.</li>
+<li>The gap curve crossing zero — “and it stays tipped”.</li>
+<li>One small panel per persona — “speed differs by persona”.</li>
+<li>Aspect heatmap (rows: appearance, voice, AI-ness, persona, content, product; columns: weeks; colour: praise minus criticism) — “what exactly people stopped complaining about”.</li>
+<li>Relational share vs positive-sentiment share, early vs late — “normal is not the same as liked”.</li>
+<li>Repeat commenters' first → last label (Sankey) — “individuals move the same way”.</li>
+<li>Commercial share with τ* marked + the coefficient — “shopping talk follows”.</li>
+</ol>
+Plus tables: corpus description; validation numbers; how often labels co-occur (many people mock the face <em>and</em> ask for the link in one comment); example comments per label and phase, in Vietnamese with an English gloss.</div>
+<div class="block get"><b>What you may claim</b>Market-level <em>discourse</em> normalization and its timing; a lagged association with commercial-receptivity talk; normalization without positivity; a practical leading indicator for campaign timing.<br><b style="margin-top:.6rem">What you may not claim</b>That individual consumers changed their minds (different people each week), that the crossover causes purchases, or that the uncanny valley “disappears by itself” everywhere.</div>
+</div>
+
+<h2>Glossary</h2>
+<dl>
+<dt>Virtual influencer (VI)</dt><dd>A computer-generated persona that posts like a human influencer.</dd>
+<dt>Uncanny valley</dt><dd>The creepy feeling when something looks almost — but not quite — human.</dd>
+<dt>Parasocial</dt><dd>A one-sided relationship where a viewer feels they know a media figure personally.</dd>
+<dt>Codebook</dt><dd>The written rulebook that says exactly what each label means, with examples.</dd>
+<dt>Gold set</dt><dd>Comments labelled by humans; the answer key for checking the AI.</dd>
+<dt>Krippendorff's α</dt><dd>How much two coders agree beyond chance (0 = chance, 1 = perfect).</dd>
+<dt>Precision / Recall / F1</dt><dd>Did the AI cry wolf? / Did it miss cases? / The balance of both.</dd>
+<dt>GAM</dt><dd>A model that fits a smooth curve (not forced straight) with an uncertainty band.</dd>
+<dt>Bootstrap</dt><dd>Re-draw the data many times to see how much a result would wobble.</dd>
+<dt>Crossover point τ*</dt><dd>The first week relational talk durably exceeds resistance talk.</dd>
+<dt>Robustness check</dt><dd>Redoing the analysis with different reasonable choices to see if the answer holds.</dd>
+</dl>
+
+<h2>One-page checklist</h2>
+<div class="tbl"><table>
+<tr><th>#</th><th>Done?</th><th>Output file</th></tr>
+<tr><td>1</td><td>Cleaned comment table</td><td><code>data/analysis/comments.parquet</code></td></tr>
+<tr><td>2</td><td>Launch dates + week numbers</td><td><code>data/personas.csv</code>; column <code>week_since_launch</code></td></tr>
+<tr><td>3–4</td><td>Codebook v1 after 200-comment pilot</td><td><code>docs/codebook_v1.md</code></td></tr>
+<tr><td>5</td><td>Gold set 600–800, α per label, practice/exam split</td><td><code>data/coding/gold.csv</code></td></tr>
+<tr><td>6</td><td>Prompt tuned on practice; exam scored once (P/R/F1, macro-F1)</td><td><code>docs/validation_table.csv</code></td></tr>
+<tr><td>7</td><td>Whole corpus labelled; prompt + model + date saved</td><td><code>data/analysis/labels.parquet</code></td></tr>
+<tr><td>8</td><td>Curves R(t), S(t), C(t) + slopes</td><td><code>fig1.pdf</code></td></tr>
+<tr><td>9</td><td>D(t), τ* + bootstrap CI, per persona, phase test</td><td><code>fig2.pdf</code>, <code>fig3.pdf</code></td></tr>
+<tr><td>10</td><td>Commercial regression</td><td><code>fig7.pdf</code></td></tr>
+<tr><td>11</td><td>Robustness table</td><td><code>robustness.csv</code></td></tr>
+<tr><td>12</td><td>All figures, tables, claims written</td><td>paper §4–§5</td></tr>
+</table></div>
+</div>
+</body>
+</html>

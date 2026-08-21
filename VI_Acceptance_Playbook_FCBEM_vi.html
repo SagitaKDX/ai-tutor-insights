@@ -1,0 +1,1019 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cẩm nang Phân tích — Sự Đón nhận Người Ảnh Hưởng Ảo (VI) tại Việt Nam — FCBEM Study 1</title>
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<!-- KaTeX CSS & JS for Math Rendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+        ],
+        throwOnError: false
+    });"></script>
+
+<style>
+/* ==========================================================================
+   THEME: TỐI GIẢN TRẮNG ĐEN / MONOCHROME ACADEMIC HIGH-CONTRAST
+   ========================================================================== */
+/* Semantic Colors for Charts, Badges & Pills */
+:root {
+  --bg: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-alt: #F8F9FA;
+  --ink: #111111;
+  --muted: #444444;
+  --subtle: #666666;
+  --line: #D0D0D0;
+  --line-strong: #111111;
+  --code-bg: #F4F4F4;
+  --highlight-box: #F8F9FA;
+  
+  /* Semantic Accent Colors */
+  --r: #C0392B; --r-soft: #FDEDEC; --r-ink: #922B21;
+  --s: #1E7F70; --s-soft: #E8F8F5; --s-ink: #117A65;
+  --c: #D4AC0D; --c-soft: #FEF9E7; --c-ink: #B7950B; --c-dark: #B8860B;
+}
+
+@media print {
+  :root {
+    --bg: #FFFFFF;
+    --surface: #FFFFFF;
+    --surface-alt: #FFFFFF;
+    --ink: #000000;
+    --muted: #333333;
+    --line: #999999;
+    --line-strong: #000000;
+    --code-bg: #F0F0F0;
+  }
+  body { font-size: 10pt; line-height: 1.5; }
+  .wrap { max-width: none; padding: 0; }
+  h2 { break-before: page; }
+  h2:first-of-type { break-before: auto; }
+  pre, table, .fig, .callout, .explain-box { break-inside: avoid; }
+  a { color: #000000 !important; text-decoration: underline !important; }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 15.5px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 82ch;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  font-family: "Bricolage Grotesque", "IBM Plex Sans", sans-serif;
+  color: var(--ink);
+  line-height: 1.25;
+  text-wrap: balance;
+  margin: 0;
+}
+h1 {
+  font-size: 2.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid var(--ink);
+}
+h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 3.5rem;
+  padding-top: 1.2rem;
+  border-top: 2px solid var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  color: var(--ink);
+}
+h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-top: 1.4rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+p { margin: 0.9rem 0; }
+
+.eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+.lede {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-top: 1rem;
+  line-height: 1.65;
+}
+.meta {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: 1.2rem 0;
+  background: var(--surface-alt);
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ink);
+}
+
+a { color: var(--ink); text-decoration: underline; font-weight: 600; }
+a:hover { background: #000; color: #fff; text-decoration: none; }
+
+/* Code & Pre */
+code, pre { font-family: "IBM Plex Mono", monospace; font-size: 0.88em; }
+code { background: var(--code-bg); padding: 0.15em 0.4em; border-radius: 3px; border: 1px solid #E2E2E2; }
+pre {
+  background: var(--code-bg);
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ink);
+  border-radius: 4px;
+  overflow-x: auto;
+  line-height: 1.55;
+  margin: 1.2rem 0;
+  white-space: pre-wrap;
+  color: var(--ink);
+}
+pre code { background: none; padding: 0; border: none; }
+
+/* Tables - Academic APA/Chicago Grayscale Style */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+  margin: 1.4rem 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.tbl { overflow-x: auto; margin: 1.2rem 0; }
+th, td {
+  text-align: left;
+  padding: 0.65rem 0.8rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+th {
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--surface-alt);
+  border-bottom: 1.5px solid var(--ink);
+}
+td.num, th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-family: "IBM Plex Mono", monospace;
+}
+tr:hover td { background-color: #F8F8F8; }
+
+/* Colored Semantic Pills & Badges */
+.pill {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+  padding: 0.15em 0.55em;
+  border-radius: 3px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.pill.r { background: var(--r-soft); color: var(--r-ink); border: 1px solid var(--r); } /* Red */
+.pill.s { background: var(--s-soft); color: var(--s-ink); border: 1px solid var(--s); } /* Teal */
+.pill.c { background: var(--c-soft); color: var(--c-ink); border: 1px solid var(--c); } /* Gold */
+.pill.n { background: var(--code-bg); color: var(--muted); border: 1px solid var(--line); }
+
+/* Callout & Explain Box */
+.callout {
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--ink);
+  padding: 1rem 1.25rem;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+}
+.callout.warn {
+  border-left: 4px solid #000;
+  background: #F8F8F8;
+}
+.callout p:first-child, .explain-box p:first-child { margin-top: 0; }
+.callout p:last-child, .explain-box p:last-child { margin-bottom: 0; }
+
+.explain-box {
+  background: var(--highlight-box);
+  border: 1.5px solid #222222;
+  padding: 1.1rem 1.35rem;
+  border-radius: 3px;
+  margin: 1.5rem 0;
+  font-size: 0.94rem;
+}
+.explain-box .title {
+  font-weight: 800;
+  font-size: 1rem;
+  color: #000000;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid #D0D0D0;
+  padding-bottom: 0.35rem;
+}
+
+/* Steps */
+.steps { list-style: none; counter-reset: st; padding: 0; margin: 1.2rem 0; }
+.steps li {
+  counter-increment: st;
+  position: relative;
+  padding: 0.8rem 0 0.8rem 3.2rem;
+  border-bottom: 1px solid var(--line);
+}
+.steps li::before {
+  content: counter(st, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.95rem;
+  background: var(--code-bg);
+  padding: 0.1em 0.4em;
+  border: 1px solid var(--line);
+}
+
+/* Figures */
+.fig {
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  padding: 1.35rem;
+  margin: 1.8rem 0;
+}
+.fig figcaption {
+  font-size: 0.86rem;
+  color: var(--muted);
+  margin-top: 0.9rem;
+  line-height: 1.55;
+  border-top: 1px solid var(--line);
+  padding-top: 0.6rem;
+}
+.fig svg { width: 100%; height: auto; display: block; }
+
+/* Key-Value Summary Grid */
+.kv {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.85rem;
+  margin: 1.4rem 0;
+}
+.kv div {
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--ink);
+  padding: 0.85rem 1rem;
+}
+.kv b {
+  display: block;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.kv span { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
+
+/* Lists & Quotes */
+ul, ol { padding-left: 1.4rem; }
+li { margin: 0.4rem 0; }
+.refs ol { padding-left: 1.8rem; }
+.refs li { margin: 0.7rem 0; font-size: 0.88rem; line-height: 1.55; }
+.refs .tag {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  color: #000;
+  background: #EAEAEA;
+  padding: 0.1em 0.45em;
+  border: 1px solid #CCC;
+  border-radius: 2px;
+}
+.small { font-size: 0.88rem; color: var(--muted); }
+.vi { font-style: italic; font-weight: 600; color: #000; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 640px) { .two { grid-template-columns: 1fr; } }
+
+.toc {
+  background: var(--surface-alt);
+  border: 1.5px solid var(--ink);
+  padding: 1.1rem 1.4rem;
+  margin: 1.8rem 0;
+  font-size: 0.94rem;
+}
+.toc strong { font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.toc ol { margin: 0.6rem 0; padding-left: 1.3rem; }
+.toc li { margin: 0.4rem 0; }
+
+.quote {
+  border-left: 3px solid var(--ink);
+  padding: 0.6rem 0 0.6rem 1.2rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 1rem 0;
+  background: var(--surface-alt);
+}
+
+/* Math block styling */
+.math-display {
+  display: block;
+  text-align: center;
+  margin: 1rem 0;
+  overflow-x: auto;
+  font-size: 1.05em;
+}
+.katex { font-size: 1.02em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="eyebrow">FCBEM · Study 1 · Chuyên ngành Marketing &amp; Kinh doanh · Bản Hướng dẫn Kỹ thuật</div>
+<h1>Sự Đón Nhận của Người Tiêu Dùng đối với Người Ảnh Hưởng Ảo trên Mạng Xã Hội Việt Nam — Cẩm Nang Phân Tích (Playbook)</h1>
+<p class="lede">Hướng dẫn toàn diện cách chuyển hóa dữ liệu bình luận Facebook đã cào thành bằng chứng nghiên cứu Marketing có giá trị xuất bản: định nghĩa và cách đo lường "sự đón nhận", quy trình gán nhãn AI hỗ trợ chuẩn học thuật, phương pháp xác định <strong>Điểm Giao Thoa Bình Thường Hóa (Normalization Crossover Point)</strong>, cách trình bày biểu đồ thuyết phục độc giả kinh doanh, và hệ thống tài liệu tham khảo đã kiểm chứng.</p>
+
+<div class="meta">
+  <strong>Nhóm tác giả:</strong> Minh &amp; Trúc &nbsp;|&nbsp; 
+  <strong>Đề tài:</strong> “From Rejection to Acceptance: Detecting the Normalization Crossover of Virtual Influencers through Longitudinal Social Media Discourse in Vietnam” &nbsp;|&nbsp; 
+  <strong>Hạn nộp bài:</strong> 28/08/2026
+</div>
+
+<!-- ============================================================ -->
+<div class="explain-box">
+  <div class="title">💡 Tóm tắt Nhanh &amp; Trọng tâm Đề tài</div>
+  <p><strong>Vấn đề thực tiễn:</strong> Các thương hiệu tại Việt Nam đang tích cực thuê KOL ảo / Người ảnh hưởng ảo (Virtual Influencers - VI như <i>Tiểu Mỹ</i>) để quảng cáo. Nhưng rủi ro lớn nhất là: <em>Bao giờ thì khán giả hết chê "đồ ảo, đồ giả, dị hợm" để bắt đầu xem nhân vật này như một người bạn thân thiết và sẵn sàng đón nhận sản phẩm quảng cáo?</em></p>
+  <p><strong>Đóng góp học thuật:</strong> Nghiên cứu sử dụng chuỗi thời gian (Longitudinal analysis) trên hàng nghìn bình luận Facebook thật từ ngày đầu ra mắt để tìm ra <strong>Điểm giao thoa bình thường hóa ($\tau^*$)</strong> — thời điểm mà các thảo luận gắn kết xã hội ($S(t)$) chính thức vượt qua các thảo luận chê bai tính giả tạo ($R(t)$), mở đường cho sự đón nhận thương mại ($C(t)$).</p>
+</div>
+
+<!-- ============================================================ -->
+<div class="toc">
+  <strong>Mục lục Cẩm nang</strong>
+  <ol>
+    <li><a href="#sec1">Câu hỏi kinh doanh &amp; Biểu đồ cốt lõi của bài báo</a></li>
+    <li><a href="#sec2">Quy trình thu thập dữ liệu — Viết cho phần Phương pháp (Methodology)</a></li>
+    <li><a href="#sec3">Đo lường cái gì: Từ "Sentiment" chung chung đến 4 phản ứng của người tiêu dùng</a></li>
+    <li><a href="#sec4">Gán nhãn quy mô lớn: Phân tích nội dung bằng AI kết hợp kiểm định con người</a></li>
+    <li><a href="#sec5">Phân tích theo khía cạnh (ABSA): Khán giả phản đối gì và đón nhận gì?</a></li>
+    <li><a href="#sec6">Mô hình thống kê: Quỹ đạo, Điểm giao thoa ($\tau^*$) và Đón nhận thương mại</a></li>
+    <li><a href="#sec7">Kể câu chuyện qua dữ liệu: Hệ thống biểu đồ &amp; bảng biểu chuẩn Marketing</a></li>
+    <li><a href="#sec8">Bài báo ĐƯỢC PHÉP và KHÔNG ĐƯỢC PHÉP tuyên bố điều gì (Hàm ý quản trị)</a></li>
+    <li><a href="#sec9">Lộ trình thực hiện đến ngày 28/08 — Phân công công việc &amp; Hành động ngay</a></li>
+    <li><a href="#sec10">Phụ lục: Prompt gán nhãn AI · Mã nguồn R chạy mô hình · Cấu trúc dữ liệu</a></li>
+    <li><a href="#sec11">Danh mục tài liệu tham khảo (Đã kiểm chứng học thuật)</a></li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec1">1. Câu hỏi kinh doanh &amp; Biểu đồ cốt lõi của bài báo</h2>
+<p>Các thương hiệu tại Việt Nam đang tích cực sử dụng các nhân vật được tạo bởi AI. Bài toán cốt lõi đối với các nhà quản trị là <strong>thời điểm và rủi ro</strong>: <em>Khi nào thì cộng đồng mạng ngừng bàn tán về một KOL ảo như một "thứ đồ giả tạo/kỳ dị" và bắt đầu coi cô ấy như một nhân vật mà họ cảm thấy gắn kết — và liệu sự sẵn sàng đón nhận sản phẩm quảng cáo có nối tiếp theo sau hay không?</em></p>
+<p>Đóng góp lớn nhất của bài báo là đưa ra câu trả lời định lượng có mốc thời gian rõ ràng: <strong>Điểm Giao Thoa Bình Thường Hóa (Normalization Crossover Point - $\tau^*$)</strong> — thời điểm (tính theo tuần) mà những bình luận thể hiện mối quan hệ gắn kết (tương tác cận xã hội - parasocial) vượt qua một cách bền vững các bình luận chê bai tính giả tạo/kỳ quặc (uncanny resistance), cùng với sự gia tăng của các bình luận quan tâm đến sản phẩm/thương mại sau cột mốc đó.</p>
+
+<figure class="fig">
+<svg viewBox="0 0 660 270" role="img" aria-label="Biểu đồ minh họa hai đường cong ước lượng theo tuần từ khi ra mắt: Phản kháng kỳ thị giảm dần, Gắn kết xã hội tăng lên; Điểm giao nhau chính là Điểm Giao Thoa Bình Thường Hóa với khoảng tin cậy Bootstrap.">
+  <defs>
+    <style>
+      .ax { stroke: #111; stroke-width: 1.5; }
+      .grid { stroke: #E5E5E5; stroke-width: 1; stroke-dasharray: 2 2; }
+      .lbl { font: 12px "IBM Plex Mono", monospace; fill: #333; font-weight: 500; }
+      .t { font: 13px "IBM Plex Sans", sans-serif; font-weight: 700; }
+    </style>
+  </defs>
+  <!-- Background Grid -->
+  <line x1="50" y1="160" x2="630" y2="160" class="grid"/>
+  <line x1="50" y1="110" x2="630" y2="110" class="grid"/>
+  <line x1="50" y1="60" x2="630" y2="60" class="grid"/>
+  
+  <!-- Axes -->
+  <line x1="50" y1="210" x2="630" y2="210" class="ax"/>
+  <line x1="50" y1="20" x2="50" y2="210" class="ax"/>
+  <text x="340" y="248" class="lbl" text-anchor="middle">Số tuần kể từ khi nhân vật ảo ra mắt (t)</text>
+  <text x="18" y="115" class="lbl" transform="rotate(-90 18 115)" text-anchor="middle">Tỷ lệ bình luận (%)</text>
+
+  <!-- Tau* Confidence Interval Shading (Soft Mint) -->
+  <rect x="320" y="20" width="70" height="190" fill="#E8F8F5" opacity="0.9"/>
+  <line x1="355" y1="20" x2="355" y2="210" stroke="#117A65" stroke-dasharray="4 4" stroke-width="1.8"/>
+
+  <!-- Curve 1: Uncanny Resistance R(t) - Brick Red -->
+  <path d="M60 40 C 140 60, 200 130, 300 165 S 520 190, 620 192" fill="none" stroke="#C0392B" stroke-width="3.2"/>
+  
+  <!-- Curve 2: Relational / Parasocial S(t) - Emerald Teal -->
+  <path d="M60 180 C 160 178, 240 168, 320 150 S 480 95, 620 80" fill="none" stroke="#1E7F70" stroke-width="3.2"/>
+  
+  <!-- Curve 3: Commercial Receptivity C(t) - Amber Golden -->
+  <path d="M60 200 C 200 200, 330 196, 420 175 S 560 140, 620 132" fill="none" stroke="#D4AC0D" stroke-width="2.5" stroke-dasharray="6 4"/>
+
+  <!-- Colored Labels -->
+  <text x="65" y="34" class="t" fill="#C0392B">── Phản kháng do cảm giác dị/giả R(t)</text>
+  <text x="390" y="75" class="t" fill="#1E7F70">── Gắn kết / Tương tác xã hội S(t)</text>
+  <text x="400" y="128" class="t" fill="#B7950B">- - Đón nhận thương mại C(t)</text>
+  
+  <text x="355" y="14" class="lbl" text-anchor="middle" fill="#117A65" font-weight="bold">Khoảng tin cậy 95% của τ*</text>
+  <text x="355" y="228" class="lbl" text-anchor="middle" fill="#117A65" font-weight="bold">τ* (Tuần giao thoa)</text>
+</svg>
+<figcaption><strong>Hình 1 (Mục tiêu tối thượng của bài báo):</strong> Ba phản ứng của khán giả trong suốt vòng đời của KOL ảo trên mạng xã hội. Bài báo được chấp nhận hay bị từ chối phụ thuộc hoàn toàn vào việc các đường cong này có được đo lường một cách đáng tin cậy và có cơ sở học thuật hay không — chứ không phải một biểu đồ tròn (pie chart) đo sentiment thô sơ.</figcaption>
+</figure>
+
+<div class="explain-box">
+  <div class="title">🔍 Giải thích Trực quan: Ý nghĩa của 3 Đường cong &amp; Điểm Giao thoa $\tau^*$</div>
+  <p>1. <strong>Đường màu đỏ $R(t)$ (Uncanny Resistance):</strong> Khi mới ra mắt, người xem vào chê bai rất nhiều vì chưa quen mắt ("mặt đơ thế", "giọng ghép giả tạo", "ghê quá"). Theo thời gian, hiệu ứng tiếp xúc lặp lại (<i>Mere Exposure Effect</i>) khiến cảm giác kỳ dị phai nhạt dần, đường này tụt dốc.</p>
+  <p>2. <strong>Đường màu xanh ngọc $S(t)$ (Relational / Parasocial):</strong> Ban đầu rất thấp, nhưng càng về sau khán giả bắt đầu xưng hô "chị Mỹ", "bé Mỹ", đùa giỡn, giục ra video mới như một người quen. Đường này đi lên.</p>
+  <p>3. <strong>Điểm giao thoa $\tau^*$ (Crossover Point):</strong> Khoảnh khắc đường xanh ngọc $S(t)$ chính thức vượt lên trên đường đỏ $R(t)$. Đây là cột mốc cộng đồng chính thức "bình thường hóa" KOL ảo.</p>
+  <p>4. <strong>Đường màu vàng hổ phách $C(t)$ (Commercial Receptivity):</strong> Tín hiệu thương mại (hỏi mua quạt, xin link quần áo, khen quảng cáo duyên). Sau mốc $\tau^*$, các bài đăng tài trợ mới bắt đầu nhận được sự hưởng ứng tích cực.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec2">2. Quy trình thu thập dữ liệu (Methodology)</h2>
+<p>Phần này được viết theo chuẩn để có thể trích xuất trực tiếp vào mục <em>3.1 Thiết kế nghiên cứu (Research design)</em> và <em>3.2 Công cụ thu thập (Instrumentation)</em> của bài báo. Số liệu được cập nhật dựa trên tập dữ liệu thực tế tính đến ngày 21/08/2026.</p>
+
+<h3>2.1 Bối cảnh nghiên cứu và Khung chọn mẫu (Sampling Frame)</h3>
+<ul>
+  <li><strong>Nền tảng nghiên cứu:</strong> Facebook — mạng xã hội phổ biến nhất tại Việt Nam và là kênh chính nơi các KOL ảo phát hành nội dung và nhận phản hồi công khai từ người dùng. Cấu trúc đơn vị: Nhân vật ảo (Persona) $\rightarrow$ Bài viết/Reels (Post/Reel) $\rightarrow$ Bình luận/Phản hồi công khai (Public comment/reply).</li>
+  <li><strong>Đối tượng nhân vật ảo (Personas):</strong> Các trang KOL ảo tiếng Việt, hoạt động liên tục. Đã thu thập: <span class="vi">Tiểu Mỹ</span> (<code>facebook.com/tieumyday</code>), một ca sĩ/nhân vật ảo AI với cả bài đăng đời thường lẫn bài đăng thương mại (ví dụ: <span class="vi">“Lần đầu bán quạt…”</span>). <em>Mục tiêu mở rộng:</em> 4–6 nhân vật ảo với độ chân thực (human-likeness) khác nhau và ngày ra mắt khác nhau, để kết quả mang tính khái quát cao chứ không phải câu chuyện riêng của một cá nhân.</li>
+  <li><strong>Cửa sổ quan sát:</strong> Toàn bộ bài đăng công khai từ ngày lập trang (thời điểm gốc, $t = 0$) đến thời điểm cào dữ liệu. Đối với <span class="vi">Tiểu Mỹ</span>: từ ngày 10/03/2026 đến 19/08/2026 (23 tuần).</li>
+  <li><strong>Đơn vị phân tích:</strong> Bình luận công khai (bao gồm cả bình luận cấp 1 và câu trả lời phụ). Đơn vị thời gian: số tuần tính từ ngày ra mắt ($t$).</li>
+  <li><strong>Tiêu chí chọn mẫu:</strong> Bình luận bằng tiếng Việt dưới các bài đăng/reels của nhân vật ảo. <em>Tiêu chí loại trừ:</em> Bình luận do chính tài khoản nhân vật ảo tự đăng, bình luận rác/spam bot, văn bản không phải tiếng Việt, các đoạn text kỹ thuật do hệ thống tự sinh (alt-text).</li>
+</ul>
+
+<h3>2.2 Công cụ thu thập dữ liệu (Crawler)</h3>
+<p>Dữ liệu được thu thập bằng công cụ tự động hóa trình duyệt chuyên dụng viết bằng Python (Playwright trên Chromium), mô phỏng chính xác những gì một người dùng đăng nhập nhìn thấy trên giao diện web công khai — không sử dụng API ẩn và không truy cập nội dung riêng tư. Quy trình thu thập gồm 5 bước:</p>
+<ol class="steps">
+  <li><strong>Quét dòng thời gian (Timeline discovery):</strong> Cuộn trang tin chính và tab Reels; ghi nhận mọi bài viết/reels kèm vị trí hiển thị, chú thích (caption), ngày đăng, lượt tương tác (like, share) và số lượng bình luận hiển thị trên giao diện (làm mẫu số tính độ phủ dữ liệu sau này).</li>
+  <li><strong>Mở chi tiết bài viết (Post opening):</strong> Mở từng bài đăng qua đường dẫn trực tiếp (permalink) — cách này giúp lấy được mốc thời gian tuyệt đối và mã định danh tác giả chuẩn xác tới 97–100% (so với chỉ 15–34% nếu mở qua pop-up lightbox trên trang chủ).</li>
+  <li><strong>Mở rộng luồng bình luận (Thread expansion):</strong> Chuyển bộ lọc sang "Tất cả bình luận" (All comments), tự động bấm "Xem thêm bình luận / câu trả lời" tối đa 600 lần hoặc 15 phút mỗi bài, trích xuất nội dung bình luận, người đăng, ID người đăng, thời gian, bình luận cha và loại nội dung từ cấu trúc DOM.</li>
+  <li><strong>Lưu trữ &amp; Tiếp tục phiên làm việc (Persistence &amp; Resumability):</strong> Ghi ngay dữ liệu từng bài vào cơ sở dữ liệu SQLite (<code>data/db/scraper.sqlite</code>); nếu bị ngắt quãng có thể chạy tiếp mà không bị mất dữ liệu cũ, tự động hợp nhất dữ liệu (union).</li>
+  <li><strong>Đo lường độ bao phủ (Coverage measurement):</strong> So sánh số bình luận cào được với số lượng hiển thị trên huy hiệu bài viết (<code>ui_comment_count</code>) để tính tỷ lệ bao phủ, phục vụ việc kiểm định độ vững (robustness checks).</li>
+</ol>
+
+<h3>2.3 Bức tranh tổng thể dữ liệu đã thu thập (Sau khi lọc trùng)</h3>
+<div class="kv">
+  <div><b>5.888</b><span>Bình luận phân biệt</span></div>
+  <div><b>265</b><span>Bài viết/Reels có cmt (trên 474 tìm thấy)</span></div>
+  <div><b>23</b><span>Tuần theo dõi (Tuần 12 → Tuần 34)</span></div>
+  <div><b>3.783</b><span>Người dùng bình luận duy nhất</span></div>
+  <div><b>346</b><span>Commenter lặp lại (≥ 3 cmt, chiếm 33%)</span></div>
+  <div><b>≈ 1.960</b><span>Bình luận trả lời qua lại</span></div>
+</div>
+
+<div class="tbl"><table>
+<thead>
+<tr><th>Đặc điểm dữ liệu</th><th>Giá trị thực tế</th><th>Ý nghĩa đối với quá trình phân tích</th></tr>
+</thead>
+<tbody>
+<tr><td>Loại nội dung (Content type)</td><td>Ảnh: 2.382 · Bài viết: 680 · Reels: 751 · Chưa phân loại: 2.075</td><td>Cần đưa biến loại nội dung vào mô hình kiểm soát (control variable); cần cào nốt ~56 video Reels còn thiếu.</td></tr>
+<tr><td>Độ chính xác mốc thời gian</td><td>1.885 mốc tuyệt đối · 3.247 mốc "N tuần trước" · 756 mốc "N ngày/giờ trước"</td><td>Mốc tương đối được quy đổi lùi từ thời điểm cào dữ liệu (độ lệch $\pm 1$ tuần). Gom nhóm theo tuần là hoàn toàn hợp lệ; gom nhóm 2 tuần dùng để kiểm tra độ nhạy.</td></tr>
+<tr><td>Khối lượng bình luận theo tuần</td><td>Thấp nhất: 3 (Tuần 28) · Cao nhất: 2.278 (Tuần 33)</td><td>Khối lượng bị chi phối bởi các bài viết viral; khi chạy mô hình bắt buộc phải phân cụm theo bài viết (cluster by post), không dùng tỷ lệ tuần thô sơ.</td></tr>
+<tr><td>Mức độ tập trung dữ liệu</td><td>1 bài đăng ảnh viral = 1.357 bình luận (chiếm 23% toàn bộ dữ liệu)</td><td>Cần chạy một bài kiểm định độ vững riêng biệt loại bỏ bài viết viral này để chứng minh xu hướng không bị méo mó bởi 1 bài duy nhất.</td></tr>
+<tr><td>Tỷ lệ bao phủ (Coverage)</td><td>$\approx 100\%$ với bài $\le 30$ bình luận; 50–60% với bài viral $> 400$</td><td>Phải báo cáo độ phủ minh bạch trong bài báo; chạy kiểm định phụ chỉ với các bài có độ phủ $\ge 50\%$.</td></tr>
+<tr><td>Độ dài bình luận</td><td>Trung vị: 33 ký tự; 4,5% bình luận $\le 5$ ký tự</td><td>Bình luận ngắn, nhiều tiếng lóng, teencode, icon — bắt buộc phải gán nhãn trên văn bản tiếng Việt gốc, không dịch sang tiếng Anh qua Google Translate.</td></tr>
+<tr><td>Khán giả trung thành</td><td>346 tác giả có $\ge 3$ bình luận, tạo ra 33% lượng thảo luận</td><td>Cho phép phân tích nhóm phụ (Subsample Layer B) để xem sự thay đổi tâm lý bên trong cùng một cá nhân theo thời gian.</td></tr>
+</tbody>
+</table></div>
+
+<h3>2.4 Quy tắc làm sạch dữ liệu (Được đăng ký trước trong bài báo)</h3>
+<ul>
+  <li>Loại bỏ hoàn toàn các bình luận trùng lặp chính xác (cùng bài viết + cùng tác giả + cùng nội dung) và các bình luận do chính tài khoản của KOL ảo tự đăng (35 bình luận).</li>
+  <li>Loại bỏ các văn bản rác do Facebook tự sinh khi đọc hình ảnh (ví dụ: <span class="vi">“Có thể là hình ảnh về…”, “Hình đại diện đang chỉ tay…”</span>).</li>
+  <li>Gắn cờ (không xóa) các bình luận chỉ có biểu tượng cảm xúc (emoji-only) — chúng đóng góp vào tổng dung lượng tương tác nhưng không mang nhãn nội dung.</li>
+  <li>Gắn cờ bình luận nghi vấn là spam: chỉ có 1 từ "Follow", cùng một đoạn văn bản copy-paste nhiều lần bởi 1 người qua các bài viết khác nhau, hoặc chứa link quảng cáo ngoài.</li>
+  <li>Mã hóa bảo mật danh tính tác giả (hashing 1 chiều) trước khi đưa vào phân tích; chỉ giữ lại mã hash để nhận diện người bình luận lặp lại.</li>
+</ul>
+
+<h3>2.5 Tuyên bố Đạo đức &amp; Giới hạn nghiên cứu (Bản thảo cho bài báo)</h3>
+<div class="quote">
+"Dữ liệu nghiên cứu bao gồm các bình luận hiển thị công khai trên trang mạng xã hội của nhân vật công chúng/thương hiệu, được thu thập nhằm phục vụ mục đích nghiên cứu học thuật phi thương mại; chúng tôi không truy cập tin nhắn riêng tư, bài viết giới hạn bạn bè hay thông tin cá nhân bảo mật. Danh tính người dùng đã được ẩn danh hóa bằng thuật toán băm một chiều (one-way hashing) trước khi phân tích. Quá trình thu thập mô phỏng phiên duyệt web thông thường và tuân thủ giới hạn tần suất truy cập. Các bài viết có lượng tương tác cực lớn có tỷ lệ chọn mẫu đạt 50–60%, điều này đã được xử lý thông qua các kiểm định độ vững dựa trên độ bao phủ. Mốc thời gian tương đối hiển thị trên nền tảng được quy đổi về tuần lịch với sai số $\pm 1$ tuần."
+</div>
+<div class="callout warn"><p><strong>Lưu ý quan trọng từ Cố vấn:</strong> Thu thập dữ liệu tự động từ Facebook luôn nằm trong vùng xám về điều khoản dịch vụ (ToS). Các tạp chí Marketing hàng đầu chấp nhận phương pháp này nếu tác giả trình bày tuyên bố đạo đức rõ ràng và ẩn danh hóa dữ liệu triệt để. Hãy chủ động viết điều này trong phần Hạn chế (Limitations) thay vì để người phản biện (reviewer) chất vấn.</p></div>
+
+<!-- ============================================================ -->
+<h2 id="sec3">3. Đo lường cái gì: Từ "Sentiment" đến 4 Phản ứng của Người tiêu dùng</h2>
+<p>Điểm số cảm xúc (Sentiment: Tích cực / Tiêu cực / Trung tính) chỉ trả lời được câu hỏi hời hợt: <em>"Khán giả đang vui hay buồn?"</em>. Trong khi đó, câu hỏi nghiên cứu của bạn sâu sắc hơn và có giá trị thực tiễn cao hơn: <em>Khán giả đang thiết lập mối quan hệ như thế nào với nhân vật ảo, và mối quan hệ đó đã sẵn sàng chuyển hóa thành giá trị thương mại hay chưa?</em></p>
+
+<div class="explain-box">
+  <div class="title">⚠️ Tại sao chỉ phân tích Sentiment thông thường lại làm sai lệch bản chất?</div>
+  <p>Hãy xem xét 2 bình luận thực tế được trích xuất từ dữ liệu:</p>
+  <ul>
+    <li><span class="vi">“Con nhỏ này hôm nay lại đi quảng cáo nữa à =)))”</span> $\rightarrow$ Nếu dùng công cụ đo sentiment, câu này sẽ bị chấm là <strong>Tiêu cực (Negative)</strong> vì có ý phàn nàn. Nhưng về mặt tâm lý học người tiêu dùng, người bình luận đang đối xử với KOL ảo này <em>y hệt như một KOL người thật</em> (cũng trêu chọc, cũng cà khịa việc nhận quảng cáo). Đây là minh chứng rõ ràng cho <strong>Sự bình thường hóa (Normalization) mà không cần sự tích cực</strong>.</li>
+    <li><span class="vi">“Biết rằng tạo bằng AI nhưng ngoài thực tìm ra được em này không ta”</span> $\rightarrow$ Câu này mang sentiment <strong>Tích cực (Positive)</strong> (thể hiện sự cuốn hút, khen ngợi), nhưng tâm trí của người xem <em>vẫn bị chi phối bởi tính nhân tạo của AI</em>.</li>
+  </ul>
+</div>
+
+<p>Do đó, thang đo cốt lõi của bài báo là <strong>4 Cấu trúc phản ứng của người tiêu dùng (Consumer-Response Constructs)</strong>, được gán nhãn đa nhãn (multi-label, một bình luận có thể chứa nhiều phản ứng cùng lúc). Điểm sentiment chỉ được giữ lại như một biến mô tả phụ.</p>
+
+<div class="tbl"><table>
+<thead>
+<tr><th>Cấu trúc (Tên trong bài báo)</th><th>Khái niệm lý thuyết nền tảng</th><th>Biểu hiện nhận biết trong bình luận</th><th>Ví dụ thực tế từ bộ dữ liệu</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td><span class="pill r">Uncanny resistance</span><br><small>Phản kháng do dị/giả ($R(t)$)</small></td>
+  <td>Lý thuyết Thung lũng kỳ lạ (Uncanny Valley - Mori, 1970; Kätsyri et al., 2015): Cảm giác rợn ngườI, khó chịu trước một thực thể nhân tạo nhìn gần giống người nhưng có sự lệch pha cảm giác.</td>
+  <td>Tập trung chê ngoại hình giả tạo, mắt đơ, giọng đọc sượng, cử động giật; cảm thấy rợn người; từ chối theo dõi <em>vì</em> là đồ nhân tạo.</td>
+  <td><span class="vi">“Al hát ghép nên nghe k thật”</span><br><span class="vi">“Mỗi lúc 1 khác chả thấy đồng nhất gì”</span><br><span class="vi">“T thà xem phim hoạt hình còn hơn”</span></td>
+</tr>
+<tr>
+  <td><span class="pill n">AI skepticism</span><br><small>Hoài nghi công nghệ AI</small></td>
+  <td>Sự thiếu tin tưởng vào công nghệ, lo ngại về đạo đức, sợ bị lừa dối hoặc quan ngại AI cướp việc làm của con người.</td>
+  <td>Bình luận chống AI nói chung, chỉ trích "rác AI tràn lan", cho rằng các thương hiệu dùng AI là lười biếng, thiếu trung thực.</td>
+  <td><span class="vi">“Khổ thân thế hệ hiện giờ, sống chung với rác AI”</span><br><span class="vi">“Toàn lừa đảo người dùng”</span></td>
+</tr>
+<tr>
+  <td><span class="pill s">Parasocial / Relational orientation</span><br><small>Gắn kết / Xã hội ($S(t)$)</small></td>
+  <td>Thuyết Tương tác Cận Xã hội (Horton &amp; Wohl, 1956) &amp; Mô hình CASA (Máy tính như Tác nhân Xã hội - Nass &amp; Moon, 2000): Người dùng đối xử với thực thể máy móc như một con người thực sự trong xã hội.</td>
+  <td>Xưng hô trực tiếp thân mật (<span class="vi">chị/em/bé/bà/con nhỏ này</span>), bày tỏ tình cảm, nhớ nhung, gán tính cách nhân vật, giục ra video, bênh vực khi bị chê, đùa giỡn <em>với</em> nhân vật.</td>
+  <td><span class="vi">“Sắp thuộc lời rồi chú Khoa ơi”</span><br><span class="vi">“Nói thế bé nó buồn đấy”</span><br><span class="vi">“Ra video tiếp đi bà ơi, hóng mãi”</span></td>
+</tr>
+<tr>
+  <td><span class="pill c">Commercial receptivity</span><br><small>Đón nhận thương mại ($C(t)$)</small></td>
+  <td>Tín hiệu hành vi thể hiện sự chú ý và hứng thú với hoạt động thương mại / Độ tin cậy của nguồn (Source Credibility - Ohanian, 1990; Lou &amp; Yuan, 2019).</td>
+  <td>Hỏi link mua hàng, hỏi giá, hỏi nhãn hàng, hỏi nơi mua; bày tỏ muốn dùng thử/mua; khen sự kết hợp (collab) phù hợp giữa KOL và nhãn hàng.</td>
+  <td><span class="vi">“Quạt, quạt gì cơ xin link với”</span><br><span class="vi">“Cho mình xin info áo này nhé”</span><br><span class="vi">“Collab này hợp quá, để mua thử”</span></td>
+</tr>
+<tr>
+  <td>Sentiment<br><small>Cảm xúc bề mặt (Phụ)</small></td>
+  <td>Chiều hướng cảm xúc truyền thống (Valence).</td>
+  <td>Phân loại: Tiêu cực (Neg) / Trung tính (Neu) / Tích cực (Pos).</td>
+  <td>Dùng để đối chiếu với mức độ gắn kết.</td>
+</tr>
+</tbody>
+</table></div>
+
+<div class="callout"><p><strong>Quy chuẩn thuật ngữ viết bài báo quốc tế:</strong><br>
+1. Gọi biến đầu ra thương mại là <em>Commercial receptivity / Commercial intent signal</em> (Tín hiệu đón nhận thương mại), <strong>tuyệt đối KHÔNG gọi là "Purchase intention" (Ý định mua hàng)</strong> — vì Purchase intention là thang đo tâm lý học phải đo bằng bảng hỏi khảo sát (survey Likert scale). Dùng từ này trên dữ liệu bình luận sẽ bị phản biện bắt bẻ ngay.<br>
+2. Hiện tượng đường cong giao nhau được gọi là <em>Market-level discourse normalization</em> (Bình thường hóa ở cấp độ thảo luận thị trường), bởi vì mỗi tuần có những người dùng khác nhau vào bình luận.</p></div>
+
+<!-- ============================================================ -->
+<h2 id="sec4">4. Gán nhãn quy mô lớn: Phân tích nội dung bằng AI kết hợp kiểm định con người</h2>
+<p>Các tạp chí học thuật hàng đầu ngành Marketing (như <i>Marketing Science, Journal of Marketing, SMJ</i>) hiện nay đã chính thức chấp nhận việc sử dụng Mô hình ngôn ngữ lớn (LLM) để gán nhãn văn bản, <strong>với điều kiện bắt buộc:</strong> quy trình phải do con người dẫn dắt, có xây dựng sổ tay mã hóa (Codebook) chặt chẽ và phải được đánh giá độ chính xác độc lập trên một tập kiểm thử do con người chấm riêng biệt (Gold Standard).</p>
+<p>Dự án sử dụng mô hình <strong>DeepSeek V4 Flash</strong>: mô hình trọng số mở, chi phí cực kỳ tiết kiệm (gán nhãn toàn bộ dữ liệu 5 KOL ảo chưa tới $5 USD), và có thể khóa cố định phiên bản (version-pinnable) — giải quyết trọn vẹn yêu cầu về tính minh bạch và khả năng tái lập kết quả nghiên cứu khoa học.</p>
+
+<h3>4.1 Quy trình 7 bước chuẩn học thuật (Viết cho mục 3.2 của bài báo)</h3>
+<ol class="steps">
+  <li><strong>Làm sạch &amp; Định vị thời gian:</strong> Làm sạch dữ liệu theo quy tắc ở mục 2.4; gán vào mỗi bình luận thông tin bài viết gốc (caption, loại nội dung, gắn thẻ tài trợ, bình luận cha nếu là reply).</li>
+  <li><strong>Mã hóa thử nghiệm (Pilot Coding - Con người, ~200 bình luận):</strong> Lấy mẫu phân tầng theo nhân vật $\times$ tháng $\times$ loại nội dung; lấy mẫu tăng cường (oversampling) các bình luận có chứa từ khóa chê bai hoặc hỏi sản phẩm để các nhãn hiếm xuất hiện. <em>Kết quả:</em> Hoàn thiện Sổ tay mã hóa (Codebook v1) kèm định nghĩa, quy tắc phân biệt và 3–5 ví dụ tiếng Việt cụ thể cho từng nhãn.</li>
+  <li><strong>Xây dựng Tập Chuẩn Vàng (Gold Standard - 2 chuyên viên Việt Nam chấm độc lập, 600–800 bình luận):</strong> 2 người chấm độc lập trực tiếp trên văn bản tiếng Việt; những trường hợp bất đồng được đưa ra thảo luận để thống nhất nhãn cuối cùng. Báo cáo hệ số tin cậy liên người chấm <strong>Krippendorff's $\alpha$</strong> cho từng cấu trúc (yêu cầu $\alpha \ge 0.67$ là chấp nhận được, $\alpha \ge 0.80$ là rất tốt) và Cohen's $\kappa$.</li>
+  <li><strong>Đóng băng &amp; Phân chia tập chuẩn:</strong> Chia tập chuẩn thành 2 phần: Tập phát triển (Development set, $\approx 40\%$) dùng để tinh chỉnh prompt của AI, và Tập kiểm thử (Test set, $\approx 60\%$) — tập này được đóng băng và chỉ dùng để chấm điểm AI một lần duy nhất.</li>
+  <li><strong>Gán nhãn tự động bằng AI:</strong> Gửi bình luận tới DeepSeek V4 Flash (chạy ở nhiệt độ $\text{temperature} = 0$ để đảm bảo tính nhất quán cao nhất, xuất định dạng JSON). Gán nhãn lặp lại trên mẫu 5% dữ liệu để báo cáo chỉ số tự nhất quán của mô hình (Self-consistency).</li>
+  <li><strong>Đánh giá hiệu năng AI trên tập Test độc lập:</strong> Tính toán độ chính xác (Precision), độ bao phủ (Recall), điểm F1 cho từng cấu trúc và Macro-F1 tổng thể:
+    <div class="math-display">
+      $$P = \frac{TP}{TP + FP}, \quad R = \frac{TP}{TP + FN}, \quad F_1 = \frac{2PR}{P + R}$$
+    </div>
+    Yêu cầu độ bao phủ (Recall) $\ge 0.70$ trên các cấu trúc hiếm. <em>Không bao giờ chỉ báo cáo Accuracy thuần túy</em> (vì trong thực tế có 97% bình luận không hỏi mua hàng, nếu AI đoán toàn bộ là "không" thì Accuracy vẫn đạt 97% nhưng vô giá trị).
+  </li>
+  <li><strong>Gán nhãn toàn bộ dữ liệu &amp; Lan truyền sai số:</strong> Chạy mô hình trên toàn bộ tập dữ liệu bằng prompt đã đóng băng. Sau đó thực hiện kiểm định chéo: chạy lại mô hình thống kê chính trên tập do con người chấm để chứng minh xu hướng thời gian hoàn toàn đồng nhất về dấu và hướng đi.</li>
+</ol>
+
+<div class="tbl"><table>
+<thead>
+<tr><th>Chỉ số kiểm định cần đưa vào Bảng 2 của bài báo</th><th>Phạm vi đánh giá</th><th>Ngưỡng đạt chuẩn học thuật</th></tr>
+</thead>
+<tbody>
+<tr><td>Krippendorff's $\alpha$ (Người chấm 1 vs Người chấm 2)</td><td>Từng cấu trúc phản ứng</td><td>$\ge 0.67$ (đạt), $\ge 0.80$ (tốt)</td></tr>
+<tr><td>Precision · Recall · F1 (AI DeepSeek vs Tập Chuẩn Vàng)</td><td>Từng cấu trúc trên tập Test</td><td>Recall $\ge 0.70$ cho các lớp hiếm (UV, CR)</td></tr>
+<tr><td>Macro-F1 tổng thể</td><td>Toàn bộ hệ thống nhãn</td><td>Báo cáo giá trị thực tế</td></tr>
+<tr><td>Mức độ tự nhất quán của AI (Self-agreement)</td><td>Mẫu 5% chạy lặp lại</td><td>$\ge 0.90$ (90% kết quả trùng khớp)</td></tr>
+<tr><td>Tính nhất quán về hướng xu hướng (Direction consistency)</td><td>Tập con người chấm vs Toàn bộ tập AI chấm</td><td>Cùng dấu hệ số góc (cùng chiều tăng/giảm)</td></tr>
+</tbody>
+</table></div>
+
+<!-- ============================================================ -->
+<h2 id="sec5">5. Phân tích theo khía cạnh (ABSA): Khán giả phản đối gì và đón nhận gì?</h2>
+<p>Để cung cấp cho các nhà quản trị thương hiệu những thông tin chi tiết và có thể hành động được, nghiên cứu bổ sung tầng phân tích <strong>Cảm xúc theo Khía cạnh (Aspect-Based Sentiment Analysis - ABSA)</strong>: với mỗi bình luận, người dùng đang đánh giá <em>khía cạnh cụ thể nào</em> của nhân vật ảo và với thái độ gì. Chúng tôi sử dụng khung danh mục cố định gồm 6 khía cạnh chuẩn (tương thích với các bộ benchmark ABSA tiếng Việt như UIT-ViSFD, VLSP-2018):</p>
+
+<div class="tbl"><table>
+<thead>
+<tr><th>Khía cạnh (Aspect)</th><th>Bao gồm các nội dung</th><th>Ý nghĩa quản trị thực tiễn (Managerial Reading)</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>APPEARANCE</code><br>(Ngoại hình)</td>
+  <td>Khuôn mặt, ánh mắt, làn da, vóc dáng, độ chân thực hình ảnh, nét biểu cảm.</td>
+  <td>Chất lượng thiết kế và render đồ họa 3D/AI; yếu tố kích hoạt chính của cảm giác "thung lũng kỳ lạ".</td>
+</tr>
+<tr>
+  <td><code>VOICE_MOTION</code><br>(Giọng nói &amp; Cử động)</td>
+  <td>Giọng đọc, khẩu hình miệng (lip-sync), giọng hát, cử động tay chân, dáng đi.</td>
+  <td>Chất lượng hậu kỳ âm thanh/chuyển động; thường là điểm lệch pha cuối cùng bị khán giả soi xét.</td>
+</tr>
+<tr>
+  <td><code>AI_NATURE</code><br>(Bản chất AI)</td>
+  <td>Việc đây là sản phẩm AI, công nghệ AI nói chung, tranh cãi về đạo đức AI.</td>
+  <td>Chiến lược công khai tính ảo (AI disclosure) và định vị thương hiệu có trách nhiệm.</td>
+</tr>
+<tr>
+  <td><code>PERSONA</code><br>(Tính cách &amp; Nhân vật)</td>
+  <td>Sự hài hước, nét duyên dáng, phong cách nói chuyện, tương tác gần gũi.</td>
+  <td>Chiến lược xây dựng nhân vật — đây chính là nơi tạo ra giá trị kết nối cảm xúc lâu dài.</td>
+</tr>
+<tr>
+  <td><code>CONTENT</code><br>(Nội dung bài đăng)</td>
+  <td>Bài hát, kịch bản video, câu chuyện đời thường, bối cảnh dựng video.</td>
+  <td>Chiến lược sáng tạo nội dung (biến kiểm soát).</td>
+</tr>
+<tr>
+  <td><code>PRODUCT_BRAND</code><br>(Sản phẩm &amp; Nhãn hàng)</td>
+  <td>Sản phẩm quảng cáo, giá cả, thương hiệu tài trợ, sự phù hợp của hợp tác.</td>
+  <td>Mức độ sẵn sàng đón nhận thương mại và độ phù hợp của nhãn hàng với nhân vật ảo.</td>
+</tr>
+</tbody>
+</table></div>
+
+<p>Mỗi khía cạnh được gắn thái độ: <em>Tiêu cực (-1) / Trung tính (0) / Tích cực (+1)</em>. Kết quả được tổng hợp thành chỉ số <strong>Điểm phân cực ròng (Net Polarity)</strong> theo công thức:</p>
+<div class="math-display">
+  $$\text{Net Polarity}_{\text{Aspect}, t} = \frac{n_{\text{pos}} - n_{\text{neg}}}{n_{\text{pos}} + n_{\text{neg}} + n_{\text{neu}}}$$
+</div>
+<p>Biểu đồ nhiệt (Heatmap) Khía cạnh $\times$ Tuần giúp nhà quản trị thấy rõ: <em>Lời chê bai về Ngoại hình giảm đi trước, lời khen về Tính cách tăng lên dẫn đầu, và sau đó sự tò mò về Sản phẩm xuất hiện</em>. Đây cũng là bằng chứng hội tụ độc lập thứ hai để đối chiếu với điểm giao thoa $\tau^*$.</p>
+
+<!-- ============================================================ -->
+<h2 id="sec6">6. Mô hình thống kê: Quỹ đạo, Điểm giao thoa ($\tau^*$) và Đón nhận thương mại</h2>
+<p>Phần này trình bày phương pháp phân tích định lượng chặt chẽ. Công cụ thực hiện: Python (tiền xử lý, gán nhãn AI) và R (mô hình hóa bằng các gói <code>mgcv</code>, <code>segmented</code>, <code>boot</code>, <code>gratia</code>).</p>
+
+<h3>6.1 Bước 1 — Ước lượng đường cong quỹ đạo (H1, H2)</h3>
+<p>Với mỗi cấu trúc phản ứng, mô hình ước lượng <em>xác suất một bình luận đăng ở tuần $t$ mang cấu trúc đó</em>. Thay vì giả định đường thẳng tuyến tính thô sơ, nghiên cứu sử dụng <strong>Mô hình Cộng tính Tổng quát có yếu tố ngẫu nhiên (GAM - Generalized Additive Model)</strong> (Wood, 2017):</p>
+<div class="math-display">
+  $$\text{logit } P(Y_{ijt} = 1) = \beta_0 + s(\text{week}_t) + \beta_1 \cdot \text{sponsored} + \beta_2 \cdot \text{ai\_disclosure} + \beta_3 \cdot \text{content\_type} + \beta_4 \cdot \text{realism} + u_{\text{post}} + u_{\text{vi}}$$
+</div>
+<p>Mô hình này tạo ra các đường cong phi tuyến mượt mà kèm dải băng tin cậy 95%. Đạo hàm bậc nhất của đường cong ($dR/dt$, $dS/dt$) cho biết chính xác <strong>tốc độ suy giảm phản kháng</strong> và <strong>tốc độ tăng trưởng gắn kết</strong> theo thời gian.</p>
+<p><strong>Tại sao các biến kiểm soát (Controls) lại cực kỳ quan trọng?</strong> Nếu đồ họa và giọng nói của KOL ảo được nâng cấp đẹp hơn sau vài tháng, lời chê bai giảm đi có thể là do "đồ họa đẹp hơn" chứ không phải do "tâm lý khán giả đã quen". Việc gắn nhãn độ chân thực hình ảnh và nội dung bài đăng vào mô hình giúp chứng minh rằng sự thay đổi này thực sự đến từ quá trình thích nghi tâm lý của khán giả (Audience Adaptation).</p>
+
+<h3>6.2 Bước 2 — Xác định Điểm Giao Thoa Bình Thường Hóa $\tau^*$ (RQ3)</h3>
+<p>Tính đường cong chênh lệch:</p>
+<div class="math-display">
+  $$D(t) = \hat{S}(t) - \hat{R}(t), \quad \text{SE}_{D}(t) \approx \sqrt{\text{SE}_{S}^2(t) + \text{SE}_{R}^2(t)}$$
+</div>
+<p><strong>Quy tắc quyết định (Đăng ký trước khi xem kết quả):</strong> $\tau^*$ được định nghĩa là <em>tuần đầu tiên mà biên dưới của khoảng tin cậy 95% của $D(t)$ lớn hơn 0 liên tục trong ít nhất 3 tuần liên tiếp</em>. Quy tắc này đảm bảo rằng sự vượt lên là bền vững, loại trừ hiện tượng một tuần ngẫu nhiên bị đột biến.</p>
+<p>Đo lường sai số bằng kỹ thuật <strong>Cluster Bootstrap theo bài viết</strong> ($B = 500\text{--}1.000$ lần lặp lại): Rút mẫu có hoàn lại các bài viết, chạy lại mô hình GAM và tìm lại $\tau^*$. Báo cáo kết quả dưới dạng: <em>“$\tau^* \approx$ Tuần 14, Khoảng tin cậy 95% [12, 18]”</em>.</p>
+
+<h3>6.3 Bước 3 — Kiểm định Cấu trúc Giai đoạn (Phases)</h3>
+<p>Giả thuyết cho rằng tiến trình bình thường hóa trải qua 3 giai đoạn: <em>Phản kháng thị giác $\rightarrow$ Tái định hình xã hội $\rightarrow$ Tiếp nhận thương mại</em>. Để chứng minh cấu trúc này xuất phát từ dữ liệu thực tế chứ không phải do tác giả tự suy diễn, chúng tôi sử dụng phương pháp <strong>Segmented Regression (Hồi quy phân đoạn)</strong> để tìm điểm gãy (breakpoints) tối ưu theo tiêu chí AIC.</p>
+
+<h3>6.4 Bước 4 — Tác động đến Đón nhận Thương mại (H3, H4)</h3>
+<p>Mô hình hóa mối liên hệ giữa tỷ lệ bình luận đón nhận thương mại của tuần $t$ ($C_t$) với độ chênh lệch gắn kết của tuần trước đó ($D_{t-1}$):</p>
+<div class="math-display">
+  $$C_t = \alpha + \beta_1 D_{t-1} + \beta_2 C_{t-1} + \beta_3 \text{SponsoredShare}_t + \beta_4 \text{ProductShare}_t + \beta_5 \log(\text{Volume}_t) + \varepsilon_t$$
+</div>
+<p>Hệ số $\beta_1 > 0$ và có ý nghĩa thống kê sẽ chứng minh rằng: <em>Khi cán cân thảo luận nghiêng về phía gắn kết xã hội hơn là chê bai ở tuần trước, lượng bình luận quan tâm đến sản phẩm sẽ tăng lên ở tuần tiếp theo (chỉ số dẫn dắt - Leading indicator)</em>.</p>
+
+<h3>6.5 Bước 5 — Phân tích Nhóm Bình Luận Lặp Lại (Layer B)</h3>
+<p>Với 346 người dùng bình luận từ 3 lần trở lên, sắp xếp các bình luận của từng người theo dòng thời gian để lập ma trận chuyển dịch tâm lý: xem có bao nhiêu % cá nhân chuyển từ trạng thái <em>Chê bai/Phản kháng ban đầu $\rightarrow$ Gắn kết/Ủng hộ sau này</em>. Đây là bằng chứng củng cố mạnh mẽ ở cấp độ vi mô (trong cùng một người dùng).</p>
+
+<h3>6.6 Danh mục Các phép Kiểm tra Độ vững (Robustness Checks)</h3>
+<div class="tbl"><table>
+<thead>
+<tr><th>Phép kiểm tra độ vững</th><th>Mục đích học thuật</th></tr>
+</thead>
+<tbody>
+<tr><td>Gom nhóm theo tuần (1 tuần) vs Gom nhóm 2 tuần</td><td>Kiểm tra độ nhạy với sai số mốc thời gian "N tuần trước".</td></tr>
+<tr><td>Toàn bộ tập AI gán nhãn vs Tập con do Con người gán</td><td>Chứng minh kết quả không bị sai lệch do lỗi mô hình AI.</td></tr>
+<tr><td>Loại bỏ bình luận Spam và Tiếng nước ngoài</td><td>Đảm bảo tín hiệu không bị nhiễu bởi bot mạng.</td></tr>
+<tr><td>Loại bỏ bài đăng ảnh Viral ở Tuần 33 (1.357 cmt)</td><td>Chứng minh đường cong không phụ thuộc vào một bài đăng đột biến.</td></tr>
+<tr><td>Chạy riêng biệt trên từng KOL ảo</td><td>Chứng minh hiện tượng xảy ra trên nhiều nhân vật, không phải cá biệt.</td></tr>
+<tr><td>Tách riêng bài đăng Quảng cáo vs Bài đăng Đời thường</td><td>Kiểm soát yếu tố gây nhiễu từ tính chất bài viết.</td></tr>
+<tr><td>Quy tắc xác định $\tau^*$ với 2 / 3 / 4 tuần liên tiếp</td><td>Chứng minh điểm giao thoa không phụ thuộc vào định nghĩa chủ quan.</td></tr>
+<tr><td>Chỉ giữ lại các bài viết có độ bao phủ bình luận $\ge 50\%$</td><td>Loại trừ sai số do việc cào thiếu bình luận ở bài viral.</td></tr>
+</tbody>
+</table></div>
+
+<!-- ============================================================ -->
+<h2 id="sec7">7. Kể câu chuyện qua Dữ liệu: Hệ thống Biểu đồ &amp; Bảng biểu</h2>
+<p>Một bài báo Marketing xuất sắc phải khiến người đọc hiểu được kết quả cốt lõi chỉ bằng cách xem biểu đồ. Thống nhất quy ước màu sắc nhận diện chuẩn xác: <span class="pill r">Phản kháng = Đỏ gạch</span>, <span class="pill s">Gắn kết = Xanh ngọc</span>, <span class="pill c">Thương mại = Vàng hổ phách</span> kết hợp cùng các dạng đường nét khác biệt (nét liền, nét đứt, chấm bi) để trực quan trên màn hình và rõ nét cả khi in ấn:</p>
+
+<div class="tbl"><table>
+<thead>
+<tr><th>Mã hiệu</th><th>Tên Biểu đồ / Bảng biểu</th><th>Thông điệp cốt lõi truyền tải tới người đọc</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Hình 1</strong></td>
+  <td>Đường cong $R(t)$, $S(t)$, $C(t)$ kèm dải băng tin cậy 95% và vùng $\tau^*$</td>
+  <td>"Sự chê bai mờ dần, sự gắn kết tăng lên, và đây là mốc thời gian chính xác cán cân bị đảo chiều."</td>
+</tr>
+<tr>
+  <td><strong>Hình 2</strong></td>
+  <td>Đường cong chênh lệch $D(t)$ cắt qua trục 0 với cửa sổ duy trì 3 tuần</td>
+  <td>"Sự vượt lên là bền vững và có ý nghĩa thống kê vững chắc, không phải hiện tượng nhất thời."</td>
+</tr>
+<tr>
+  <td><strong>Hình 3</strong></td>
+  <td>Biểu đồ lưới nhỏ (Small multiples) từng KOL ảo và dải điểm $\tau^*$</td>
+  <td>"Tốc độ bình thường hóa khác nhau tùy theo mức độ giống người và phong cách nội dung của từng KOL."</td>
+</tr>
+<tr>
+  <td><strong>Hình 4</strong></td>
+  <td>Biểu đồ nhiệt (Heatmap) Khía cạnh $\times$ Tuần của điểm phân cực ròng</td>
+  <td>"Ngoại hình hết bị soi xét đầu tiên, giọng nói theo sau; sự yêu mến tính cách dẫn đầu; tò mò sản phẩm tiếp bước."</td>
+</tr>
+<tr>
+  <td><strong>Hình 5</strong></td>
+  <td>Biểu đồ dốc (Slope chart): Tỷ lệ gắn kết vs Tỷ lệ cảm xúc tích cực</td>
+  <td>"Khán giả chấp nhận KOL ảo như người thật không đồng nghĩa với việc họ luôn khen ngợi (họ vẫn chê khi nhận quảng cáo)."</td>
+</tr>
+<tr>
+  <td><strong>Hình 6</strong></td>
+  <td>Biểu đồ dòng chảy Sankey của nhóm người bình luận lặp lại (Layer B)</td>
+  <td>"Tâm lý của từng cá nhân thực sự chuyển dịch theo đúng hướng mà toàn bộ thị trường đang dịch chuyển."</td>
+</tr>
+<tr>
+  <td><strong>Hình 7</strong></td>
+  <td>Đón nhận thương mại $C(t)$ gắn mốc $\tau^*$ và Biểu đồ hệ số tác động trễ</td>
+  <td>"Thảo luận hỏi mua hàng tăng rõ rệt sau điểm giao thoa; kết quả vững qua nhiều cấu hình trễ."</td>
+</tr>
+<tr>
+  <td><strong>Bảng 1</strong></td>
+  <td>Bảng mô tả tổng quan bộ dữ liệu (Corpus Description)</td>
+  <td>Mẫu nghiên cứu minh bạch, quy mô lớn, thông số rõ ràng.</td>
+</tr>
+<tr>
+  <td><strong>Bảng 2</strong></td>
+  <td>Bảng kiểm định độ tin cậy gán nhãn ($\alpha$, Precision, Recall, F1)</td>
+  <td>Đo lường chuẩn xác học thuật, chứng minh AI đạt độ tin cậy tương đương chuyên gia.</td>
+</tr>
+<tr>
+  <td><strong>Bảng 3</strong></td>
+  <td>Ma trận xuất hiện đồng thời giữa các phản ứng (Co-occurrence &amp; Lift)</td>
+  <td>"Tâm lý lưỡng phân rất phổ biến: khán giả vừa trêu mặt giả vừa xin link mua áo trong cùng 1 câu."</td>
+</tr>
+<tr>
+  <td><strong>Bảng 4</strong></td>
+  <td>Bảng trích dẫn các câu bình luận tiêu biểu tiếng Việt kèm giải nghĩa tiếng Anh</td>
+  <td>Lắng nghe tiếng nói chân thực của người tiêu dùng; tạo chiều sâu định tính cho bài báo.</td>
+</tr>
+</tbody>
+</table></div>
+
+<!-- ============================================================ -->
+<h2 id="sec8">8. Bài báo ĐƯỢC PHÉP và KHÔNG ĐƯỢC PHÉP tuyên bố điều gì?</h2>
+<p>Để đảm bảo tính liêm chính học thuật và bảo vệ bài báo trước những câu hỏi hóc búa của hội đồng phản biện, nhóm tác giả cần nắm vững các ranh giới kết luận sau:</p>
+
+<div class="two">
+<div>
+<h4>Bạn ĐƯỢC PHÉP tuyên bố (Claims Allowed)</h4>
+<ul>
+  <li>Trên không gian thảo luận công khai tại Việt Nam, sự phản kháng/kỳ thị đối với KOL ảo giảm dần theo thời gian trong khi các thảo luận gắn kết xã hội tăng lên; cán cân chính thức đảo chiều tại điểm $\tau^*$ [KTC 95%].</li>
+  <li>Một cán cân thảo luận nghiêng về gắn kết xã hội ở tuần trước có mối liên hệ thuận chiều (lagged association) với lượng thảo luận đón nhận thương mại ở tuần tiếp theo.</li>
+  <li>Sự bình thường hóa diễn ra độc lập với sự gia tăng của cảm xúc tích cực — khán giả coi KOL ảo như một influencer bình thường, bao gồm cả việc phàn nàn khi thấy cô ấy quảng cáo.</li>
+  <li>Điểm giao thoa $\tau^*$ là một <em>chỉ số dẫn dắt thực tiễn (practical leading indicator)</em> giúp thương hiệu định thời điểm đẩy mạnh chiến dịch bán hàng.</li>
+</ul>
+</div>
+<div>
+<h4>Bạn TUYỆT ĐỐI KHÔNG ĐƯỢC tuyên bố (Overclaims to Avoid)</h4>
+<ul>
+  <li>Không được khẳng định <em>"mọi người tiêu dùng đều đã thay đổi suy nghĩ"</em> — vì mỗi tuần có những người mới vào bình luận (phân tích Layer B chỉ đóng vai trò bổ trợ).</li>
+  <li>Không được khẳng định điểm giao thoa <em>"gây ra quan hệ nhân quả (causality) trực tiếp làm tăng doanh số hay ý định mua hàng"</em>.</li>
+  <li>Không được kết luận hiện tượng "Thung lũng kỳ lạ sẽ tự động biến mất theo thời gian cho mọi trường hợp" — sự quen thuộc làm giảm cảm giác dị hợm, nhưng việc khán giả có yêu mến hay không phụ thuộc vào cách xây dựng tính cách của nhân vật (Złotowski et al., 2015).</li>
+  <li>Không khái quát hóa sang các nền tảng khác như TikTok hay Instagram — nghiên cứu này chỉ giới hạn trên Facebook Việt Nam.</li>
+</ul>
+</div>
+</div>
+
+<div class="explain-box">
+  <div class="title">💼 4 Hàm ý Quản trị đắt giá dành cho Doanh nghiệp (Managerial Implications)</div>
+  <p>1. <strong>Tín hiệu định thời điểm (Timing Signal):</strong> Doanh nghiệp không nên vội vã đưa sản phẩm vào bán ngay trong những tuần đầu ra mắt KOL ảo. Hãy theo dõi dòng thảo luận đến khi vượt qua điểm $\tau^*$ mới bắt đầu các chiến dịch thương mại nặng đô.</p>
+  <p>2. <strong>Biết nơi cần đầu tư ngân sách:</strong> Phân tích khía cạnh chỉ ra yếu tố nào đang gây cản trở ở từng giai đoạn (ví dụ: giai đoạn đầu cần sửa lỗi đồ họa khuôn mặt; giai đoạn sau cần đầu tư kịch bản hài hước, tạo chiều sâu tính cách).</p>
+  <p>3. <strong>Tính cách quan trọng hơn đồ họa 3D hoàn hảo:</strong> Dữ liệu cho thấy chính sự gần gũi, nét duyên dáng trong tính cách (Persona) mới là động cơ chính kéo cán cân gắn kết đi lên, chứ không phải việc cố gắng render khuôn mặt thật 100%.</p>
+  <p>4. <strong>Chiến lược minh bạch AI:</strong> Việc chủ động thừa nhận là nhân vật AI từ đầu giúp giảm bớt cảm giác bị lừa dối và tạo điều kiện cho các tương tác đùa vui mang tính xã hội.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="sec9">9. Lộ trình thực hiện đến ngày 28/08 — Phân công công việc</h2>
+<p>Dự án gồm 5 luồng công việc chạy song song; đường găng trọng yếu (critical path) là: <strong>Cào dữ liệu $\rightarrow$ Gán nhãn thử nghiệm $\rightarrow$ Tập chuẩn con người $\rightarrow$ Gán nhãn AI toàn bộ $\rightarrow$ Chạy mô hình R $\rightarrow$ Xuất biểu đồ</strong>.</p>
+
+<div class="tbl"><table style="font-size:0.84rem">
+<thead>
+<tr><th>Luồng công việc</th><th>Thứ Năm 21/8</th><th>Thứ Sáu 22/8</th><th>Thứ Bảy 23/8</th><th>Chủ Nhật 24/8</th><th>Thứ Hai 25/8</th><th>Thứ Ba 26/8</th><th>Thứ Tư 27/8</th><th>Thứ Năm 28/8</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>1. Dữ liệu (Data)</strong></td>
+  <td colspan="2">Cào thêm 2–4 KOL ảo; xác định $t=0$<br><small>Minh</small></td>
+  <td>Tạo bảng phân tích hoàn chỉnh<br><small>Minh (App. C)</small></td>
+  <td>Gán nhãn bài viết: tài trợ, loại bài, độ thật<br><small>Minh / Trúc</small></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+  <td><strong>2. Con người gán nhãn</strong></td>
+  <td></td>
+  <td>Pilot 200 mẫu $\rightarrow$ Codebook v1<br><small>Trúc + Minh</small></td>
+  <td colspan="2">Tập chuẩn 600–800 cmt (2 người); tính $\alpha$; chia Dev/Test<br><small>2 Chuyên viên VN</small></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+  <td><strong>3. AI gán nhãn</strong></td>
+  <td colspan="2"></td>
+  <td>Viết script DeepSeek; chạy thử trên Pilot<br><small>Minh (App. A)</small></td>
+  <td>Chỉnh prompt trên Dev $\rightarrow$ Test 1 lần $\rightarrow$ Gán toàn bộ<br><small>Minh</small></td>
+  <td colspan="4"></td>
+</tr>
+<tr>
+  <td><strong>4. Mô hình thống kê</strong></td>
+  <td colspan="3"></td>
+  <td>Script R kiểm tra thử<br><small>Minh (App. B)</small></td>
+  <td>Mô hình GAM, $\tau^*$ Bootstrap; Xuất Hình 1–3<br><small>Minh</small></td>
+  <td>Mô hình $C(t)$, Layer B, ABSA; Xuất Hình 4–7<br><small>Minh</small></td>
+  <td colspan="2"></td>
+</tr>
+<tr>
+  <td><strong>5. Viết bài báo (Writing)</strong></td>
+  <td colspan="2">Viết mục 3.1–3.2 Phương pháp + Đạo đức<br><small>Minh</small></td>
+  <td colspan="2">Tổng quan lý thuyết, khung nghiên cứu, giả thuyết<br><small>Trúc</small></td>
+  <td>Khung Kết quả<br><small>Trúc</small></td>
+  <td>Phần Phát hiện 4.1/4.2<br><small>Minh + Trúc</small></td>
+  <td>Thảo luận, Giới hạn, Tích hợp bài<br><small>Cả hai</small></td>
+  <td style="background:#000;color:#fff;text-align:center;font-weight:bold">NỘP BÀI</td>
+</tr>
+</tbody>
+</table></div>
+
+<h3>9.1 Việc cần làm ngay trong 48 giờ tới (Minh)</h3>
+<ol class="steps">
+  <li><strong>Chốt danh sách KOL ảo và mốc $t = 0$:</strong> Chọn 4–6 KOL ảo Việt Nam, xác định ngày đăng bài đầu tiên của trang làm mốc $t=0$. Xuất ra file <code>data/personas.csv</code> (chứa <code>vi_id, page_url, launch_date, human_likeness</code>). Nếu không có $t=0$ thì không thể tính biến <code>week_since_launch</code>.</li>
+  <li><strong>Chạy cào dữ liệu cho các KOL mới:</strong> Ưu tiên cào bằng đường dẫn bài viết trực tiếp (permalink) để lấy mốc thời gian tuyệt đối chính xác 97–100%. Dùng lệnh <code>caffeinate -dimsu</code> để máy không bị sleep khi cào ban đêm.</li>
+  <li><strong>Xây dựng bảng phân tích tổng hợp:</strong> Lọc trùng, quy đổi mốc thời gian, tính tỷ lệ bao phủ, băm ẩn danh tác giả, loại bỏ alt-text. Xuất ra file <code>data/analysis/comments.parquet</code> và báo cáo tổng số lượng theo tuần.</li>
+  <li><strong>Rút mẫu thử nghiệm Pilot (200 bình luận):</strong> Lấy mẫu tăng cường các bình luận có từ khóa chê bai hoặc hỏi mua hàng để gửi Trúc hoàn thiện Codebook.</li>
+  <li><strong>Viết script gán nhãn <code>tools/annotate_deepseek.py</code>:</strong> Chạy thử nghiệm trên mẫu pilot để tính toán chi phí và kiểm tra định dạng JSON.</li>
+  <li><strong>Bản thảo phần Phương pháp nghiên cứu (Mục 3.1 &amp; 3.2):</strong> Trích xuất nội dung từ Mục 2 và Mục 4 của cẩm nang này để hoàn thiện bản thảo nộp cho người hướng dẫn.</li>
+</ol>
+
+<h3>9.2 Việc cần phối hợp thực hiện (Trúc)</h3>
+<ul>
+  <li>Hướng dẫn 2 chuyên viên Việt Nam chấm tập chuẩn (Gold Set); thống nhất các ca khó trong Sổ tay mã hóa (ví dụ: <span class="vi">“AI hả?”</span> chỉ là câu hỏi, không tính là phản kháng; <span class="vi">“Lại quảng cáo nữa”</span> tính là gắn kết trêu đùa, không tính là đón nhận thương mại).</li>
+  <li>Hoàn thiện câu chữ của các Giả thuyết nghiên cứu dựa trên các cấu trúc chuẩn ở Mục 3.</li>
+  <li>Đăng ký trước trong bài báo quy tắc xác định $\tau^*$ (biên dưới KTC 95% lớn hơn 0 trong 3 tuần liên tiếp) và danh sách kiểm định độ vững ở Mục 6.6 trước khi có kết quả số liệu.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2 id="sec10">10. Phụ lục kỹ thuật</h2>
+
+<h3>Phụ lục A — Prompt chuẩn cho DeepSeek V4 Flash (Đa nhãn, JSON)</h3>
+<pre><code>SYSTEM
+Bạn là chuyên gia ngôn ngữ học gán nhãn bình luận Facebook tiếng Việt về một Người ảnh hưởng ảo (Virtual Influencer do AI tạo ra) cho một nghiên cứu học thuật về Marketing.
+Chỉ đánh giá nội dung của bình luận; sử dụng caption và bình luận cha làm ngữ cảnh bổ trợ.
+Các nhãn là độc lập với nhau (một bình luận có thể nhận nhiều nhãn 1 cùng lúc).
+Chỉ trả về định dạng JSON duy nhất.
+
+SỔ TAY MÃ HÓA (CODEBOOK)
+- uv_resistance (0/1): Bình luận tập trung vào sự giả tạo, kỳ dị, lệch pha cảm xúc về ngoại hình/giọng nói/cử động (mặt đơ, mắt giả, giọng ghép, nhìn ghê, nhìn sai sai, không phải người thật, AI mà...), hoặc từ chối xem VÌ là đồ giả. Không bao gồm quan điểm chống AI chung chung và không bao gồm câu hỏi trung tính như "AI hả?".
+- ai_skepticism (0/1): Sự thiếu tin tưởng vào công nghệ AI nói chung, lo ngại bị lừa đảo, mất việc làm, gọi là "rác AI", chê nhãn hàng dùng AI là thiếu trung thực. Không nói về ngoại hình của nhân vật.
+- parasocial_orientation (0/1): Đối xử với nhân vật như một con người thực sự: xưng hô thân mật (chị/em/bé/bà/con nhỏ này + hành động), bày tỏ tình cảm, nhớ nhung, khen tính cách ("bà này hài ghê"), giục ra video, bảo vệ khi bị chê, đùa giỡn VỚI nhân vật. Bao gồm cả khi giọng điệu là trêu chọc ("lại đi quảng cáo nữa à").
+- commercial_acceptance (0/1): Tò mò hoặc có ý định đối với sản phẩm/thương hiệu: hỏi link mua hàng, giá cả, nơi bán, tên nhãn hàng; muốn dùng thử/mua; khen ngợi sự hợp tác quảng cáo này. Không bao gồm lời phàn nàn việc "suốt ngày quảng cáo".
+- sentiment: "neg" (tiêu cực) | "neu" (trung tính) | "pos" (tích cực)
+- ai_mention (0/1): Có nhắc đến từ khóa AI/ảo/giả/người ảo hay không.
+- spam (0/1): Bình luận rác, bot, spam link, không liên quan đến nhân vật.
+- aspects: Danh sách các đối tượng [{"cat": APPEARANCE|VOICE_MOTION|AI_NATURE|PERSONA|CONTENT|PRODUCT_BRAND, "pol": neg|neu|pos}]; mảng rỗng [] nếu không nhắc đến.
+
+ĐẦU VÀO MẪU (INPUT)
+{"id": 8812, "persona": "tieumy", "caption": "Lần đầu bán quạt...", "parent": "",
+ "text": "Nhìn mặt vẫn hơi giả nhưng bà này nói chuyện hài ghê, cái áo đẹp xin link"}
+
+ĐẦU RA MẪU (OUTPUT)
+{"id": 8812, "uv_resistance": 1, "ai_skepticism": 0, "parasocial_orientation": 1,
+ "commercial_acceptance": 1, "sentiment": "pos", "ai_mention": 1, "spam": 0,
+ "aspects": [{"cat":"APPEARANCE","pol":"neg"},{"cat":"PERSONA","pol":"pos"},
+             {"cat":"PRODUCT_BRAND","pol":"neu"}]}</code></pre>
+
+<h3>Phụ lục B — Mã nguồn chạy mô hình thống kê trong R</h3>
+<pre><code>library(mgcv); library(segmented); library(gratia); library(boot)
+
+# 1. Ước lượng quỹ đạo (GAM với hiệu ứng ngẫu nhiên theo bài viết và theo nhân vật)
+m_uv  <- bam(uv ~ s(week, k=12) + s(week, by=vi, k=8, m=1)
+               + sponsored + ai_disclosure + content_type + is_reply
+               + visual_realism + coverage_ratio
+               + s(post_id, bs="re") + s(vi, bs="re"),
+             family=binomial, data=d, method="fREML", discrete=TRUE)
+m_psi <- update(m_uv, psi ~ .)
+m_cr  <- update(m_uv, cr ~ .)
+
+# 2. Dự báo đường cong chuẩn hóa và tính đường chênh lệch D(t)
+grid  <- expand.grid(week=seq(0, max(d$week), by=.5), sponsored=0, ai_disclosure=1,
+                     content_type="photo", is_reply=0, visual_realism=median(d$visual_realism),
+                     coverage_ratio=1, vi=levels(d$vi)[1], post_id=levels(d$post_id)[1])
+R_hat <- predict(m_uv,  grid, type="response", exclude=c("s(post_id)","s(vi)"), se.fit=TRUE)
+S_hat <- predict(m_psi, grid, type="response", exclude=c("s(post_id)","s(vi)"), se.fit=TRUE)
+D_hat <- S_hat$fit - R_hat$fit
+
+# 3. Tìm điểm giao thoa tau*: Tuần đầu tiên biên dưới KTC 95% của D(t) > 0 trong >= 3 tuần liên tiếp
+# Thực hiện Cluster Bootstrap theo bài viết (post_id) với B = 500-1000 để lấy khoảng tin cậy 95% cho tau*
+
+# 4. Tốc độ thay đổi (Đạo hàm bậc nhất): gratia::derivatives(m_uv, "s(week)")
+
+# 5. Kiểm định số lượng giai đoạn (Segmented Regression)
+fit0 <- glm(cbind(n_uv, n - n_uv) ~ week, family=binomial, data=weekly)
+pscore.test(fit0); fit1 <- segmented(fit0, seg.Z=~week, npsi=1); fit2 <- segmented(fit0, seg.Z=~week, npsi=2)
+AIC(fit0, fit1, fit2)
+
+# 6. Mô hình tác động trễ đến Đón nhận Thương mại:
+# C_t ~ D_{t-1} + C_{t-1} + sponsored_share_t + product_share_t + log(volume_t)
+# Sử dụng mô hình quasi-binomial GLM với sai số chuẩn Newey-West</code></pre>
+
+<h3>Phụ lục C — Cấu trúc Bảng dữ liệu phân tích (Mỗi dòng là một bình luận)</h3>
+<div class="tbl"><table>
+<thead>
+<tr><th>Tên trường (Field)</th><th>Ý nghĩa dữ liệu</th><th>Nguồn trích xuất</th></tr>
+</thead>
+<tbody>
+<tr><td><code>comment_id</code>, <code>parent_comment_id</code>, <code>is_reply</code></td><td>Mã định danh và cấu trúc phân cấp câu trả lời</td><td>Bộ cào (Crawler)</td></tr>
+<tr><td><code>post_id</code>, <code>vi_id</code>, <code>content_type</code>, <code>caption</code></td><td>Thông tin ngữ cảnh bài viết gốc</td><td>Bộ cào / File cấu hình</td></tr>
+<tr><td><code>post_date</code>, <code>comment_time</code>, <code>time_precision</code>, <code>week_since_launch</code>, <code>bin2w</code></td><td>Trục thời gian và số tuần tính từ ngày ra mắt</td><td>Quy đổi thời gian</td></tr>
+<tr><td><code>author_hash</code>, <code>author_n_comments</code></td><td>Mã hóa ẩn danh người dùng và số lần bình luận</td><td>Tính toán ẩn danh</td></tr>
+<tr><td><code>sponsored</code>, <code>product_category</code>, <code>ai_disclosure</code>, <code>visual_realism</code>, <code>social_content</code></td><td>Các biến kiểm soát cấp bài viết (tài trợ, độ thật, công khai AI)</td><td>Gán nhãn tay / Phân loại tự động</td></tr>
+<tr><td><code>ui_comment_count</code>, <code>n_collected</code>, <code>coverage_ratio</code></td><td>Chỉ số đo lường độ bao phủ dữ liệu</td><td>Bộ cào (Crawler)</td></tr>
+<tr><td><code>uv_resistance</code>, <code>ai_skepticism</code>, <code>parasocial_orientation</code>, <code>commercial_acceptance</code>, <code>sentiment</code>, <code>ai_mention</code>, <code>spam</code>, <code>aspects</code></td><td>Kết quả gán nhãn 4 cấu trúc phản ứng và khía cạnh</td><td>Mô hình DeepSeek AI (+ Cột đối chứng con người <code>*_gold</code>)</td></tr>
+<tr><td><code>lang_flag</code>, <code>empty_text</code>, <code>artefact</code></td><td>Các cờ đánh dấu lọc sạch dữ liệu</td><td>Tiền xử lý dữ liệu</td></tr>
+</tbody>
+</table></div>
+
+<!-- ============================================================ -->
+<h2 id="sec11">11. Danh mục Tài liệu tham khảo đã kiểm chứng</h2>
+<div class="refs">
+<p class="small">Tất cả tài liệu dưới đây đã được kiểm chứng chuẩn xác qua Crossref / CRAN / ACL Anthology. Được sắp xếp theo nhóm chủ đề tương ứng với từng phần trong bài báo.</p>
+
+<h3>A. Nghiên cứu về Người ảnh hưởng ảo trong Marketing</h3>
+<ol>
+<li>Lou, C., Kiew, S. T. J., Chen, T., Lee, T. Y. M., Ong, J. E. C., &amp; Phua, Z. (2023). Authentically fake? How consumers respond to the influence of virtual influencers. <i>Journal of Advertising, 52</i>(4), 540–557.</li>
+<li>Arsenyan, J., &amp; Mirowska, A. (2021). Almost human? A comparative case study on the social media presence of virtual influencers. <i>International Journal of Human-Computer Studies, 155</i>, 102694. (So sánh mức độ giống người và cảm giác kỳ dị).</li>
+<li>Dabiran, E., Farivar, S., Wang, F., &amp; Grant, G. (2024). Virtually human: Anthropomorphism in virtual influencer marketing. <i>Journal of Retailing and Consumer Services, 79</i>, 103797.</li>
+<li>Franke, C., Groeppel-Klein, A., &amp; Müller, K. (2023). Consumers' responses to virtual influencers as advertising endorsers: Novel and effective or uncanny and deceiving? <i>Journal of Advertising, 52</i>(4), 523–539.</li>
+<li>Lim, R. E., &amp; Lee, S. Y. (2023). “You are a virtual influencer!”: Understanding the impact of origin disclosure and emotional narratives on parasocial relationships and virtual influencer credibility. <i>Computers in Human Behavior, 148</i>, 107897. (Cơ sở cho biến kiểm soát công khai AI).</li>
+<li>Looi, J., Kim, E., &amp; E, Z. (2025). Sponsorship disclosure in virtual influencer marketing: Assessing users' sentiment and engagement toward virtual influencer endorsements. <i>Journal of Advertising Research, 65</i>(3), 321–343.</li>
+</ol>
+
+<h3>B. Lý thuyết Thung lũng kỳ lạ &amp; Phản kháng tâm lý</h3>
+<ol start="7">
+<li>Mori, M., MacDorman, K. F., &amp; Kageki, N. (2012). The uncanny valley [From the field]. <i>IEEE Robotics &amp; Automation Magazine, 19</i>(2), 98–100.</li>
+<li>Kätsyri, J., Förger, K., Mäkäräinen, M., &amp; Takala, T. (2015). A review of empirical evidence on different uncanny valley hypotheses: Support for perceptual mismatch as one road to the valley of eeriness. <i>Frontiers in Psychology, 6</i>, 390.</li>
+<li>Złotowski, J., Sumioka, H., Nishio, S., Glas, D. F., Bartneck, C., &amp; Ishiguro, H. (2015). Persistence of the uncanny valley: The influence of repeated interactions and a robot's attitude on its perception. <i>Frontiers in Psychology, 6</i>, 883.</li>
+</ol>
+
+<h3>C. Hiệu ứng Tiếp xúc Thường xuyên (Mere Exposure) &amp; Thời gian</h3>
+<ol start="10">
+<li>Zajonc, R. B. (1968). Attitudinal effects of mere exposure. <i>Journal of Personality and Social Psychology, 9</i>(2, Pt. 2), 1–27.</li>
+<li>Montoya, R. M., Horton, R. S., Vevea, J. L., Citkowicz, M., &amp; Lauber, E. A. (2017). A re-examination of the mere exposure effect. <i>Psychological Bulletin, 143</i>(5), 459–498. (Cơ sở chứng minh hiệu ứng tiếp xúc là phi tuyến, đòi hỏi dùng mô hình GAM).</li>
+</ol>
+
+<h3>D. Thuyết Tương tác Cận xã hội &amp; Nhân cách hóa (CASA)</h3>
+<ol start="12">
+<li>Horton, D., &amp; Wohl, R. R. (1956). Mass communication and para-social interaction. <i>Psychiatry, 19</i>(3), 215–229.</li>
+<li>Nass, C., &amp; Moon, Y. (2000). Machines and mindlessness: Social responses to computers. <i>Journal of Social Issues, 56</i>(1), 81–103.</li>
+<li>Gambino, A., Fox, J., &amp; Ratan, R. A. (2020). Building a stronger CASA: Extending the computers are social actors paradigm. <i>Human-Machine Communication, 1</i>, 71–86.</li>
+</ol>
+
+<h3>E. Phương pháp Gán nhãn bằng AI &amp; Kiểm định Độ tin cậy</h3>
+<ol start="15">
+<li>Li, P., Castelo, N., Katona, Z., &amp; Sarvary, M. (2024). Frontiers: Determining the validity of large language models for automated perceptual analysis. <i>Marketing Science, 43</i>(2), 254–266.</li>
+<li>Arora, N., Chakraborty, I., &amp; Nishimura, Y. (2025). AI–human hybrids for marketing research: Leveraging large language models (LLMs) as collaborators. <i>Journal of Marketing, 89</i>(2), 43–70.</li>
+<li>Carlson, N. A., &amp; Burbano, V. (2026). The use of LLMs to annotate data in management research: Foundational guidelines and warnings. <i>Strategic Management Journal, 47</i>(3), 699–725.</li>
+<li>Krippendorff, K. (2018). <i>Content analysis: An introduction to its methodology</i> (4th ed.). SAGE.</li>
+<li>Truong, S. T., et al. (2024). Crossing linguistic horizons: Finetuning and comprehensive evaluation of Vietnamese large language models. <i>Findings of NAACL 2024</i>, 2849–2900. (Minh chứng F1 của LLM tiếng Việt cần được con người kiểm định).</li>
+</ol>
+
+<h3>F. Phương pháp Mô hình hóa Thống kê</h3>
+<ol start="20">
+<li>Wood, S. N. (2017). <i>Generalized additive models: An introduction with R</i> (2nd ed.). Chapman &amp; Hall/CRC.</li>
+<li>Muggeo, V. M. R. (2008). segmented: An R package to fit regression models with broken-line relationships. <i>R News, 8</i>(1), 20–25.</li>
+<li>Lee, S., Lei, M.-K., &amp; Brody, G. H. (2015). Confidence intervals for distinguishing ordinal and disordinal interactions in multiple regression. <i>Psychological Methods, 20</i>(2), 245–258. (Cơ sở tính khoảng tin cậy Bootstrap cho điểm giao thoa của hai đường hồi quy).</li>
+</ol>
+</div>
+
+</div>
+</body>
+</html>

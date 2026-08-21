@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VI Acceptance Playbook — FCBEM Study 1</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F4F6F7; --surface:#FFFFFF; --ink:#18222B; --muted:#5C6B75; --line:#D6DDE1;
+  --accent:#1E7F70; --accent-soft:#E1F0EC;
+  --r:#B5482A; --r-soft:#F6E4DD; --s:#1E7F70; --s-soft:#DDEFEA; --c:#B8860B; --c-soft:#F7EDD1;
+  --code-bg:#EDF1F3; --warn:#FBF1E6; --warn-ink:#7A4A12;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111A20; --surface:#18232A; --ink:#E6ECEF; --muted:#9FB0B9; --line:#2B3A43;
+    --accent:#4FB8A6; --accent-soft:#173A34;
+    --r:#E07A5A; --r-soft:#3C241C; --s:#4FB8A6; --s-soft:#173A34; --c:#E0B04A; --c-soft:#3B3115;
+    --code-bg:#0E161B; --warn:#3A2C18; --warn-ink:#F1C98A;
+  }
+}
+@media print{
+  :root{--bg:#FFFFFF; --surface:#FFFFFF; --ink:#000; --muted:#444; --line:#BBB; --code-bg:#F2F2F2; --accent-soft:#E8F2EF; --warn:#FFF6E8}
+  body{font-size:10.5pt}
+  .wrap{max-width:none;padding:0}
+  h2{break-before:page}
+  h2:first-of-type{break-before:auto}
+  pre,table,.fig,.callout{break-inside:avoid}
+  a{color:inherit;text-decoration:none}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:78ch;margin:0 auto;padding:2.5rem 1.25rem 5rem}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.45rem;font-weight:700;margin-top:3rem;padding-top:1.25rem;border-top:2px solid var(--ink)}
+h3{font-size:1.1rem;font-weight:600;margin-top:1.75rem}
+h4{font-size:.95rem;font-weight:600;margin-top:1.2rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+p{margin:.85rem 0}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem}
+.lede{font-size:1.08rem;color:var(--muted);margin-top:.75rem;max-width:64ch}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--muted);margin-top:1rem}
+a{color:var(--accent)}
+code,pre{font-family:"IBM Plex Mono",monospace;font-size:.86em}
+code{background:var(--code-bg);padding:.1em .35em;border-radius:3px}
+pre{background:var(--code-bg);padding:1rem 1.1rem;border-radius:6px;overflow-x:auto;line-height:1.5;margin:1rem 0;white-space:pre-wrap}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1rem 0}
+.tbl{overflow-x:auto}
+th,td{text-align:left;padding:.5rem .65rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:"IBM Plex Mono",monospace;font-size:.86rem}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.72rem;padding:.1em .5em;border-radius:999px;font-weight:500;white-space:nowrap}
+.pill.r{background:var(--r-soft);color:var(--r)} .pill.s{background:var(--s-soft);color:var(--s)} .pill.c{background:var(--c-soft);color:var(--c)} .pill.n{background:var(--code-bg);color:var(--muted)}
+.callout{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);padding:.9rem 1.1rem;border-radius:4px;margin:1.25rem 0}
+.callout.warn{border-left-color:var(--c);background:var(--warn);color:var(--warn-ink)}
+.callout p:first-child{margin-top:0}.callout p:last-child{margin-bottom:0}
+.steps{list-style:none;counter-reset:st;padding:0;margin:1rem 0}
+.steps li{counter-increment:st;position:relative;padding:.7rem 0 .7rem 2.9rem;border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(st,decimal-leading-zero);position:absolute;left:0;top:.85rem;font-family:"IBM Plex Mono",monospace;color:var(--accent);font-weight:500}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:1rem;margin:1.5rem 0}
+.fig figcaption{font-size:.85rem;color:var(--muted);margin-top:.5rem}
+.fig svg{width:100%;height:auto;display:block}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin:1.25rem 0}
+.kv div{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:.75rem .9rem}
+.kv b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.kv span{font-size:.8rem;color:var(--muted)}
+ul,ol{padding-left:1.3rem}li{margin:.3rem 0}
+.refs ol{padding-left:1.6rem}.refs li{margin:.5rem 0;font-size:.9rem}
+.refs .tag{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--muted)}
+.small{font-size:.88rem;color:var(--muted)}
+.vi{font-style:italic}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}@media(max-width:640px){.two{grid-template-columns:1fr}}
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:1rem 1.25rem;margin:1.5rem 0;font-size:.92rem}
+.toc ol{margin:.3rem 0;padding-left:1.2rem}
+.quote{border-left:3px solid var(--line);padding:.2rem 0 .2rem 1rem;color:var(--muted);font-style:italic;margin:.75rem 0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="eyebrow">FCBEM · Study 1 · Marketing &amp; Business track · working document</div>
+<h1>Consumer Acceptance of Virtual Influencers on Vietnamese Social Media — Analysis Playbook</h1>
+<p class="lede">How to turn the crawled Facebook comments into publishable marketing evidence: what “acceptance” means and how to measure it, how to code thousands of Vietnamese comments with an AI assistant without losing academic credibility, which analysis produces the Normalization Crossover Point, what the figures should say to a business reader, and which references to cite.</p>
+<p class="meta">Prepared 2026-08-21 for Minh &amp; Trúc · Paper: “From Rejection to Acceptance: Detecting the Normalization Crossover of Virtual Influencers through Longitudinal Social Media Discourse in Vietnam” · Submission 28/08</p>
+
+<div class="toc"><strong>Contents</strong>
+<ol>
+<li>The business question and the one figure the paper stands on</li>
+<li>Data collection — documented for the Methodology section</li>
+<li>What we measure: from “sentiment” to four consumer responses</li>
+<li>Coding at scale: AI-assisted content analysis with human validation</li>
+<li>Aspect-level reading: what consumers reject and what they embrace</li>
+<li>Analysis: trajectories, crossover, and commercial receptivity</li>
+<li>Telling the story: figures and tables for a marketing audience</li>
+<li>What the paper can and cannot claim (managerial implications)</li>
+<li>Roadmap to 28/08 — workstreams, owners, what to do now</li>
+<li>Appendices: codebook &amp; prompt · model code · data schema</li>
+<li>References (verified)</li>
+</ol></div>
+
+<!-- ============================================================ -->
+<h2>1. The business question and the one figure the paper stands on</h2>
+<p>Brands in Vietnam are already using AI-generated personas. The managerial problem is timing and risk: <em>when does an audience stop talking about a virtual influencer as a “fake thing” and start talking about her as a persona they relate to — and does commercial receptivity follow?</em> The paper's contribution is a measurable, time-stamped answer: the <strong>Normalization Crossover Point (τ*)</strong>, the week in which relational (parasocial) talk durably overtakes uncanny/artificiality talk in public discourse, and whether product-related talk rises after it.</p>
+<figure class="fig">
+<svg viewBox="0 0 640 260" role="img" aria-label="Two model-estimated curves over weeks since launch: uncanny resistance falling, parasocial orientation rising; their crossing is the Normalization Crossover Point with a bootstrap interval.">
+  <defs><style>.ax{stroke:var(--line);stroke-width:1}.lbl{font:12px "IBM Plex Mono",monospace;fill:var(--muted)}.t{font:13px "IBM Plex Sans",sans-serif}</style></defs>
+  <line x1="50" y1="210" x2="610" y2="210" class="ax"/><line x1="50" y1="20" x2="50" y2="210" class="ax"/>
+  <text x="330" y="245" class="lbl" text-anchor="middle">weeks since persona launch (t)</text>
+  <text x="18" y="115" class="lbl" transform="rotate(-90 18 115)" text-anchor="middle">share of comments</text>
+  <rect x="318" y="20" width="70" height="190" fill="var(--accent-soft)" opacity=".7"/>
+  <line x1="352" y1="20" x2="352" y2="210" stroke="var(--ink)" stroke-dasharray="4 4" stroke-width="1"/>
+  <path d="M60 40 C 140 60, 200 130, 300 165 S 520 190, 600 192" fill="none" stroke="var(--r)" stroke-width="3"/>
+  <path d="M60 180 C 160 178, 240 168, 320 150 S 480 95, 600 80" fill="none" stroke="var(--s)" stroke-width="3"/>
+  <path d="M60 200 C 200 200, 330 196, 420 175 S 560 140, 600 132" fill="none" stroke="var(--c)" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="70" y="34" class="t" fill="var(--r)">Uncanny resistance R(t)</text>
+  <text x="430" y="75" class="t" fill="var(--s)">Relational / parasocial S(t)</text>
+  <text x="440" y="128" class="t" fill="var(--c)">Commercial receptivity C(t)</text>
+  <text x="352" y="14" class="lbl" text-anchor="middle">τ* with 95% interval</text>
+  <text x="352" y="226" class="lbl" text-anchor="middle">τ*</text>
+</svg>
+<figcaption>Figure 1 (target). Three audience responses over a persona's life on the platform. The paper lives or dies on whether these curves are measured credibly — not on a sentiment pie chart.</figcaption>
+</figure>
+<p>Everything below is in service of producing Figure 1 credibly for a marketing reviewer: a transparent sample, constructs grounded in consumer theory (uncanny valley, mere exposure, parasocial interaction, source credibility), coding validated by Vietnamese human coders, and statistics that state uncertainty honestly.</p>
+
+<!-- ============================================================ -->
+<h2>2. Data collection — documented for the Methodology section</h2>
+<p>This section is written so it can be lifted, trimmed, and pasted into <em>3.1 Research design</em> and <em>3.2 Instrumentation</em>. Numbers refer to the corpus as of 2026-08-21.</p>
+
+<h3>2.1 Research setting and sampling frame</h3>
+<ul>
+  <li><strong>Platform.</strong> Facebook — the dominant social platform in Vietnam and the channel on which Vietnamese virtual influencers (VIs) publish and receive public comments. Study unit hierarchy: persona → post/reel → public comment/reply.</li>
+  <li><strong>Personas.</strong> Vietnamese-language, persistently active VI pages. Collected so far: <span class="vi">Tiểu Mỹ</span> (<code>facebook.com/tieumyday</code>), an AI-generated singer/persona with both organic (daily-life, music) and product-oriented (e.g., <span class="vi">“Lần đầu bán quạt…”</span>) posts. Target: 4–6 personas with different levels of human-likeness and different launch dates, so that curves can be compared across personas and the result is not one persona's story.</li>
+  <li><strong>Observation window.</strong> All public posts from page launch (time zero, t = 0) to collection date. For <span class="vi">Tiểu Mỹ</span>: 2026-03-10 → 2026-08-19 (23 weeks).</li>
+  <li><strong>Unit of analysis.</strong> The public comment (top-level or reply). Unit of time: week since launch (2-week bins as sensitivity).</li>
+  <li><strong>Inclusion.</strong> Vietnamese-language public comments on the persona's own posts/reels. Exclusion: comments posted by the persona account itself, spam/bot content, non-Vietnamese text, platform alt-text artefacts.</li>
+</ul>
+
+<h3>2.2 Collection instrument</h3>
+<p>Comments were collected with a purpose-built browser-automation crawler (Python, Playwright on Chromium) that reproduces what a logged-in user sees on the public page — it does not use private APIs or access non-public content. The procedure per persona:</p>
+<ol class="steps">
+  <li><strong>Timeline discovery.</strong> Scroll the page feed and the Reels tab; record every post/reel with its feed position, caption, publication date, reactions, shares and Facebook's displayed comment count (used later as a coverage denominator).</li>
+  <li><strong>Post opening.</strong> Open each post (preferably by permalink — this path returns full, absolute timestamps and stable author identifiers in 97–100% of cases, versus 15–34% via the feed lightbox).</li>
+  <li><strong>Thread expansion.</strong> Switch the comment sort to “All comments”, repeatedly expand “View more comments / replies” up to a per-post cap (600 expansion rounds or 15 minutes), and read comment text, author, author id, timestamp, parent relation and content type from the rendered DOM.</li>
+  <li><strong>Persistence &amp; resumability.</strong> Each post is written to SQLite (<code>data/db/scraper.sqlite</code>) as soon as it is done; runs can be resumed and are merged by union, so repeated runs deepen coverage rather than overwrite.</li>
+  <li><strong>Coverage measurement.</strong> For each post, collected comments are compared to the displayed comment badge (<code>ui_comment_count</code>); the gap is stored per post and used in robustness analyses.</li>
+</ol>
+
+<h3>2.3 Corpus collected so far (after de-duplication)</h3>
+<div class="kv">
+  <div><b>5,888</b><span>distinct comments</span></div>
+  <div><b>265</b><span>posts/reels with comments (474 discovered)</span></div>
+  <div><b>23</b><span>weeks (2026-W12 → W34)</span></div>
+  <div><b>3,783</b><span>unique commenters</span></div>
+  <div><b>346</b><span>commenters with ≥ 3 comments (33% of all comments)</span></div>
+  <div><b>≈ 1,960</b><span>replies addressed to another user</span></div>
+</div>
+<div class="tbl"><table>
+<tr><th>Characteristic</th><th>Value</th><th>Implication for analysis</th></tr>
+<tr><td>Content type</td><td>photo 2,382 · post 680 · reel 751 · unknown 2,075</td><td>Code content type per post; reels partially collected (≈56 remaining).</td></tr>
+<tr><td>Timestamp precision</td><td>1,885 absolute · 3,247 “N weeks ago” · 756 “N days/hours ago”</td><td>Relative stamps resolved against run time (±1 week). Weekly bins acceptable; 2-week bins as sensitivity.</td></tr>
+<tr><td>Weekly volume</td><td>min 3 (W28) · max 2,278 (W33)</td><td>Volume is driven by viral posts; analysis must control for post (clustering), not use raw weekly shares.</td></tr>
+<tr><td>Concentration</td><td>one viral photo post = 1,357 comments (23%)</td><td>Rerun every model excluding this post.</td></tr>
+<tr><td>Coverage</td><td>≈100% on posts with ≤ 30 comments; 50–60% on posts with &gt; 400</td><td>Report coverage; rerun with posts ≥ 50% coverage only.</td></tr>
+<tr><td>Comment length</td><td>median 33 characters; 4.5% ≤ 5 characters</td><td>Short, slang-heavy, emoji-rich register (teencode) — code in raw Vietnamese, never via machine translation.</td></tr>
+<tr><td>Repeat commenters</td><td>346 authors ≥ 3 comments, 33% of comments</td><td>Enables a within-commenter robustness subsample (Layer B).</td></tr>
+</table></div>
+
+<div class="callout warn"><p><strong>Commercial stimulus is almost absent for <span class="vi">Tiểu Mỹ</span>.</strong> Of 477 posts, ~17 contain commercial vocabulary and most of those are self-promotion (YouTube channel, MV, Zalo). Only a handful are product/selling posts (<span class="vi">“Lần đầu bán quạt…”</span>, <span class="vi">“Mời cả nhà ghé mua ‘quả thông minh’”</span>) plus one affiliate link posted by the persona in the comments. There is no third-party brand partnership. Consequences: (1) code a 4-level post variable <code>commercial_post ∈ {none, self_promo, own_product/affiliate, brand_sponsored}</code> instead of a binary “sponsored”; (2) for this persona RQ4 can only be tested as <em>spontaneous</em> commercial receptivity (unprompted asks about what she wears/uses) and must be labelled exploratory; (3) at least two of the remaining personas must have real brand-tied posts (Facebook “Paid partnership” label, #ad, tagged brands) if H3/H4 are to be tested properly; (4) seller spam in comments (<span class="vi">“Mua tại đây ⬇️”</span>) is <code>spam=1</code>, never commercial receptivity, and <span class="vi">“xin link nhạc”</span> is content interest, not commercial.</p></div>
+<h3>2.4 Data cleaning rules (pre-registered in the paper)</h3>
+<ul>
+  <li>Remove exact duplicates (same post + author + text) and comments by the persona's own account (35).</li>
+  <li>Remove Facebook alt-text artefacts captured as text (<span class="vi">“May be an image of…”, “Avatar is pointing…”</span>).</li>
+  <li>Flag (not delete) emoji-only comments — they count toward engagement volume but carry no construct label.</li>
+  <li>Flag suspected spam: single-word “Follow”, identical text repeated by one author across posts, links.</li>
+  <li>Flag non-Vietnamese text with a language detector set permissively (teencode confuses detectors); exclude in a robustness run.</li>
+  <li>Hash author identifiers before analysis; keep only the hash for repeat-commenter analysis.</li>
+</ul>
+
+<h3>2.5 Ethics and limitations statement (draft wording)</h3>
+<p class="quote">Data consist of publicly visible comments on public brand/persona pages, collected for non-commercial academic research; no private messages, friend-only content, or profile data were accessed. Author identifiers were pseudonymised by one-way hashing before analysis and no individual is identified in reporting. Collection reproduces an ordinary logged-in browsing session and respects platform rate limits; comments on highly viral posts are under-sampled (50–60% coverage), which we address through coverage-based robustness checks. Timestamps shown by the platform as relative (“N weeks ago”) were converted to calendar weeks with ±1-week precision.</p>
+<div class="callout warn"><p><strong>Mention, don't hide:</strong> automated collection from Facebook sits in a grey zone of the platform's terms even when only public content is read. Marketing journals generally accept it with a clear ethics statement and pseudonymisation; say it explicitly in Limitations rather than leaving a reviewer to raise it.</p></div>
+
+<!-- ============================================================ -->
+<h2>3. What we measure: from “sentiment” to four consumer responses</h2>
+<p>A sentiment score answers “is the audience happy?”. Your research questions ask something more specific and more useful to managers: <em>what kind of relationship does the audience have with the persona, and is it moving toward commercial readiness?</em> Two observations from the corpus show why sentiment alone misleads:</p>
+<ul>
+  <li><span class="vi">“Con nhỏ này hôm nay lại đi quảng cáo nữa à =)))”</span> — mildly negative, yet the commenter treats the VI exactly like any human influencer. That is <strong>normalization without positivity</strong>.</li>
+  <li><span class="vi">“biết rằng tạo bằng AI nhưng ngoài thực tìm ra được em này không ta”</span> — artificiality acknowledged, yet the response is attraction and curiosity. Positive sentiment, still artificiality-focused.</li>
+</ul>
+<p>So the primary measurement is <strong>four consumer-response constructs</strong>, each coded present/absent, several allowed per comment. Sentiment is kept as a secondary, descriptive variable.</p>
+<div class="tbl"><table>
+<tr><th>Construct (paper name)</th><th>What it captures (theory)</th><th>Observable in comments</th><th>Examples from the corpus</th></tr>
+<tr><td><span class="pill r">Uncanny resistance</span></td><td>Perceptual-mismatch / uncanny-valley discomfort with a near-human artificial entity (Mori; Kätsyri et al.; MacDorman &amp; Chattopadhyay)</td><td>Focus on fake/strange appearance, eyes, voice, motion; eeriness; rejection <em>because</em> artificial</td><td><span class="vi">“Al hát ghép nên nghe k thật”</span> · <span class="vi">“mỗi lúc 1 khác chả thấy đồng nhất”</span> · <span class="vi">“T thà xem phim hoạt hình”</span></td></tr>
+<tr><td><span class="pill n">AI skepticism</span></td><td>Technology distrust / deception concern — a separate negative mechanism, <em>not</em> uncanny valley</td><td>Anti-AI opinions, “AI trash”, brands using AI are untrustworthy</td><td><span class="vi">“khổ thân thế hệ hiện giờ, sống chung với rác AI”</span></td></tr>
+<tr><td><span class="pill s">Parasocial / relational orientation</span></td><td>Treating the persona as a social actor (Horton &amp; Wohl; CASA — Nass &amp; Moon; Gambino et al.)</td><td>Direct address (<span class="vi">chị/em/bé/bà</span>), affection, missing her, personality attribution, asking her to post/reply, defending her, jokes <em>with</em> her</td><td><span class="vi">“Sắp thuộc rồi chú Khoa ơi”</span> · <span class="vi">“nói AI bé nó buồn đấy”</span> · <span class="vi">“Ra video tiếp đi”</span></td></tr>
+<tr><td><span class="pill c">Commercial receptivity</span></td><td>Behavioural textual signals consistent with commercial interest (source credibility / influencer persuasion — Ohanian; Lou &amp; Yuan)</td><td>Asks link, price, brand, where to buy; wants to try/buy; welcomes a collab</td><td><span class="vi">“Quạt, quạt gì cơ”</span> (curiosity) · <span class="vi">“xin link”</span> · <span class="vi">“Collab này hợp quá”</span></td></tr>
+<tr><td>Sentiment (secondary)</td><td>Valence</td><td>negative / neutral / positive</td><td>—</td></tr>
+</table></div>
+<div class="callout"><p><strong>Naming for the paper.</strong> Call the downstream construct <em>commercial receptivity / commercial intent signal</em>, not purchase intention — purchase intention is a psychometric construct measured by survey (e.g., Dabiran et al., 2024), and reviewers will object if a comment is labelled as intention. Call the phenomenon <em>market-level discourse normalization</em>, because different people comment in different weeks; the repeat-commenter subsample is the only within-person evidence.</p></div>
+
+<!-- ============================================================ -->
+<h2>4. Coding at scale: AI-assisted content analysis with human validation</h2>
+<p>Marketing journals now accept large language models as coders <em>provided</em> the workflow is human-led and validated on held-out human-coded data (Li et al., 2024, <i>Marketing Science</i>; Arora et al., 2025, <i>Journal of Marketing</i>; Carlson &amp; Burbano, 2026, <i>SMJ</i>; Törnberg, 2024). This is standard content analysis (Krippendorff, 2018) with the LLM replacing the third, fourth… coder. For Vietnamese specifically, zero-shot LLM sentiment accuracy is only moderate (GPT-4 F1 ≈ .67 on Vietnamese benchmarks — Truong et al., 2024), which is exactly why the human gold standard is the centre of the method, not a formality.</p>
+<p>You have chosen <strong>DeepSeek V4 Flash</strong>: open-weight, cheap (the whole corpus of 5 personas costs well under US$5), and version-pinnable — which also answers the reproducibility concern raised about closed models (Ollion et al., 2024).</p>
+
+<h3>4.1 The workflow (write this as Section 3.2 Instrumentation)</h3>
+<ol class="steps">
+  <li><strong>Clean &amp; time-resolve</strong> the corpus (Section 2.4); attach to each comment the post caption, content type, sponsorship flag, and the parent comment if it is a reply.</li>
+  <li><strong>Pilot coding (humans, ~200 comments).</strong> Stratified by persona × month × content type, oversampling comments that contain resistance or product vocabulary so the rare categories appear. Output: the codebook — definition, include/exclude rules, 3–5 raw Vietnamese examples per code, and documented emergent themes (e.g., joking anthropomorphism, ironic “she's advertising again” talk).</li>
+  <li><strong>Gold standard (two Vietnamese coders, 600–800 comments).</strong> Independent coding on raw Vietnamese; disagreements adjudicated. Report Krippendorff's α per construct (≥ .67 acceptable, ≥ .80 good) and Cohen's κ.</li>
+  <li><strong>Freeze; split gold into development (≈ 40%) and test (≈ 60%).</strong> The prompt is tuned on development only; the test set is touched once.</li>
+  <li><strong>LLM coding.</strong> One comment per request (or ≤ 25 per batch with ids echoed), temperature 0, JSON output; record model id, date, prompt, parameters. Re-code a 5% sample to report the model's self-consistency.</li>
+  <li><strong>Evaluation on test.</strong> Per construct: precision, recall, F1, confusion matrix; macro-F1 overall. Target recall ≥ .70 on the rare constructs. Never report accuracy alone — with 97% of comments not commercial, “predict none” scores 97%.</li>
+  <li><strong>Code the full corpus</strong> with the frozen prompt. Then carry coding uncertainty forward: (a) repeat the main analysis on the human-coded subset and show the same direction; (b) bootstrap by post; (c) optionally apply the design-based correction of Egami et al. (2023).</li>
+</ol>
+<div class="tbl"><table>
+<tr><th>Validation table to put in the paper</th><th>Level</th><th>Defensible value</th></tr>
+<tr><td>Krippendorff's α (coder 1 vs coder 2)</td><td>per construct</td><td>≥ .67 / ≥ .80</td></tr>
+<tr><td>Precision · Recall · F1 (LLM vs gold, test set only)</td><td>per construct</td><td>recall ≥ .70 on rare classes</td></tr>
+<tr><td>Macro-F1</td><td>overall</td><td>report</td></tr>
+<tr><td>LLM self-agreement on repeat run</td><td>5% sample</td><td>≥ .90</td></tr>
+<tr><td>Direction consistency</td><td>human subset vs full corpus</td><td>same sign of trends</td></tr>
+</table></div>
+<p class="small">The full codebook prompt is in Appendix A. It is multi-label (a comment can be resistance + relational + commercial at once, e.g. <span class="vi">“Nhìn mặt vẫn hơi giả nhưng bà này nói chuyện hài ghê, cái áo đẹp xin link”</span>), which is what later lets you show <em>coexistence</em> — a finding in itself.</p>
+
+<!-- ============================================================ -->
+<h2>5. Aspect-level reading: what consumers reject and what they embrace</h2>
+<p>To give managers actionable detail, add an <strong>aspect-based sentiment</strong> layer: for each comment, which <em>aspect</em> of the VI is being judged and with what valence. Use a fixed set of aspect categories (the approach used in Vietnamese ABSA benchmarks — UIT-ViSFD, VLSP-2018 — and in SemEval), not free-text aspect extraction, which breaks on teencode.</p>
+<div class="tbl"><table>
+<tr><th>Aspect</th><th>Covers</th><th>Managerial reading</th></tr>
+<tr><td><code>APPEARANCE</code></td><td>face, eyes, skin, body, visual realism</td><td>Design/rendering quality; the classic uncanny trigger</td></tr>
+<tr><td><code>VOICE_MOTION</code></td><td>voice, lip-sync, singing, movement</td><td>Production quality; often the last mismatch to disappear</td></tr>
+<tr><td><code>AI_NATURE</code></td><td>being AI per se, AI in society</td><td>Disclosure/transparency strategy; ethical positioning</td></tr>
+<tr><td><code>PERSONA</code></td><td>personality, humour, charm, relationship talk</td><td>Character strategy — this is where relational value is built</td></tr>
+<tr><td><code>CONTENT</code></td><td>the song/video/story itself</td><td>Content strategy (control)</td></tr>
+<tr><td><code>PRODUCT_BRAND</code></td><td>product, price, link, collab, ad</td><td>Commercial readiness and fit of the sponsorship</td></tr>
+</table></div>
+<p>Each aspect receives negative / neutral / positive. The insight is the <strong>aspect × week net-polarity heatmap</strong>: managers see appearance complaints fading, persona praise rising, product curiosity appearing — and can read <em>which</em> lever (rendering, character, disclosure, product fit) is moving. It also yields a second, independent crossover estimate (the week <code>PERSONA:positive</code> overtakes <code>APPEARANCE:negative + VOICE_MOTION:negative</code>); if it falls inside the interval of the construct-based τ*, you have convergent evidence.</p>
+
+<!-- ============================================================ -->
+<h2>6. Analysis: trajectories, crossover, and commercial receptivity</h2>
+<p>Written for a business reader first; model specifications are in Appendix B. Tools: Python for cleaning and LLM coding; R (<code>mgcv</code>, <code>segmented</code>, <code>boot</code>) for modelling.</p>
+
+<h3>6.1 Step 1 — Trajectories (RQ1, RQ2; H1, H2)</h3>
+<p>For each construct, estimate the <em>probability that a comment posted in week t carries that construct</em>, with a flexible curve over time rather than a straight line (mere-exposure effects are often non-linear — Montoya et al., 2017), while controlling for what the persona posted (sponsored vs organic, content type, visual realism, AI disclosure) and for the fact that comments cluster inside posts and personas. The method is a generalized additive model with random effects (Wood, 2017; Pedersen et al., 2019): it produces smooth curves with confidence bands, and the <em>rate of change</em> (resistance decay rate, socialization growth rate) comes directly from the slope of those curves (Simpson, 2018).</p>
+<p><strong>Why the controls matter to the story:</strong> if the VI's graphics, voice and storytelling improve over six months, negative talk can fall because the product got better, not because the audience normalized. Coding realism and sponsorship per post is what lets you attribute the change to audience adaptation.</p>
+
+<h3>6.2 Step 2 — The crossover point (RQ3)</h3>
+<p>Compute the difference curve D(t) = S(t) − R(t). Define τ* <em>before looking at the result</em>: the earliest week at which the lower 95% bound of D(t) is above zero for at least three consecutive weeks (a pre-registered decision rule, so one noisy week cannot create a “crossover”). Quantify uncertainty by re-sampling posts (cluster bootstrap, 500–1,000 replications; Cameron et al., 2008; Lee et al., 2015) and re-estimating τ* each time. Report “τ* ≈ week 14, 95% CI [12, 18]” — or “no sustained crossover within the 23-week window; resistance fell from .18 to .05 while relational talk rose from .12 to .21”. Both are publishable; do not force it.</p>
+
+<h3>6.3 Step 3 — Phase structure (robustness)</h3>
+<p>Your narrative proposes phases (visual resistance → social reframing → commercial accommodation). Test rather than assume it: segmented regression with data-estimated breakpoints (Muggeo, 2003, 2008) tells you whether the weekly series supports zero, one or two breakpoints. If one, the paper reports two phases.</p>
+
+<h3>6.4 Step 4 — Commercial receptivity (RQ4; H3, H4)</h3>
+<div class="callout"><p><strong>Two versions of RQ4, depending on the persona.</strong> For personas <em>without</em> brand partnerships (e.g. <span class="vi">Tiểu Mỹ</span>): C(t) measures <em>spontaneous</em> commercial receptivity — report as exploratory, drop the sponsored-share control (no variance), keep <code>commercial_post</code> level as a covariate. For personas <em>with</em> brand-tied posts: the full H3/H4 test applies. A persona with no commercial stimulus is also a <em>clean baseline</em> of normalization uncontaminated by advertising, which lets you answer “does sponsorship accelerate or delay normalization?” by comparing curves across personas.</p></div>
+<p>Relate weekly commercial receptivity C<sub>t</sub> to the previous week's balance D<sub>t−1</sub>, controlling for how much sponsored/product content the persona posted that week and for last week's C. A positive, significant coefficient supports “a more favourable relational-to-resistance balance <em>precedes</em> more commercial-receptivity talk”. The before/after-τ* comparison of C is descriptive; because τ* is estimated from the same data it is not a causal interrupted-time-series design (Bernal et al., 2017) — say so.</p>
+
+<h3>6.5 Step 5 — Repeat commenters (Layer B)</h3>
+<p>346 commenters appear three or more times. Order their comments in time and tabulate first-label → last-label transitions (resistance → relational → commercial). It is a selective group, so present it as supporting within-person evidence, not the main result.</p>
+
+<h3>6.6 Robustness checks (commit to the list now)</h3>
+<div class="tbl"><table>
+<tr><th>Rerun</th><th>Reason</th></tr>
+<tr><td>Weekly vs 2-week bins</td><td>“N weeks ago” precision</td></tr>
+<tr><td>Full LLM-coded corpus vs human-coded subset</td><td>Coding validity</td></tr>
+<tr><td>Exclude spam / non-Vietnamese</td><td>Bot and noise influence</td></tr>
+<tr><td>Exclude the viral W33 post (1,357 comments)</td><td>Campaign shock</td></tr>
+<tr><td>Each persona separately</td><td>One persona dominating</td></tr>
+<tr><td>Sponsored vs organic posts separately</td><td>Commercial confound</td></tr>
+<tr><td>Strict vs broad definition of resistance</td><td>Construct sensitivity</td></tr>
+<tr><td>Crossover rule 2 / 3 / 4 consecutive weeks</td><td>Definition sensitivity</td></tr>
+<tr><td>Posts with ≥ 50% comment coverage only</td><td>Collection selection</td></tr>
+</table></div>
+
+<h3>6.7 Metric sheet — every indicator, its formula, input, tool, and the claim it supports</h3>
+<p>One input table (one row per comment: four 0/1 labels + sentiment + aspects + week + post + persona + controls). Three tools: Python/pandas (tables, descriptive indicators, P/R/F1), R <code>mgcv</code> + <code>gratia</code> + <code>boot</code> (curves, D(t), τ*, CI), R <code>segmented</code> (phases).</p>
+<h4>A. Measurement quality (Validation table)</h4>
+<div class="tbl"><table>
+<tr><th>Indicator</th><th>Formula / definition</th><th>Input</th><th>Tool</th><th>Report · threshold</th></tr>
+<tr><td>Krippendorff's α</td><td>α = 1 − D<sub>o</sub>/D<sub>e</sub> (nominal)</td><td>2 Vietnamese coders × 600–800 comments × each construct</td><td>R <code>irr::kripp.alpha()</code> / <code>krippendorffsalpha</code></td><td>per construct · ≥ .67 ok, ≥ .80 good</td></tr>
+<tr><td>Cohen's κ (secondary)</td><td>(p<sub>o</sub> − p<sub>e</sub>)/(1 − p<sub>e</sub>)</td><td>same</td><td><code>irr::kappa2()</code></td><td>.61–.80 substantial</td></tr>
+<tr><td>Precision / Recall / F1 per construct</td><td>P = TP/(TP+FP); R = TP/(TP+FN); F1 = 2PR/(P+R)</td><td>LLM labels vs gold, <strong>test set only</strong></td><td><code>sklearn.metrics.classification_report</code></td><td>4 constructs × (P, R, F1, n⁺) · recall ≥ .70 on UV, CR</td></tr>
+<tr><td>Macro-F1</td><td>mean of class F1</td><td>same</td><td><code>f1_score(average="macro")</code></td><td>one number; never accuracy alone</td></tr>
+<tr><td>Confusion matrix</td><td>TP/FP/FN/TN</td><td>same</td><td><code>confusion_matrix</code></td><td>appendix</td></tr>
+<tr><td>LLM self-agreement</td><td>% identical labels on a rerun</td><td>5% of corpus, temperature 0</td><td>Python</td><td>≥ .90</td></tr>
+<tr><td>Direction consistency</td><td>sign of dR/dt, dS/dt on human-coded subset vs full corpus</td><td>two GAM fits</td><td>R</td><td>same sign</td></tr>
+</table></div>
+<h4>B. Trajectories (RQ1, RQ2 / H1, H2)</h4>
+<div class="tbl"><table>
+<tr><th>Indicator</th><th>Formula</th><th>Input</th><th>Tool</th><th>Report</th></tr>
+<tr><td>R(t), S(t), C(t)</td><td>P(label = 1 | week t) from logit-GAM: logit P = β₀ + s(t) + controls + u<sub>post</sub> + u<sub>VI</sub></td><td>comment rows: <code>uv/psi/cr</code>, <code>week</code>, <code>post_id</code>, <code>vi</code>, <code>sponsored</code>, <code>content_type</code>, <code>realism</code></td><td><code>mgcv::bam(family=binomial)</code> → <code>predict(type="response", se.fit=TRUE)</code></td><td>curves + 95% bands (Fig 1)</td></tr>
+<tr><td>Resistance decay rate</td><td>−dR/dt (finite-difference derivative of the smooth)</td><td>m_uv</td><td><code>gratia::derivatives()</code></td><td>weeks where &lt; 0 → <strong>H1</strong></td></tr>
+<tr><td>Socialization growth rate</td><td>dS/dt</td><td>m_psi</td><td><code>gratia::derivatives()</code></td><td>weeks where &gt; 0 → <strong>H2</strong></td></tr>
+<tr><td>Start–end levels</td><td>R(1) → R(T); S(1) → S(T)</td><td>predict at week 1, T</td><td>R</td><td>“R fell .18 → .05”</td></tr>
+<tr><td>EDF, p of s(t)</td><td>non-linearity and significance of the time smooth</td><td><code>summary(m)</code></td><td>R</td><td>appendix table</td></tr>
+</table></div>
+<h4>C. Crossover (RQ3)</h4>
+<div class="tbl"><table>
+<tr><th>Indicator</th><th>Formula</th><th>Tool</th><th>Report</th></tr>
+<tr><td>D(t)</td><td>Ŝ(t) − R̂(t); SE ≈ √(SE<sub>S</sub>² + SE<sub>R</sub>²)</td><td>from the two predicts (or inside the bootstrap)</td><td>Fig 2</td></tr>
+<tr><td>τ* (Normalization Crossover Point)</td><td>earliest week with lower 95% bound of D(t) &gt; 0 for ≥ 3 consecutive weeks (pre-registered rule)</td><td>R loop over weekly grid</td><td>“τ* = week 14” or “none within window”</td></tr>
+<tr><td>95% CI of τ*</td><td>cluster bootstrap by post, B = 500–1000: resample posts → refit m_uv, m_psi → τ*<sub>b</sub>; percentiles 2.5/97.5</td><td>R <code>boot</code> or manual loop</td><td>“τ* = 14.3, CI [12.1, 17.8]”</td></tr>
+<tr><td>τ*<sub>k</sub> per persona</td><td>same, from <code>s(week, by=vi)</code></td><td>same</td><td>Fig 3 strip</td></tr>
+<tr><td>Number of breakpoints</td><td>AIC of 0/1/2 breakpoints on weekly series; <code>pscore.test</code></td><td><code>segmented::segmented(npsi=1,2)</code></td><td>“data support k phases”</td></tr>
+<tr><td>Rule sensitivity</td><td>τ* under 2/3/4-week rule, 1/2-week bins</td><td>rerun</td><td>robustness table</td></tr>
+</table></div>
+<h4>D. Commercial receptivity (RQ4 / H3, H4)</h4>
+<div class="tbl"><table>
+<tr><th>Indicator</th><th>Formula</th><th>Input</th><th>Tool</th><th>Report</th></tr>
+<tr><td>C<sub>t</sub> (weekly)</td><td>n(CR=1)/n in week t</td><td>weekly table</td><td>pandas</td><td>series</td></tr>
+<tr><td>β₁ (H4, leading indicator)</td><td>C<sub>t</sub> = α + β₁D<sub>t−1</sub> + β₂C<sub>t−1</sub> + β₃SponsoredShare<sub>t</sub> + β₄ProductShare<sub>t</sub> + β₅log(volume<sub>t</sub>) + ε</td><td>weekly table (persona fixed effects if pooled)</td><td><code>glm(quasibinomial)</code> + <code>sandwich::NeweyWest</code></td><td>β₁, CI, p; expect β₁ &gt; 0</td></tr>
+<tr><td>β₁, β₂ (H3)</td><td>C<sub>t</sub> = β₀ + β₁S<sub>t</sub> − β₂R<sub>t</sub> + ε</td><td>weekly</td><td>glm</td><td>signs &amp; CI</td></tr>
+<tr><td>C before/after τ*</td><td>mean C(t &lt; τ*) vs mean C(t &gt; τ*)</td><td>weekly</td><td>descriptive</td><td>one sentence; not causal</td></tr>
+</table></div>
+<h4>E. Insight indicators (qualitative findings &amp; managerial implications)</h4>
+<div class="tbl"><table>
+<tr><th>Indicator</th><th>Formula</th><th>Tool</th><th>Used in</th></tr>
+<tr><td>Co-occurrence &amp; lift</td><td>P(A∧B); lift = P(A∧B)/(P(A)·P(B)) for UV–PSI, PSI–CR, UV–CR</td><td>pandas crosstab</td><td>Tab 3 “ambivalence”</td></tr>
+<tr><td>Normalization–positivity gap</td><td>share(PSI=1) − share(sentiment=pos), early vs late window</td><td>pandas</td><td>Fig 5</td></tr>
+<tr><td>Net polarity by aspect × week</td><td>(n<sub>pos</sub> − n<sub>neg</sub>)/(n<sub>pos</sub>+n<sub>neg</sub>+n<sub>neu</sub>)</td><td>pandas → ggplot heatmap</td><td>Fig 4</td></tr>
+<tr><td>τ*(ABSA)</td><td>week share(PERSONA:pos) &gt; share(APPEARANCE:neg + VOICE_MOTION:neg), 3-week rule</td><td>as τ*</td><td>convergent check</td></tr>
+<tr><td>Repeat-commenter transition rate</td><td>among authors with ≥ 3 comments: % first label ∈ UV and last ∈ PSI/CR; transition matrix</td><td>pandas</td><td>Fig 6, Layer B</td></tr>
+<tr><td>Distinctive vocabulary</td><td>log-odds ratio with Dirichlet prior, early vs late (Monroe et al. 2008)</td><td>Python</td><td>Fig 8</td></tr>
+<tr><td>Coverage ratio</td><td>n<sub>collected</sub>/ui_comment_count per post</td><td>crawler</td><td>robustness filter ≥ .5</td></tr>
+</table></div>
+<h4>F. Corpus description (Table 1)</h4>
+<p class="small">Comments, posts, weeks, personas; comments/week (min–max); % replies; % emoji-only; % spam; % absolute vs relative timestamps; % comments on sponsored posts — all from the analysis table with pandas.</p>
+
+<!-- ============================================================ -->
+<h2>7. Telling the story: figures and tables for a marketing audience</h2>
+<p>A business reader should understand the finding from the figures alone. Keep one colour per response across the whole paper (resistance = brick, relational = teal, commercial = amber), put time on the x-axis everywhere, and avoid pies, word clouds and dual axes.</p>
+<div class="tbl"><table>
+<tr><th>#</th><th>Figure / table</th><th>What the reader takes away</th></tr>
+<tr><td>Fig 1</td><td>R(t), S(t), C(t) curves with confidence bands; τ* shaded with its interval</td><td>“Resistance fades, relationship grows, here is when the balance tips.”</td></tr>
+<tr><td>Fig 2</td><td>Difference curve D(t) crossing zero; the 3-week sustain window marked</td><td>“The tip is durable, not a blip.”</td></tr>
+<tr><td>Fig 3</td><td>Small multiples per persona; strip of τ* estimates with intervals</td><td>“Speed of normalization differs by persona (human-likeness, content mix).”</td></tr>
+<tr><td>Fig 4</td><td>Aspect × week heatmap of net polarity (positive − negative)</td><td>“Appearance complaints fade first, voice later; persona praise leads; product curiosity follows.”</td></tr>
+<tr><td>Fig 5</td><td>Slope chart: share of relational comments vs share of positive sentiment, early vs late window</td><td>“Normalization is not the same as liking.”</td></tr>
+<tr><td>Fig 6</td><td>Alluvial/Sankey of repeat commenters' first → last response</td><td>“Individuals move in the same direction the market does.”</td></tr>
+<tr><td>Fig 7</td><td>Commercial receptivity C(t) with τ* marked + coefficient plot of D<sub>t−1</sub> across specifications</td><td>“Commercial talk rises after the balance tips; robust across bins/lags.”</td></tr>
+<tr><td>Tab 1</td><td>Corpus description (Section 2.3)</td><td>Transparent sample</td></tr>
+<tr><td>Tab 2</td><td>Coding validation (α, P/R/F1, macro-F1)</td><td>Credible measurement</td></tr>
+<tr><td>Tab 3</td><td>Co-occurrence of responses (resistance ∧ relational, relational ∧ commercial, …)</td><td>“Ambivalence is common: people joke about the fake face and ask for the link in one breath.”</td></tr>
+<tr><td>Tab 4</td><td>Exemplar comments per response × phase, raw Vietnamese + English gloss</td><td>Voice of the consumer; the qualitative findings section</td></tr>
+<tr><td>Fig 8 (opt.)</td><td>Early-vs-late distinctive vocabulary (log-odds, Monroe et al., 2008)</td><td>“The words changed from <span class="vi">giả, AI, ghê</span> to <span class="vi">chị, xinh, link</span>.”</td></tr>
+</table></div>
+<p class="small">Produce figures in R/ggplot2 (with <code>gratia</code> for the smooth curves and <code>patchwork</code> for panels); export PDF/SVG at 85 mm or 178 mm width, fonts ≥ 7 pt. Use Python/Plotly only for exploration and the team dashboard.</p>
+
+<!-- ============================================================ -->
+<h2>8. What the paper can and cannot claim</h2>
+<div class="two">
+<div>
+<h4>You can say</h4>
+<ul>
+  <li>In Vietnamese public discourse, uncanny-related resistance toward VI X attenuated over N weeks while relational talk grew; the balance tipped at τ* [CI] (or: did not tip within the window).</li>
+  <li>A more favourable relational-to-resistance balance preceded higher commercial-receptivity talk (association, lagged).</li>
+  <li>Normalization occurred without a matching rise in positive sentiment — audiences treat the VI as an ordinary influencer, including complaining about her ads.</li>
+  <li>The crossover point is a practical <em>leading indicator</em> for timing promotional intensity, to be read with its interval.</li>
+</ul>
+</div>
+<div>
+<h4>You cannot say</h4>
+<ul>
+  <li>That individual consumers changed their minds (different people comment each week) — unless Layer B is strong, and then only as supporting evidence.</li>
+  <li>That the crossover <em>causes</em> purchase intention or sales.</li>
+  <li>That the uncanny valley is “temporary and self-decaying” in general — repeated exposure lowers eeriness, but liking depends on the persona's behaviour (Złotowski et al., 2015).</li>
+  <li>Anything about Instagram/TikTok audiences — this is Facebook Vietnam.</li>
+</ul>
+</div>
+</div>
+<p><strong>Managerial implications you will be able to write:</strong> (1) a measurable readiness signal for when to shift a VI from awareness/character-building content to product integration; (2) which aspects (appearance, voice, persona, disclosure) drive resistance at each stage, i.e. where to invest; (3) evidence that character/relational content — not rendering quality alone — is what moves the audience toward commercial receptivity; (4) that AI disclosure and sponsorship density moderate the curves.</p>
+
+<!-- ============================================================ -->
+<h2>9. Roadmap to 28/08 — parallel workstreams, owners, and what to do now</h2>
+<p>Five workstreams run in parallel; the critical path is <strong>crawl → pilot → gold set → AI coding → modelling → figures</strong>. Anything in the Writing row can proceed without data. Colours: <span class="pill n">data</span> <span class="pill r">human coding</span> <span class="pill c">AI coding</span> <span class="pill s">modelling</span> <span class="pill n">writing</span>.</p>
+<style>
+.gantt{border-collapse:separate;border-spacing:2px;width:100%;font-size:.8rem;table-layout:fixed}
+.gantt th{font-family:"IBM Plex Mono",monospace;font-size:.72rem;text-transform:none;letter-spacing:0;text-align:center;padding:.35rem .2rem;border:0;color:var(--muted)}
+.gantt th:first-child,.gantt td:first-child{text-align:left;width:11ch;font-weight:600;font-size:.78rem;color:var(--ink);border:0;padding-left:0}
+.gantt td{padding:.3rem .4rem;overflow-wrap:anywhere;hyphens:auto;border:0;border-radius:4px;vertical-align:top;line-height:1.3}
+.gantt td.g{background:var(--code-bg)}
+.gantt td.d{background:var(--code-bg);border-left:3px solid var(--muted)}
+.gantt td.h{background:var(--r-soft);border-left:3px solid var(--r)}
+.gantt td.a{background:var(--c-soft);border-left:3px solid var(--c)}
+.gantt td.m{background:var(--s-soft);border-left:3px solid var(--s)}
+.gantt td.w{background:var(--accent-soft);border-left:3px solid var(--accent)}
+.gantt td small{display:block;color:var(--muted);font-family:"IBM Plex Mono",monospace;font-size:.68rem;margin-top:.15rem}
+.gantt td.e{background:transparent}
+.gantt td.ms{background:var(--ink);color:var(--bg);text-align:center;font-weight:600}
+@media print{.gantt{font-size:.68rem}}
+</style>
+<div class="tbl"><table class="gantt">
+<tr><th></th><th>Thu 21</th><th>Fri 22</th><th>Sat 23</th><th>Sun 24</th><th>Mon 25</th><th>Tue 26</th><th>Wed 27</th><th>Thu 28</th></tr>
+<tr><td>Data &amp; crawl</td>
+  <td class="d" colspan="2">Crawl 2–4 more personas; set t=0 each<small>Minh</small></td>
+  <td class="d">Build analysis table<small>Minh · App. C</small></td>
+  <td class="d">Code posts: sponsored, disclosure, realism<small>Minh/Trúc</small></td>
+  <td class="e" colspan="4"></td></tr>
+<tr><td>Human coding</td>
+  <td class="e"></td>
+  <td class="h">Pilot 200 → codebook v1<small>Trúc+Minh</small></td>
+  <td class="h" colspan="2">Gold set 600–800, two coders; α; freeze dev/test<small>2 VN coders</small></td>
+  <td class="e" colspan="4"></td></tr>
+<tr><td>AI coding</td>
+  <td class="e" colspan="2"></td>
+  <td class="a">Annotate script; dry-run on pilot<small>Minh · App. A</small></td>
+  <td class="a">Tune on dev → one test eval → code corpus<small>Minh</small></td>
+  <td class="e" colspan="4"></td></tr>
+<tr><td>Modelling</td>
+  <td class="e" colspan="3"></td>
+  <td class="m">R scripts on pilot labels<small>Minh · App. B</small></td>
+  <td class="m">GAM curves, τ* bootstrap, robustness; Figs 1–3<small>Minh</small></td>
+  <td class="m">C(t) model, Layer B, ABSA; Figs 4–7<small>Minh</small></td>
+  <td class="e" colspan="2"></td></tr>
+<tr><td>Writing</td>
+  <td class="w" colspan="2">Write 3.1–3.2 Method + ethics (from §2, §4)<small>Minh</small></td>
+  <td class="w" colspan="2">Lit review, framework, hypothesis wording<small>Trúc</small></td>
+  <td class="w">Results skeleton<small>Trúc</small></td>
+  <td class="w">Findings 4.1/4.2<small>Minh+Trúc</small></td>
+  <td class="w">Discussion, limits, integrate<small>All</small></td>
+  <td class="ms">Submit</td></tr>
+</table></div>
+<p class="small">Dependencies: gold set cannot start before codebook v1 (Fri evening); AI test evaluation cannot happen before gold is frozen (Sun); Figures 1–3 need the coded corpus (Mon). Writing rows never wait.</p>
+
+<h3>9.1 What to do now — the next 48 hours (Minh)</h3>
+<p>This is the advisor's plan in the PDF, applied to what the data audit showed. Each item names the concrete output.</p>
+<ol class="steps">
+  <li><strong>Decide the persona list and t = 0 for each</strong> (4–6 personas, varied human-likeness, Vietnamese audience; <strong>at least two with real brand-tied posts</strong> — check the page for Facebook’s “Paid partnership / Có trả phí hợp tác” label, #ad / #quangcao, tagged brands, product links — before crawling). Output: <code>data/personas.csv</code> with <code>vi_id, page_url, launch_date, human_likeness (low/med/high), notes</code>. Without t = 0 you cannot build <code>week_since_launch</code> — the main predictor.</li>
+  <li><strong>Run the crawl for the new personas</strong> with the permalink/seed path where possible (97–100% absolute timestamps vs 15% on the feed path) and <code>caffeinate -dimsu</code>. Keep <span class="vi">Tiểu Mỹ</span> as is; ≈56 reels remain — optional.</li>
+  <li><strong>Build the analysis table</strong> (Appendix C). The logic already exists in this session's audit: dedup on post+author+text, resolve “N weeks ago” against run <code>started_at</code>, set <code>time_precision</code>, attach caption/parent, hash authors, compute <code>coverage_ratio</code>, strip alt-text artefacts. Output: <code>data/analysis/comments.parquet</code> + a one-page data report (counts per persona × week).</li>
+  <li><strong>Draw the pilot sample (200)</strong> stratified by persona × month × content type, oversampling comments matching the resistance / product keyword lists (keyword hit rates: resistance ≈ 1.6%, commercial ≈ 2.7% — random sampling would give you ~3 and ~5 examples). Output: <code>data/coding/pilot_200.csv</code> with blank label columns; share with Trúc.</li>
+  <li><strong>Write <code>tools/annotate_deepseek.py</code></strong> from Appendix A: JSON-only, temperature 0, id echo, retries, logs model id + date; dry-run on the pilot. Output: cost and a first confusion look against your own pilot labels (not the test set).</li>
+  <li><strong>Draft Section 3.1–3.2 of the paper</strong> from §2 and §4 of this playbook (sampling frame, instrument, cleaning rules, ethics, validation design). This is the Methodology deliverable due 15/08 that is now late — it needs only what you already have.</li>
+</ol>
+<h3>9.2 In parallel (Trúc)</h3>
+<ul>
+  <li>Brief the two Vietnamese coders; agree decision rules for the hard cases in the codebook (<span class="vi">“AI hả?”</span> is not resistance; <span class="vi">“lại quảng cáo nữa”</span> is relational, not commercial; teasing counts as relational).</li>
+  <li>Finalize hypothesis wording with the construct names from §3 (“commercial receptivity discourse”, “market-level discourse normalization”) and the theory mapping (uncanny valley / perceptual mismatch → resistance; mere exposure → time; PSI/CASA → relational; source credibility → commercial).</li>
+  <li>Pre-register, in the methods text, the crossover rule (lower 95% bound of D(t) &gt; 0 for 3 consecutive weeks) and the robustness list in §6.6 — before results exist.</li>
+</ul>
+<h3>9.3 Decisions to lock before modelling</h3>
+<div class="tbl"><table>
+<tr><th>Decision</th><th>Recommendation</th><th>Why</th></tr>
+<tr><td>Time zero</td><td>First public post of the persona page</td><td>Observable, same rule for all personas; “market entry” is ambiguous</td></tr>
+<tr><td>Time bin</td><td>Week; 2-week as sensitivity</td><td>3,247 stamps have ±1-week precision</td></tr>
+<tr><td>Gold-set size</td><td>600–800 (≥ 400 minimum)</td><td>Rare classes need ≥ 40–60 positives in test for usable recall estimates</td></tr>
+<tr><td>Crossover rule</td><td>3 consecutive weeks, lower CI &gt; 0</td><td>Advisor's example; report 2 and 4 as sensitivity</td></tr>
+<tr><td>Outcome naming</td><td>Commercial receptivity / intent signal</td><td>Avoid “purchase intention” without a survey</td></tr>
+<tr><td>Unit of claim</td><td>Market-level discourse normalization</td><td>Different commenters each week; Layer B only supports</td></tr>
+</table></div>
+<p><strong>If time runs out, this is the cut line.</strong> Keep: cleaned corpus for ≥ 3 personas; gold set ≥ 400 with α; DeepSeek validation on test; GAM curves + D(t) + bootstrap τ* with the 3-week rule; 2-week-bin and human-subset robustness. Defer (and say so): segmented-regression phase test, ABSA heatmap, DSL correction, lagged commercial model.</p>
+
+<!-- ============================================================ -->
+<h2>10. Appendices</h2>
+
+<h3>Appendix A — Codebook prompt for DeepSeek V4 Flash (multi-label, JSON)</h3>
+<pre><code>SYSTEM
+You annotate Vietnamese Facebook comments about a virtual (AI-generated) influencer
+for an academic marketing study. Judge ONLY the comment text; use caption/parent
+for context. Labels are independent; several can be 1. Answer with JSON only.
+
+CODEBOOK
+uv_resistance (0/1): the comment's focus is the persona's artificial/synthetic
+  appearance, eeriness, or perceptual mismatch (face, eyes, voice, motion; "giả",
+  "đơ", "ghê", "nhìn sai sai", "không phải người thật", "AI mà ..."), or rejection
+  because it is fake. Exclude general anti-AI opinions (→ ai_skepticism) and
+  neutral questions such as "AI hả?" (→ uv_resistance=0, ai_mention=1).
+ai_skepticism (0/1): distrust of AI/technology as such, deception, job loss,
+  "rác AI", brands using AI are untrustworthy. Not about how she looks.
+parasocial_orientation (0/1): treats the persona as a social actor: direct address
+  (chị/em/bé/bà + verb), affection, missing her, personality attribution
+  ("bà này hài"), asking her to reply/post more, defending her, joking WITH her,
+  relational continuity ("hôm qua chị…"). Include even if the tone is teasing or
+  negative ("lại đi quảng cáo nữa à").
+commercial_acceptance (0/1): product/brand curiosity or intent: asks link, price,
+  where to buy, brand name of something she wears/uses/sells; wants to try/buy;
+  welcomes a collab/ad. Exclude complaints that it is "quảng cáo"; exclude
+  requests for the SONG/VIDEO link ("xin link nhạc" → CONTENT interest, not
+  commercial); exclude seller advertisements posted by other users (→ spam=1).
+sentiment: "neg" | "neu" | "pos"
+ai_mention (0/1): mentions AI/ảo/giả at all.
+spam (0/1): bot, advert, copy-paste, unrelated to the persona.
+aspects: list of {"cat": APPEARANCE|VOICE_MOTION|AI_NATURE|PERSONA|CONTENT|PRODUCT_BRAND,
+  "pol": neg|neu|pos}; empty list if none.
+
+INPUT
+{"id": 8812, "persona": "tieumy", "caption": "...", "parent": "...",
+ "text": "Nhìn mặt vẫn hơi giả nhưng bà này nói chuyện hài ghê, cái áo đẹp xin link"}
+
+OUTPUT
+{"id": 8812, "uv_resistance": 1, "ai_skepticism": 0, "parasocial_orientation": 1,
+ "commercial_acceptance": 1, "sentiment": "pos", "ai_mention": 1, "spam": 0,
+ "aspects": [{"cat":"APPEARANCE","pol":"neg"},{"cat":"PERSONA","pol":"pos"},
+             {"cat":"PRODUCT_BRAND","pol":"neu"}]}</code></pre>
+<p class="small">Add 8–12 few-shot examples taken from the development set, balanced across constructs and including hard negatives. Keep the exact prompt, model id, date, temperature and pre-processing rules in the paper's appendix.</p>
+
+<h3>Appendix B — Model specifications (R)</h3>
+<pre><code>library(mgcv); library(segmented)
+
+# Trajectories: comment i in post j of persona k
+m_uv  <- bam(uv ~ s(week, k=12) + s(week, by=vi, k=8, m=1)
+               + sponsored + ai_disclosure + content_type + is_reply
+               + visual_realism + coverage_ratio
+               + s(post_id, bs="re") + s(vi, bs="re"),
+             family=binomial, data=d, method="fREML", discrete=TRUE)
+m_psi <- update(m_uv, psi ~ .);  m_cr <- update(m_uv, cr ~ .)
+
+# Curves at reference covariates, random effects excluded
+grid  <- expand.grid(week=seq(0, max(d$week), by=.5), sponsored=0, ai_disclosure=1,
+                     content_type="photo", is_reply=0, visual_realism=median(d$visual_realism),
+                     coverage_ratio=1, vi=levels(d$vi)[1], post_id=levels(d$post_id)[1])
+R_hat <- predict(m_uv,  grid, type="response", exclude=c("s(post_id)","s(vi)"), se.fit=TRUE)
+S_hat <- predict(m_psi, grid, type="response", exclude=c("s(post_id)","s(vi)"), se.fit=TRUE)
+D_hat <- S_hat$fit - R_hat$fit
+
+# tau*: earliest week with lower 95% bound of D > 0 for >= 3 consecutive weeks.
+# Cluster bootstrap: resample post_id with replacement (B = 500-1000), refit, recompute tau*.
+
+# Rates of change: gratia::derivatives(m_uv, "s(week)")
+
+# Phase structure (weekly series)
+fit0 <- glm(cbind(n_uv, n - n_uv) ~ week, family=binomial, data=weekly)
+pscore.test(fit0); fit1 <- segmented(fit0, seg.Z=~week, npsi=1); fit2 <- segmented(fit0, seg.Z=~week, npsi=2)
+AIC(fit0, fit1, fit2)
+
+# Commercial receptivity (weekly): C_t ~ D_{t-1} + C_{t-1} + sponsored_share_t + product_share_t + log(volume_t)
+# quasi-binomial GLM; Newey-West SE; sensitivity: lag 2, 2-week bins, drop W33</code></pre>
+
+<h3>Appendix C — Analysis table schema (one row per comment)</h3>
+<div class="tbl"><table>
+<tr><th>Field</th><th>Meaning</th><th>Source</th></tr>
+<tr><td><code>comment_id</code>, <code>parent_comment_id</code>, <code>is_reply</code></td><td>identity and thread structure</td><td>crawler</td></tr>
+<tr><td><code>post_id</code>, <code>vi_id</code>, <code>content_type</code>, <code>caption</code></td><td>post-level context</td><td>crawler / seed</td></tr>
+<tr><td><code>post_date</code>, <code>comment_time</code>, <code>time_precision</code>, <code>week_since_launch</code>, <code>bin2w</code></td><td>time index</td><td>derived</td></tr>
+<tr><td><code>author_hash</code>, <code>author_n_comments</code></td><td>repeat-commenter analysis</td><td>derived</td></tr>
+<tr><td><code>sponsored</code>, <code>product_category</code>, <code>ai_disclosure</code>, <code>visual_realism</code>, <code>social_content</code></td><td>post-level coding (controls)</td><td>manual / LLM on caption</td></tr>
+<tr><td><code>ui_comment_count</code>, <code>n_collected</code>, <code>coverage_ratio</code></td><td>collection coverage</td><td>crawler</td></tr>
+<tr><td><code>uv_resistance</code>, <code>ai_skepticism</code>, <code>parasocial_orientation</code>, <code>commercial_acceptance</code>, <code>sentiment</code>, <code>ai_mention</code>, <code>spam</code>, <code>aspects</code></td><td>construct coding</td><td>LLM (+ human gold columns <code>*_gold</code>)</td></tr>
+<tr><td><code>lang_flag</code>, <code>empty_text</code>, <code>artefact</code></td><td>cleaning flags</td><td>derived</td></tr>
+</table></div>
+
+<!-- ============================================================ -->
+<h2 id="refs">11. References (verified)</h2>
+<div class="refs">
+
+
+<p class="small">Every entry below was checked against Crossref / CRAN / ACL Anthology / arXiv on 2026-08-21. Grouped by where each belongs in the paper — marketing literature first. <span class="tag">[§]</span> = which section of this playbook it backs.</p>
+
+<h3>A. Virtual influencer marketing <span class="tag">[§3, §8]</span></h3>
+<ol start="1">
+<li>Lou, C., Kiew, S. T. J., Chen, T., Lee, T. Y. M., Ong, J. E. C., & Phua, Z. (2023). Authentically fake? How consumers respond to the influence of virtual influencers. <i>Journal of Advertising, 52</i>(4), 540–557. <a href="https://doi.org/10.1080/00913367.2022.2149641">doi:10.1080/00913367.2022.2149641</a></li>
+<li>Arsenyan, J., & Mirowska, A. (2021). Almost human? A comparative case study on the social media presence of virtual influencers. <i>International Journal of Human-Computer Studies, 155</i>, 102694. <a href="https://doi.org/10.1016/j.ijhcs.2021.102694">doi:10.1016/j.ijhcs.2021.102694</a> — human-like VIs attract more negative/uncanny engagement than cartoon-like ones: your anthropomorphism-level RQ.</li>
+<li>Mirowska, A., & Arsenyan, J. (2023). Sweet escape: The role of empathy in social media engagement with human versus virtual influencers. <i>International Journal of Human-Computer Studies, 174</i>, 103008. <a href="https://doi.org/10.1016/j.ijhcs.2023.103008">doi:10.1016/j.ijhcs.2023.103008</a></li>
+<li>Sands, S., Ferraro, C., Demsar, V., & Chandler, G. (2022). False idols: Unpacking the opportunities and challenges of falsity in the context of virtual influencers. <i>Business Horizons, 65</i>(6), 777–788. <a href="https://doi.org/10.1016/j.bushor.2022.08.002">doi:10.1016/j.bushor.2022.08.002</a></li>
+<li>Sands, S., Campbell, C. L., Plangger, K., & Ferraro, C. (2022). Unreal influence: Leveraging AI in influencer marketing. <i>European Journal of Marketing, 56</i>(6), 1721–1747. <a href="https://doi.org/10.1108/EJM-12-2019-0949">doi:10.1108/EJM-12-2019-0949</a></li>
+<li>Stein, J.-P., Linda Breves, P., & Anders, N. (2024). Parasocial interactions with real and virtual influencers: The role of perceived similarity and human-likeness. <i>New Media & Society, 26</i>(6), 3433–3453. <a href="https://doi.org/10.1177/14614448221102900">doi:10.1177/14614448221102900</a></li>
+<li>Franke, C., Groeppel-Klein, A., & Müller, K. (2023). Consumers' responses to virtual influencers as advertising endorsers: Novel and effective or uncanny and deceiving? <i>Journal of Advertising, 52</i>(4), 523–539. <a href="https://doi.org/10.1080/00913367.2022.2154721">doi:10.1080/00913367.2022.2154721</a></li>
+<li>Dabiran, E., Farivar, S., Wang, F., & Grant, G. (2024). Virtually human: Anthropomorphism in virtual influencer marketing. <i>Journal of Retailing and Consumer Services, 79</i>, 103797. <a href="https://doi.org/10.1016/j.jretconser.2024.103797">doi:10.1016/j.jretconser.2024.103797</a> — the “Virtually Human” study in your notes (credibility & PSR → purchase intention).</li>
+<li>Kim, H., & Park, M. (2023). Virtual influencers' attractiveness effect on purchase intention: A moderated mediation model of the Product–Endorser fit with the brand. <i>Computers in Human Behavior, 143</i>, 107703. <a href="https://doi.org/10.1016/j.chb.2023.107703">doi:10.1016/j.chb.2023.107703</a></li>
+<li>Lim, R. E., & Lee, S. Y. (2023). “You are a virtual influencer!”: Understanding the impact of origin disclosure and emotional narratives on parasocial relationships and virtual influencer credibility. <i>Computers in Human Behavior, 148</i>, 107897. <a href="https://doi.org/10.1016/j.chb.2023.107897">doi:10.1016/j.chb.2023.107897</a> — AI-disclosure control.</li>
+<li>Mouritzen, S. L. T., Penttinen, V., & Pedersen, S. (2024). Virtual influencer marketing: The good, the bad and the unreal. <i>European Journal of Marketing, 58</i>(2), 410–440. <a href="https://doi.org/10.1108/EJM-12-2022-0915">doi:10.1108/EJM-12-2022-0915</a></li>
+<li>Looi, J., Kim, E., & E, Z. (2025). Sponsorship disclosure in virtual influencer marketing: Assessing users' sentiment and engagement toward virtual influencer endorsements. <i>Journal of Advertising Research, 65</i>(3), 321–343. <a href="https://doi.org/10.1080/00218499.2025.2464300">doi:10.1080/00218499.2025.2464300</a> — measures disclosure effects through comment sentiment: closest methodological cousin.</li>
+<li>Ohanian, R. (1990). Construction and validation of a scale to measure celebrity endorsers' perceived expertise, trustworthiness, and attractiveness. <i>Journal of Advertising, 19</i>(3), 39–52. <a href="https://doi.org/10.1080/00913367.1990.10673191">doi:10.1080/00913367.1990.10673191</a></li>
+<li>Lou, C., & Yuan, S. (2019). Influencer marketing: How message value and credibility affect consumer trust of branded content on social media. <i>Journal of Interactive Advertising, 19</i>(1), 58–73. <a href="https://doi.org/10.1080/15252019.2018.1533501">doi:10.1080/15252019.2018.1533501</a></li>
+</ol>
+
+<h3>B. Text-mining studies of VI discourse & Vietnam-specific VI work <span class="tag">[§1, Lit review]</span></h3>
+<ol start="15">
+<li>Li, S., & Chen, J. (2024). Virtual human on social media: Text mining and sentiment analysis. <i>Technology in Society, 78</i>, 102666. <a href="https://doi.org/10.1016/j.techsoc.2024.102666">doi:10.1016/j.techsoc.2024.102666</a></li>
+<li>Looi, J., & Kahlor, L. A. (2024). Artificial intelligence in influencer marketing: A mixed-method comparison of human and virtual influencers on Instagram. <i>Journal of Interactive Advertising, 24</i>(2), 107–126. <a href="https://doi.org/10.1080/15252019.2024.2313721">doi:10.1080/15252019.2024.2313721</a></li>
+<li>Chaudhry, S., Benabderrahmane, S., & Rahwan, T. (2026). Real talk, virtual faces: Symbolic–semantic discourse geometry of virtual and human influencer audiences. <i>arXiv</i> 2603.24410. <a href="https://arxiv.org/abs/2603.24410">arxiv.org/abs/2603.24410</a> (preprint; 69k YouTube comments — cite as “not yet peer-reviewed”).</li>
+<li>Nguyen, D. H., & Hoang, L. C. (2025). Customers' engagement with virtual influencers: The roles of parasocial relationship, emotional attachment. <i>Young Consumers, 27</i>(1), 109–129. <a href="https://doi.org/10.1108/YC-04-2025-2510">doi:10.1108/YC-04-2025-2510</a> (Vietnamese sample).</li>
+<li>Truong, T. T. V., & Khuu, M. D. (2026). Virtual influencers and mindful consumption: Dual-system evidence from Vietnam. <i>HCMC Open University Journal of Science – Economics and Business Administration, 16</i>(10), 153–172. <a href="https://doi.org/10.46223/HCMCOUJS.econ.en.16.10.4766.2026">doi:10.46223/HCMCOUJS.econ.en.16.10.4766.2026</a></li>
+<li>Vo, T.-H., Tan, G. W.-H., Pham, N. T., Truong, T. H.-D., & Ooi, K.-B. (2025). Promoting customer engagement and brand loyalty on social media: The role of virtual influencers. <i>International Journal of Consumer Studies, 49</i>(2), e70028. <a href="https://doi.org/10.1111/ijcs.70028">doi:10.1111/ijcs.70028</a> (confirm sample country in full text before calling it Vietnam-specific).</li>
+</ol>
+
+<h3>C. Uncanny valley & perceptual mismatch (explains rejection) <span class="tag">[§3, §5]</span></h3>
+<ol start="21">
+<li>Mori, M., MacDorman, K. F., & Kageki, N. (2012). The uncanny valley [From the field]. <i>IEEE Robotics & Automation Magazine, 19</i>(2), 98–100. <a href="https://doi.org/10.1109/MRA.2012.2192811">doi:10.1109/MRA.2012.2192811</a> (translation of Mori, 1970, <i>Energy, 7</i>(4), 33–35).</li>
+<li>Kätsyri, J., Förger, K., Mäkäräinen, M., & Takala, T. (2015). A review of empirical evidence on different uncanny valley hypotheses: Support for perceptual mismatch as one road to the valley of eeriness. <i>Frontiers in Psychology, 6</i>, 390. <a href="https://doi.org/10.3389/fpsyg.2015.00390">doi:10.3389/fpsyg.2015.00390</a></li>
+<li>MacDorman, K. F., & Chattopadhyay, D. (2016). Reducing consistency in human realism increases the uncanny valley effect; increasing category uncertainty does not. <i>Cognition, 146</i>, 190–205. <a href="https://doi.org/10.1016/j.cognition.2015.09.019">doi:10.1016/j.cognition.2015.09.019</a></li>
+<li>Diel, A., Weigelt, S., & MacDorman, K. F. (2022). A meta-analysis of the uncanny valley's independent and dependent variables. <i>ACM Transactions on Human-Robot Interaction, 11</i>(1), 1–33. <a href="https://doi.org/10.1145/3470742">doi:10.1145/3470742</a></li>
+<li>Złotowski, J., Sumioka, H., Nishio, S., Glas, D. F., Bartneck, C., & Ishiguro, H. (2015). Persistence of the uncanny valley: The influence of repeated interactions and a robot's attitude on its perception. <i>Frontiers in Psychology, 6</i>, 883. <a href="https://doi.org/10.3389/fpsyg.2015.00883">doi:10.3389/fpsyg.2015.00883</a> — repeated exposure lowers eeriness, but liking depends on the agent's behaviour: the reason not to claim UV is “self-decaying”.</li>
+<li>Mende, M., Scott, M. L., van Doorn, J., Grewal, D., & Shanks, I. (2019). Service robots rising: How humanoid robots influence service experiences and elicit compensatory consumer responses. <i>Journal of Marketing Research, 56</i>(4), 535–556. <a href="https://doi.org/10.1177/0022243718822827">doi:10.1177/0022243718822827</a></li>
+</ol>
+
+<h3>D. Mere exposure / habituation (explains the time dimension) <span class="tag">[§6.1]</span></h3>
+<ol start="27">
+<li>Zajonc, R. B. (1968). Attitudinal effects of mere exposure. <i>Journal of Personality and Social Psychology, 9</i>(2, Pt. 2), 1–27. <a href="https://doi.org/10.1037/h0025848">doi:10.1037/h0025848</a></li>
+<li>Bornstein, R. F. (1989). Exposure and affect: Overview and meta-analysis of research, 1968–1987. <i>Psychological Bulletin, 106</i>(2), 265–289. <a href="https://doi.org/10.1037/0033-2909.106.2.265">doi:10.1037/0033-2909.106.2.265</a></li>
+<li>Montoya, R. M., Horton, R. S., Vevea, J. L., Citkowicz, M., & Lauber, E. A. (2017). A re-examination of the mere exposure effect. <i>Psychological Bulletin, 143</i>(5), 459–498. <a href="https://doi.org/10.1037/bul0000085">doi:10.1037/bul0000085</a> — inverted-U with exposure frequency: a reason to let the curve be non-linear (GAM).</li>
+</ol>
+
+<h3>E. Parasocial interaction, CASA, anthropomorphism (explains social orientation) <span class="tag">[§3, §5]</span></h3>
+<ol start="30">
+<li>Horton, D., & Wohl, R. R. (1956). Mass communication and para-social interaction. <i>Psychiatry, 19</i>(3), 215–229. <a href="https://doi.org/10.1080/00332747.1956.11023049">doi:10.1080/00332747.1956.11023049</a></li>
+<li>Dibble, J. L., Hartmann, T., & Rosaen, S. F. (2016). Parasocial interaction and parasocial relationship: Conceptual clarification and a critical assessment of measures. <i>Human Communication Research, 42</i>(1), 21–44. <a href="https://doi.org/10.1111/hcre.12063">doi:10.1111/hcre.12063</a> — use to justify “parasocial <em>orientation</em>” in discourse rather than PSR measured by scale.</li>
+<li>Nass, C., & Moon, Y. (2000). Machines and mindlessness: Social responses to computers. <i>Journal of Social Issues, 56</i>(1), 81–103. <a href="https://doi.org/10.1111/0022-4537.00153">doi:10.1111/0022-4537.00153</a></li>
+<li>Reeves, B., & Nass, C. (1996). <i>The media equation</i>. CSLI / Cambridge University Press.</li>
+<li>Gambino, A., Fox, J., & Ratan, R. A. (2020). Building a stronger CASA: Extending the computers are social actors paradigm. <i>Human-Machine Communication, 1</i>, 71–86. <a href="https://doi.org/10.30658/hmc.1.5">doi:10.30658/hmc.1.5</a></li>
+<li>Epley, N., Waytz, A., & Cacioppo, J. T. (2007). On seeing human: A three-factor theory of anthropomorphism. <i>Psychological Review, 114</i>(4), 864–886. <a href="https://doi.org/10.1037/0033-295X.114.4.864">doi:10.1037/0033-295X.114.4.864</a></li>
+</ol>
+
+<h3>F. LLM annotation: promise, limits, validation <span class="tag">[§4]</span></h3>
+<ol start="36">
+<li>Gilardi, F., Alizadeh, M., & Kubli, M. (2023). ChatGPT outperforms crowd workers for text-annotation tasks. <i>PNAS, 120</i>(30), e2305016120. <a href="https://doi.org/10.1073/pnas.2305016120">doi:10.1073/pnas.2305016120</a></li>
+<li>Törnberg, P. (2024). Best practices for text annotation with large language models. <i>Sociologica, 18</i>(2), 67–85. <a href="https://doi.org/10.6092/issn.1971-8853/19461">doi:10.6092/issn.1971-8853/19461</a> — the workflow in §2 follows this.</li>
+<li>Törnberg, P. (2025). Large language models outperform expert coders and supervised classifiers at annotating political social media messages. <i>Social Science Computer Review, 43</i>(6), 1181–1195. <a href="https://doi.org/10.1177/08944393241286471">doi:10.1177/08944393241286471</a></li>
+<li>Ziems, C., Held, W., Shaikh, O., Chen, J., Zhang, Z., & Yang, D. (2024). Can large language models transform computational social science? <i>Computational Linguistics, 50</i>(1), 237–291. <a href="https://doi.org/10.1162/coli_a_00502">doi:10.1162/coli_a_00502</a></li>
+<li>Pangakis, N., Wolken, S., & Fasching, N. (2023). Automated annotation with generative AI requires validation. <i>arXiv</i>. <a href="https://doi.org/10.48550/arXiv.2306.00176">doi:10.48550/arXiv.2306.00176</a></li>
+<li>Reiss, M. V. (2023). Testing the reliability of ChatGPT for text annotation and classification: A cautionary remark. <i>arXiv</i>. <a href="https://doi.org/10.48550/arXiv.2304.11085">doi:10.48550/arXiv.2304.11085</a> — why you run the 5% self-consistency check.</li>
+<li>Ollion, É., Shen, R., Macanovic, A., & Chatelain, A. (2024). The dangers of using proprietary LLMs for research. <i>Nature Machine Intelligence, 6</i>(1), 4–5. <a href="https://doi.org/10.1038/s42256-023-00783-6">doi:10.1038/s42256-023-00783-6</a> — supports choosing an open-weight model (DeepSeek) and pinning the version.</li>
+<li>Kristensen-McLachlan, R. D., Canavan, M., Kårdos, M., Jacobsen, M., & Aarøe, L. (2025). Are chatbots reliable text annotators? Sometimes. <i>PNAS Nexus, 4</i>(4), pgaf069. <a href="https://doi.org/10.1093/pnasnexus/pgaf069">doi:10.1093/pnasnexus/pgaf069</a></li>
+<li>Egami, N., Hinck, M., Stewart, B. M., & Wei, H. (2023). Using imperfect surrogates for downstream inference: Design-based supervised learning for social science applications of large language models. <i>Advances in Neural Information Processing Systems, 36</i>. <a href="https://arxiv.org/abs/2306.04746">arxiv.org/abs/2306.04746</a> — carrying LLM label error into the regression (§2 step 9).</li>
+<li>Li, P., Castelo, N., Katona, Z., & Sarvary, M. (2024). Frontiers: Determining the validity of large language models for automated perceptual analysis. <i>Marketing Science, 43</i>(2), 254–266. <a href="https://doi.org/10.1287/mksc.2023.0454">doi:10.1287/mksc.2023.0454</a></li>
+<li>Arora, N., Chakraborty, I., & Nishimura, Y. (2025). AI–human hybrids for marketing research: Leveraging large language models (LLMs) as collaborators. <i>Journal of Marketing, 89</i>(2), 43–70. <a href="https://doi.org/10.1177/00222429241276529">doi:10.1177/00222429241276529</a></li>
+<li>Carlson, N. A., & Burbano, V. (2026). The use of LLMs to annotate data in management research: Foundational guidelines and warnings. <i>Strategic Management Journal, 47</i>(3), 699–725. <a href="https://doi.org/10.1002/smj.70023">doi:10.1002/smj.70023</a></li>
+<li>Grimmer, J., & Stewart, B. M. (2013). Text as data: The promise and pitfalls of automatic content analysis methods for political texts. <i>Political Analysis, 21</i>(3), 267–297. <a href="https://doi.org/10.1093/pan/mps028">doi:10.1093/pan/mps028</a></li>
+<li>Krippendorff, K. (2018). <i>Content analysis: An introduction to its methodology</i> (4th ed.). SAGE.</li>
+<li>Hayes, A. F., & Krippendorff, K. (2007). Answering the call for a standard reliability measure for coding data. <i>Communication Methods and Measures, 1</i>(1), 77–89. <a href="https://doi.org/10.1080/19312450709336664">doi:10.1080/19312450709336664</a></li>
+<li>Landis, J. R., & Koch, G. G. (1977). The measurement of observer agreement for categorical data. <i>Biometrics, 33</i>(1), 159–174. <a href="https://doi.org/10.2307/2529310">doi:10.2307/2529310</a></li>
+<li>Cohen, J. (1960). A coefficient of agreement for nominal scales. <i>Educational and Psychological Measurement, 20</i>(1), 37–46. <a href="https://doi.org/10.1177/001316446002000104">doi:10.1177/001316446002000104</a></li>
+<li>McHugh, M. L. (2012). Interrater reliability: The kappa statistic. <i>Biochemia Medica, 22</i>(3), 276–282. <a href="https://doi.org/10.11613/BM.2012.031">doi:10.11613/BM.2012.031</a></li>
+</ol>
+
+<h3>G. Vietnamese NLP, sentiment & ABSA <span class="tag">[§4, §5]</span></h3>
+<ol start="54">
+<li>Nguyen, D. Q., & Nguyen, A. T. (2020). PhoBERT: Pre-trained language models for Vietnamese. <i>Findings of EMNLP 2020</i>, 1037–1042. <a href="https://doi.org/10.18653/v1/2020.findings-emnlp.92">doi:10.18653/v1/2020.findings-emnlp.92</a></li>
+<li>Nguyen, N., Phan, T., Nguyen, D.-V., & Nguyen, K. (2023). ViSoBERT: A pre-trained language model for Vietnamese social media text processing. <i>Proceedings of EMNLP 2023</i>, 5191–5207. <a href="https://doi.org/10.18653/v1/2023.emnlp-main.315">doi:10.18653/v1/2023.emnlp-main.315</a> — teencode/diacritic-dropping as a distinct register: cite when explaining why you code raw Vietnamese.</li>
+<li>Nguyen, K. V., Nguyen, V. D., Nguyen, P. X. V., Truong, T. T. H., & Nguyen, N. L.-T. (2018). UIT-VSFC: Vietnamese students' feedback corpus for sentiment analysis. <i>KSE 2018</i>, 19–24. <a href="https://doi.org/10.1109/KSE.2018.8573337">doi:10.1109/KSE.2018.8573337</a></li>
+<li>Ho, V. A., et al. (2020). Emotion recognition for Vietnamese social media text (UIT-VSMEC). <i>PACLING 2019, CCIS 1215</i>, 319–333. Springer. <a href="https://doi.org/10.1007/978-981-15-6168-9_27">doi:10.1007/978-981-15-6168-9_27</a></li>
+<li>Nguyen, H. T. M., et al. (2018). VLSP shared task: Sentiment analysis. <i>Journal of Computer Science and Cybernetics, 34</i>(4), 295–310. <a href="https://doi.org/10.15625/1813-9663/34/4/13160">doi:10.15625/1813-9663/34/4/13160</a> — covers the VLSP-2018 ABSA campaign (aspect category + polarity on reviews).</li>
+<li>Phan, L. L., Pham, P. H., Nguyen, K. T.-T., Huynh, S. K., Nguyen, T. T., Nguyen, L. T., Huynh, T. V., & Nguyen, K. V. (2021). SA2SL: From aspect-based sentiment analysis to social listening system for business intelligence (UIT-ViSFD). <i>KSEM 2021, LNCS 12816</i>. Springer. <a href="https://doi.org/10.1007/978-3-030-82147-0_53">doi:10.1007/978-3-030-82147-0_53</a> — Vietnamese ABSA benchmark with aspect-category scheme; model your ABSA evaluation on it.</li>
+<li>Pontiki, M., Galanis, D., Papageorgiou, H., et al. (2016). SemEval-2016 Task 5: Aspect based sentiment analysis. <i>Proceedings of SemEval-2016</i>, 19–30. <a href="https://doi.org/10.18653/v1/S16-1002">doi:10.18653/v1/S16-1002</a> — canonical definition of aspect-category sentiment.</li>
+<li>Truong, S. T., Nguyen, D. Q., Nguyen, T., Le, D. D., Truong, N. N., Quan, T., & Koyejo, S. (2024). Crossing linguistic horizons: Finetuning and comprehensive evaluation of Vietnamese large language models. <i>Findings of NAACL 2024</i>, 2849–2900. <a href="https://doi.org/10.18653/v1/2024.findings-naacl.182">doi:10.18653/v1/2024.findings-naacl.182</a> — GPT-4 zero-shot Vietnamese sentiment F1 ≈ .67: the strongest single justification for human validation.</li>
+<li>Luu, H. G., & Thin, D. V. (2025). Exploring the power of large language models for Vietnamese implicit sentiment analysis. <i>Proceedings of INLG 2025</i>, 202–214. <a href="https://aclanthology.org/2025.inlg-main.14/">aclanthology.org/2025.inlg-main.14</a> — evaluates DeepSeek-V3, Qwen, GPT-4o on Vietnamese sarcasm/implicit sentiment.</li>
+<li>Jadhav, S., Shanbhag, A., Thakurdesai, A., Sinare, R., & Joshi, R. (2024). On limitations of LLM as annotator for low resource languages. <i>arXiv</i>. <a href="https://arxiv.org/abs/2411.17637">arxiv.org/abs/2411.17637</a></li>
+<li>Tran, H. Q., Pham, N. T., Luu, S. T., & Nguyen, K. V. (2026). ViGoEmotions: A benchmark dataset for fine-grained emotion detection on Vietnamese texts. <i>arXiv</i>. <a href="https://arxiv.org/abs/2602.08371">arxiv.org/abs/2602.08371</a> (preprint; LLM-vs-human κ on Vietnamese social media).</li>
+</ol>
+
+<h3>H. Text-as-data in marketing <span class="tag">[§4, §7]</span></h3>
+<ol start="65">
+<li>Humphreys, A., & Wang, R. J.-H. (2018). Automated text analysis for consumer research. <i>Journal of Consumer Research, 44</i>(6), 1274–1306. <a href="https://doi.org/10.1093/jcr/ucx104">doi:10.1093/jcr/ucx104</a></li>
+<li>Berger, J., Humphreys, A., Ludwig, S., Moe, W. W., Netzer, O., & Schweidel, D. A. (2020). Uniting the tribes: Using text for marketing insight. <i>Journal of Marketing, 84</i>(1), 1–25. <a href="https://doi.org/10.1177/0022242919873106">doi:10.1177/0022242919873106</a></li>
+<li>Hartmann, J., Heitmann, M., Siebert, C., & Schamp, C. (2023). More than a feeling: Accuracy and application of sentiment analysis. <i>International Journal of Research in Marketing, 40</i>(1), 75–87. <a href="https://doi.org/10.1016/j.ijresmar.2022.05.005">doi:10.1016/j.ijresmar.2022.05.005</a></li>
+<li>Monroe, B. L., Colaresi, M. P., & Quinn, K. M. (2008). Fightin' words: Lexical feature selection and evaluation for identifying the content of political conflict. <i>Political Analysis, 16</i>(4), 372–403. <a href="https://doi.org/10.1093/pan/mpn018">doi:10.1093/pan/mpn018</a> — the early-vs-late vocabulary figure.</li>
+</ol>
+
+<h3>I. Statistical modelling <span class="tag">[§6]</span></h3>
+<ol start="69">
+<li>Wood, S. N. (2017). <i>Generalized additive models: An introduction with R</i> (2nd ed.). Chapman & Hall/CRC. <a href="https://doi.org/10.1201/9781315370279">doi:10.1201/9781315370279</a></li>
+<li>Wood, S. N. (2011). Fast stable restricted maximum likelihood and marginal likelihood estimation of semiparametric generalized linear models. <i>JRSS-B, 73</i>(1), 3–36. <a href="https://doi.org/10.1111/j.1467-9868.2010.00749.x">doi:10.1111/j.1467-9868.2010.00749.x</a></li>
+<li>Pedersen, E. J., Miller, D. L., Simpson, G. L., & Ross, N. (2019). Hierarchical generalized additive models in ecology: An introduction with mgcv. <i>PeerJ, 7</i>, e6876. <a href="https://doi.org/10.7717/peerj.6876">doi:10.7717/peerj.6876</a> — global + per-persona smooths.</li>
+<li>Marra, G., & Wood, S. N. (2012). Coverage properties of confidence intervals for generalized additive model components. <i>Scandinavian Journal of Statistics, 39</i>(1), 53–74. <a href="https://doi.org/10.1111/j.1467-9469.2011.00760.x">doi:10.1111/j.1467-9469.2011.00760.x</a></li>
+<li>Simpson, G. L. (2018). Modelling palaeoecological time series using generalised additive models. <i>Frontiers in Ecology and Evolution, 6</i>, 149. <a href="https://doi.org/10.3389/fevo.2018.00149">doi:10.3389/fevo.2018.00149</a> — derivatives of smooths = resistance-decay / socialization-growth rates.</li>
+<li>Muggeo, V. M. R. (2003). Estimating regression models with unknown break-points. <i>Statistics in Medicine, 22</i>(19), 3055–3071. <a href="https://doi.org/10.1002/sim.1545">doi:10.1002/sim.1545</a></li>
+<li>Muggeo, V. M. R. (2008). segmented: An R package to fit regression models with broken-line relationships. <i>R News, 8</i>(1), 20–25. <a href="https://journal.r-project.org/articles/RN-2008-004/">journal.r-project.org/articles/RN-2008-004</a></li>
+<li>Muggeo, V. M. R. (2016). Testing with a nuisance parameter present only under the alternative: A score-based approach with application to segmented modelling. <i>Journal of Statistical Computation and Simulation, 86</i>(15), 3059–3067. <a href="https://doi.org/10.1080/00949655.2016.1149855">doi:10.1080/00949655.2016.1149855</a> — <code>pscore.test()</code>.</li>
+<li>Muggeo, V. M. R. (2017). Interval estimation for the breakpoint in segmented regression: A smoothed score-based approach. <i>Australian & New Zealand Journal of Statistics, 59</i>(3), 311–322. <a href="https://doi.org/10.1111/anzs.12200">doi:10.1111/anzs.12200</a></li>
+<li>Killick, R., & Eckley, I. A. (2014). changepoint: An R package for changepoint analysis. <i>Journal of Statistical Software, 58</i>(3). <a href="https://doi.org/10.18637/jss.v058.i03">doi:10.18637/jss.v058.i03</a></li>
+<li>Cameron, A. C., Gelbach, J. B., & Miller, D. L. (2008). Bootstrap-based improvements for inference with clustered errors. <i>Review of Economics and Statistics, 90</i>(3), 414–427. <a href="https://doi.org/10.1162/rest.90.3.414">doi:10.1162/rest.90.3.414</a></li>
+<li>Field, C. A., & Welsh, A. H. (2007). Bootstrapping clustered data. <i>JRSS-B, 69</i>(3), 369–390. <a href="https://doi.org/10.1111/j.1467-9868.2007.00593.x">doi:10.1111/j.1467-9868.2007.00593.x</a></li>
+<li>Efron, B., & Tibshirani, R. J. (1993/1994). <i>An introduction to the bootstrap</i>. Chapman & Hall/CRC. <a href="https://doi.org/10.1201/9780429246593">doi:10.1201/9780429246593</a></li>
+<li>Lee, S., Lei, M.-K., & Brody, G. H. (2015). Confidence intervals for distinguishing ordinal and disordinal interactions in multiple regression. <i>Psychological Methods, 20</i>(2), 245–258. <a href="https://doi.org/10.1037/met0000033">doi:10.1037/met0000033</a> — bootstrap CIs for the crossover point of two regression curves.</li>
+<li>Fieller, E. C. (1954). Some problems in interval estimation. <i>JRSS-B, 16</i>(2), 175–185. <a href="https://doi.org/10.1111/j.2517-6161.1954.tb00159.x">doi:10.1111/j.2517-6161.1954.tb00159.x</a></li>
+<li>Bernal, J. L., Cummins, S., & Gasparrini, A. (2017). Interrupted time series regression for the evaluation of public health interventions: A tutorial. <i>International Journal of Epidemiology, 46</i>(1), 348–355. <a href="https://doi.org/10.1093/ije/dyw098">doi:10.1093/ije/dyw098</a> — cite to say what your before/after-τ* comparison is <em>not</em>.</li>
+<li>Bates, D., Mächler, M., Bolker, B., & Walker, S. (2015). Fitting linear mixed-effects models using lme4. <i>Journal of Statistical Software, 67</i>(1). <a href="https://doi.org/10.18637/jss.v067.i01">doi:10.18637/jss.v067.i01</a></li>
+<li>Brooks, M. E., et al. (2017). glmmTMB balances speed and flexibility among packages for zero-inflated generalized linear mixed modeling. <i>The R Journal, 9</i>(2), 378–400. <a href="https://doi.org/10.32614/RJ-2017-066">doi:10.32614/RJ-2017-066</a></li>
+</ol>
+
+<h3>J. Software to cite</h3>
+<ol start="87">
+<li>Wood, S. N. (2025). <i>mgcv</i> (R package v1.9-4). <a href="https://cran.r-project.org/package=mgcv">CRAN</a></li>
+<li>Muggeo, V. M. R. (2026). <i>segmented</i> (R package v2.2-1). <a href="https://cran.r-project.org/package=segmented">CRAN</a></li>
+<li>Gamer, M., Lemon, J., Fellows, I., & Singh, P. (2026). <i>irr</i> (R package v0.85). <a href="https://cran.r-project.org/package=irr">CRAN</a> — <code>kripp.alpha()</code>.</li>
+<li>Hughes, J. (2022). <i>krippendorffsalpha</i> (R package v2.0). <a href="https://cran.r-project.org/package=krippendorffsalpha">CRAN</a> — α with bootstrap CIs.</li>
+</ol>
+<p class="small"><strong>Not found / do not cite:</strong> Mori (1970) has no DOI (cite via the 2012 translation); “Block & Lovegrove” on VI disclosure could not be located; the <code>crossReg</code> R package is archived; no journal paper yet evaluates DeepSeek specifically on Vietnamese social-media sentiment — cite Truong et al. (2024) and Luu & Thin (2025) and report your own validation.</p>
+
+
+</div>
+</div>
+</body>
+</html>
